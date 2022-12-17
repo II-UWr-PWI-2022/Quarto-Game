@@ -1,0 +1,1 @@
+# Projekt grupowy na PWI - Quarto
