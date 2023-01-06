@@ -18,8 +18,13 @@ public:
     QuartoGame(bool gameDifficultyLevel);
     ~QuartoGame();
 
-
-
+    bool isPieceUsed(int numberOfPiece);
+    bool isBoardFieldFree(int row, int column);
+    bool getWinningPatternField(int row, int column);
+    char getPieceType(int numberOfPiece);
+    bool getPlayerActive();
+    char getPieceTypeFromBoardField(int row, int column);
+    int findPieceNumber(char typeOfPiece);
 };
 
 #endif // QUARTOGAME_H
