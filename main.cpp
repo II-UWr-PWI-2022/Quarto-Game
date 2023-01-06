@@ -5,11 +5,8 @@ using namespace std;
 
 int main()
 {
-
     QuartoGame *game;
     game = new QuartoGame(1);
     delete game;
-    int i;
-    cin >> i;
     return 0;
 }

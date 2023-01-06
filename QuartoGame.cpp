@@ -1,5 +1,4 @@
 #include "QuartoGame.h"
-#include <iostream>
 
 /*
 Constructor. It takes as an argument a bool variable.
@@ -13,10 +12,31 @@ QuartoGame::QuartoGame(bool gameDifficultyLevel)
     numberOfUsedPieces = 0;
 }
 
-
+/*
 QuartoGame::~QuartoGame()
 {
     cout << "game destructor"<<endl;
+}
+*/
+
+/*
+Search for type of piece defined by its number in table of pieces in
+Quarto game object. Then this value is assigned to the field in the
+board specified by row and column number.
+*/
+void QuartoGame::putPieceOnBoard(int row, int column, int pieceNumber)
+{
+    board[row][column] = pieces[pieceNumber].getPieceType();
+    pieces[pieceNumber].setPieceAsUsed();
+    numberOfUsedPieces++;
+}
+
+/*
+Sets the value of active player to the opposite.
+*/
+void QuartoGame::changePlayer()
+{
+    playerActive = !playerActive;
 }
 
 /*
@@ -118,6 +138,49 @@ bool QuartoGame::isGameFinishedInHardVersion(int row, int column)
 }
 
 /*
+Puts piece on board, then checks if are there any winning pattern and game is finished,
+if yes it returns different value depending on the player making the last move, if not
+it checks how many pieces have been used and if there is draw, if not it changes the
+active user and returns 0.
+*/
+int QuartoGame::makeMove(int row, int column, int pieceNumber)
+{
+    putPieceOnBoard(row,column,pieceNumber);
+    bool isFinished;
+    int result = 0;
+
+    if (DIFFICULTY_LEVEL)
+    {
+        isFinished = isGameFinishedInHardVersion(row,column);
+    }
+    else
+    {
+        isFinished = isGameFinishedInEasyVersion(row,column);
+    }
+
+    if (isFinished)
+    {
+        if (playerActive)
+        {
+            result = 2;
+        }
+        else
+        {
+            result = 1;
+        }
+    }
+    else if (numberOfUsedPieces == 16)
+    {
+        result = 3;
+    }
+    else
+    {
+        changePlayer();
+    }
+    return result;
+}
+
+/*
 Checks if particular piece from table of pieces in
 Quarto game object has been used.
 */
@@ -197,3 +260,6 @@ int QuartoGame::findPieceNumber(char typeOfPiece)
     }
     return pieceNumber;
 }
+
+
+

@@ -14,12 +14,15 @@ class QuartoGame
     bool playerActive; // player making a move (0 is player A, 1 is player B)
     int numberOfUsedPieces;
 
+    void putPieceOnBoard(int row, int column, int pieceNumber);
+    void changePlayer();
     bool isGameFinishedInEasyVersion(int row, int column);
     bool isGameFinishedInHardVersion(int row, int column);
 
 public:
     QuartoGame(bool gameDifficultyLevel);
-    ~QuartoGame();
+    //~QuartoGame();
+    int makeMove(int row, int column, int pieceNumber);
 
     bool isPieceUsed(int numberOfPiece);
     bool isBoardFieldFree(int row, int column);
