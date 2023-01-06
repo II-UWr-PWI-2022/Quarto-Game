@@ -1,12 +1,11 @@
 #include <iostream>
-#include "QuartoGame.h"
+#include "ConsoleUserInterface.h"
 
 using namespace std;
 
 int main()
 {
-    QuartoGame *game;
-    game = new QuartoGame(1);
-    delete game;
+    ConsoleUserInterface interface;
+    interface.displayMainMenu();
     return 0;
 }
