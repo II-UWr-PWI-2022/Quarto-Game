@@ -228,7 +228,10 @@ void ConsoleUserInterface::displayMainMenu()
         {
         case '1':
             game = new QuartoGame(1);
-            makeMove();
+            //makeMove();
+            clearMarks();
+            displayTheBoard();
+            system("pause");
             break;
         case '2':
 
@@ -243,6 +246,113 @@ void ConsoleUserInterface::displayMainMenu()
             string choice = "";
             getline(cin, choice);
             break;
+        }
+    }
+}
+
+/*
+Sets piece symbol using bit operations on type value given as an argument.
+*/
+string ConsoleUserInterface::createPieceSymbol(char type)
+{
+    string symbol = "";
+
+    if ((type >> 0)&1)
+    {
+        symbol += 'D';
+    }
+    else
+    {
+        symbol += 'L';
+    }
+
+    if ((type >> 2)&1)
+    {
+        symbol += 'R';
+    }
+    else
+    {
+        symbol += 'S';
+    }
+
+    if ((type >> 4)&1)
+    {
+        symbol += 'T';
+    }
+    else
+    {
+        symbol += 'S';
+    }
+
+    if ((type >> 6)&1)
+    {
+        symbol += 'S';
+    }
+    else
+    {
+        symbol += 'H';
+    }
+
+    return symbol;
+}
+
+/*
+Goes through the board of game object and sets piece types in
+board of console interface object.
+*/
+void ConsoleUserInterface::updateBoard()
+{
+    char pieceType;
+    for (int i = 0; i < 4; i++)
+    {
+        for (int j = 0; j < 4; j++)
+        {
+            pieceType = game -> getPieceTypeFromBoardField(i,j);
+            if (pieceType == 0) board[i][j] = "    ";
+            else board[i][j] = createPieceSymbol(pieceType);
+        }
+    }
+}
+
+/*
+Displays the board.
+*/
+void ConsoleUserInterface::displayTheBoard()
+{
+    updateBoard();
+    if (system("cls")) system("clear");
+    cout << "              >>> QUARTO GAME <<<           " << endl << endl;
+    cout << internal << "   |    1    |    2    |    3    |    4    |" << endl;
+    cout << "--------------------------------------------" << endl;
+    cout << internal << "   |  "<<marks[0][0]<<"   |  "<<marks[0][1]<<"   |  "<<marks[0][2]<<"   |  "<<marks[0][3]<<"   |" << endl;
+    cout << internal << " A |  "<<board[0][0]<<"   |  "<<board[0][1]<<"   |  "<<board[0][2]<<"   |  "<<board[0][3]<<"   |" << endl;
+    cout << internal << "   |  "<<marks[0][0]<<"   |  "<<marks[0][1]<<"   |  "<<marks[0][2]<<"   |  "<<marks[0][3]<<"   |" << endl;
+    cout << "--------------------------------------------" << endl;
+    cout << internal << "   |  "<<marks[1][0]<<"   |  "<<marks[1][1]<<"   |  "<<marks[1][2]<<"   |  "<<marks[1][3]<<"   |" << endl;
+    cout << internal << " B |  "<<board[1][0]<<"   |  "<<board[1][1]<<"   |  "<<board[1][2]<<"   |  "<<board[1][3]<<"   |" << endl;
+    cout << internal << "   |  "<<marks[1][0]<<"   |  "<<marks[1][1]<<"   |  "<<marks[1][2]<<"   |  "<<marks[1][3]<<"   |" << endl;
+    cout << "--------------------------------------------" << endl;
+    cout << internal << "   |  "<<marks[2][0]<<"   |  "<<marks[2][1]<<"   |  "<<marks[2][2]<<"   |  "<<marks[2][3]<<"   |" << endl;
+    cout << internal << " C |  "<<board[2][0]<<"   |  "<<board[2][1]<<"   |  "<<board[2][2]<<"   |  "<<board[2][3]<<"   |" << endl;
+    cout << internal << "   |  "<<marks[2][0]<<"   |  "<<marks[2][1]<<"   |  "<<marks[2][2]<<"   |  "<<marks[2][3]<<"   |" << endl;
+    cout << "--------------------------------------------" << endl;
+    cout << internal << "   |  "<<marks[3][0]<<"   |  "<<marks[3][1]<<"   |  "<<marks[3][2]<<"   |  "<<marks[3][3]<<"   |" << endl;
+    cout << internal << " D |  "<<board[3][0]<<"   |  "<<board[3][1]<<"   |  "<<board[3][2]<<"   |  "<<board[3][3]<<"   |" << endl;
+    cout << internal << "   |  "<<marks[3][0]<<"   |  "<<marks[3][1]<<"   |  "<<marks[3][2]<<"   |  "<<marks[3][3]<<"   |" << endl;
+    cout << "--------------------------------------------" << endl;
+}
+
+/*
+Sets marks as invisible for every field of displayed board
+(see mark description in class declaration).
+*/
+void ConsoleUserInterface::clearMarks()
+{
+    for (int i = 0; i < 4; i++)
+    {
+        for (int j = 0; j < 4; j++)
+        {
+            marks[i][j] = "    ";
         }
     }
 }

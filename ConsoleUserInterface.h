@@ -26,6 +26,12 @@ class ConsoleUserInterface
     char getSingleCharacter();
     char selectFromMainMenu();
 
+    void clearMarks();
+
+    string createPieceSymbol(char type);
+    void updateBoard();
+    void displayTheBoard();
+
     string getPieceSymbolFromUser();
     char changePieceSymbolToType(string symbol);
     int findPieceNumber(string symbol);
