@@ -26,6 +26,11 @@ class ConsoleUserInterface
     char getSingleCharacter();
     char selectFromMainMenu();
 
+    string getPieceSymbolFromUser();
+    char changePieceSymbolToType(string symbol);
+    int findPieceNumber(string symbol);
+    int makeMove();
+
 public:
     ConsoleUserInterface();
     //~ConsoleUserInterface();
