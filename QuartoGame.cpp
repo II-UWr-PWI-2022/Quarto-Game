@@ -20,6 +20,104 @@ QuartoGame::~QuartoGame()
 }
 
 /*
+Checks, in easy mode, by using bit operations if after las move
+are there four pieces on appropriate fields, which have the same
+value of at least one characteristic. If yes, it sets the winning
+pattern and returns true, it nor - it returns false.
+*/
+bool QuartoGame::isGameFinishedInEasyVersion(int row, int column)
+{
+    if ((board[row][0]&board[row][1]&board[row][2]&board[row][3]) != 0)
+    {
+        winningPattern[row][0] = 1;
+        winningPattern[row][1] = 1;
+        winningPattern[row][2] = 1;
+        winningPattern[row][3] = 1;
+        return true;
+    }
+    else if ((board[0][column]&board[1][column]&board[2][column]&board[3][column]) != 0)
+    {
+        winningPattern[0][column] = 1;
+        winningPattern[1][column] = 1;
+        winningPattern[2][column] = 1;
+        winningPattern[3][column] = 1;
+        return true;
+    }
+    else if ((board[0][0]&board[1][1]&board[2][2]&board[3][3]) != 0)
+    {
+        winningPattern[0][0] = 1;
+        winningPattern[1][1] = 1;
+        winningPattern[2][2] = 1;
+        winningPattern[3][3] = 1;
+        return true;
+    }
+    else if ((board[3][0]&board[2][1]&board[1][2]&board[0][3]) != 0)
+    {
+        winningPattern[3][0] = 1;
+        winningPattern[2][1] = 1;
+        winningPattern[1][2] = 1;
+        winningPattern[0][3] = 1;
+        return true;
+    }
+    else return false;
+}
+
+/*
+Checks, in hard mode, by using bit operations if after las move
+are there four pieces on appropriate fields, which have the same
+value of at least one characteristic. If yes, it sets the winning
+pattern and returns true, it nor - it returns false.
+*/
+bool QuartoGame::isGameFinishedInHardVersion(int row, int column)
+{
+    if (column < 3 && row < 3)
+    {
+        if ((board[row][column]&board[row][column+1]&board[row+1][column+1]&board[row+1][column]) != 0)
+        {
+            winningPattern[row][column] = 1;
+            winningPattern[row][column+1] = 1;
+            winningPattern[row+1][column+1] = 1;
+            winningPattern[row+1][column] = 1;
+            return true;
+        }
+    }
+    if (column > 0 && row < 3)
+    {
+        if ((board[row][column]&board[row+1][column]&board[row+1][column-1]&board[row][column-1]) != 0)
+        {
+            winningPattern[row][column] = 1;
+            winningPattern[row+1][column] = 1;
+            winningPattern[row+1][column-1] = 1;
+            winningPattern[row][column-1] = 1;
+            return true;
+        }
+    }
+    if (column > 0 && row > 0)
+    {
+        if ((board[row][column]&board[row][column-1]&board[row-1][column-1]&board[row-1][column]) != 0)
+        {
+            winningPattern[row][column] = 1;
+            winningPattern[row][column-1] = 1;
+            winningPattern[row-1][column-1] = 1;
+            winningPattern[row-1][column] = 1;
+            return true;
+        }
+    }
+    if (column < 3 && row > 0)
+    {
+        if ((board[row][column]&board[row-1][column]&board[row-1][column+1]&board[row][column+1]) != 0)
+        {
+            winningPattern[row][column] = 1;
+            winningPattern[row-1][column] = 1;
+            winningPattern[row-1][column+1] = 1;
+            winningPattern[row][column+1] = 1;
+            return true;
+        }
+    }
+    return false;
+}
+
+/*
 Checks if particular piece from table of pieces in
 Quarto game object has been used.
 */

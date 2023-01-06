@@ -14,6 +14,9 @@ class QuartoGame
     bool playerActive; // player making a move (0 is player A, 1 is player B)
     int numberOfUsedPieces;
 
+    bool isGameFinishedInEasyVersion(int row, int column);
+    bool isGameFinishedInHardVersion(int row, int column);
+
 public:
     QuartoGame(bool gameDifficultyLevel);
     ~QuartoGame();
