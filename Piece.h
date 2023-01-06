@@ -6,14 +6,13 @@ using namespace std;
 class Piece
 {
     char type;
-    bool isAlreadyUsed;
+    bool is_already_used;
 
 public:
-    Piece(int pieceType);
-    //~Piece();
-    void setPieceAsUsed();
-    bool isPieceUsed();
-    char getPieceType();
+    Piece(int piece_type);
+    void set_piece_as_used();
+    bool is_piece_used();
+    char get_piece_type();
 };
 
 #endif // PIECE_H

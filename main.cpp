@@ -1,11 +1,11 @@
 #include <iostream>
-#include "ConsoleUserInterface.h"
+#include "Console_user_interface.h"
 
 using namespace std;
 
 int main()
 {
-    ConsoleUserInterface interface;
-    interface.displayMainMenu();
+    Console_user_interface interface;
+    interface.display_main_menu();
     return 0;
 }

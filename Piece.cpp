@@ -29,13 +29,13 @@ in the table of pieces which is given as an constructor argument:
     - 14 - LSSS,
     - 15 - LSSH.
 */
-Piece::Piece(int pieceType)
+Piece::Piece(int piece_type)
 {
     type = 0;
-    isAlreadyUsed = false;
+    is_already_used = false;
 
     //color
-    if (pieceType < 8)
+    if (piece_type < 8)
     {
         type = type | 1 << 0;
     }
@@ -45,7 +45,7 @@ Piece::Piece(int pieceType)
     }
 
     //shape
-    if (pieceType % 8 < 4)
+    if (piece_type % 8 < 4)
     {
         type = type | 1 << 2;
     }
@@ -55,7 +55,7 @@ Piece::Piece(int pieceType)
     }
 
     //height
-    if (pieceType % 4 < 2)
+    if (piece_type % 4 < 2)
     {
         type = type | 1 << 4;
     }
@@ -65,7 +65,7 @@ Piece::Piece(int pieceType)
     }
 
     //texture
-    if (pieceType % 2 < 1)
+    if (piece_type % 2 < 1)
     {
         type = type | 1 << 6;
     }
@@ -76,33 +76,26 @@ Piece::Piece(int pieceType)
 }
 
 /*
-Piece::~Piece()
-{
-    cout << "piece destructor" << type << endl;
-}
-*/
-
-/*
 Sets the piece as used.
 */
-void Piece::setPieceAsUsed()
+void Piece::set_piece_as_used()
 {
-    isAlreadyUsed = true;
+    is_already_used = true;
 }
 
 /*
 Informs whether the piece has already been used.
 */
-bool Piece::isPieceUsed()
+bool Piece::is_piece_used()
 {
-    if (isAlreadyUsed) return true;
+    if (is_already_used) return true;
     else return false;
 }
 
 /*
 Informs what is the piece type.
 */
-char Piece::getPieceType()
+char Piece::get_piece_type()
 {
     return type;
 }

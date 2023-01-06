@@ -1,21 +1,14 @@
-#include "ConsoleUserInterface.h"
+#include "Console_user_interface.h"
 
-ConsoleUserInterface::ConsoleUserInterface()
+Console_user_interface::Console_user_interface()
 {
     game = NULL;
 }
 
 /*
-ConsoleUserInterface::~ConsoleUserInterface()
-{
-    cout << "console destructor" << endl;
-}
-*/
-
-/*
 Asks user for input till get a single character, then returns it.
 */
-char ConsoleUserInterface::getSingleCharacter()
+char Console_user_interface::get_single_character()
 {
     string input = "";
     char character  = {0};
@@ -37,7 +30,7 @@ char ConsoleUserInterface::getSingleCharacter()
 /*
 Displays main menu and ask for choice, then returns the choice.
 */
-char ConsoleUserInterface::selectFromMainMenu()
+char Console_user_interface::select_from_main_menu()
 {
     char choice;
 
@@ -49,7 +42,7 @@ char ConsoleUserInterface::selectFromMainMenu()
     cout << "3. Exit" << endl;
     cout << "---------------------------" << endl;
     cout << "You choice: ";
-    choice = getSingleCharacter();
+    choice = get_single_character();
 
     return choice;
 }
@@ -61,19 +54,19 @@ Displays result of the game depending on the value
 returned from last call of make move method.
 After that calls for method displaying main menu.
 */
-void ConsoleUserInterface::startGame(bool gameDifficultyLevel)
+void Console_user_interface::start_game(bool game_difficulty_level)
 {
-    game = new QuartoGame(gameDifficultyLevel);
-    clearMarks();
+    game = new Quarto_game(game_difficulty_level);
+    clear_marks();
     int result;
     do
     {
-        result = makeMove();
+        result = make_move();
     }
     while (result == 0);
 
-    updateMarks();
-    displayTheBoard();
+    update_marks();
+    display_the_board();
 
     cout << "   -----------------------------------------" << endl;
 
@@ -100,14 +93,14 @@ void ConsoleUserInterface::startGame(bool gameDifficultyLevel)
     string choice = "";
     getline(cin, choice);
 
-    displayMainMenu();
+    display_main_menu();
 }
 
 /*
 Sets marks as invisible for every field of displayed board
 (see mark description in class declaration).
 */
-void ConsoleUserInterface::clearMarks()
+void Console_user_interface::clear_marks()
 {
     for (int i = 0; i < 4; i++)
     {
@@ -122,13 +115,13 @@ void ConsoleUserInterface::clearMarks()
 Sets dashes instead spaces for every field of board corresponding to winner
 pattern - makes marks visible for these fields.
 */
-void ConsoleUserInterface::updateMarks()
+void Console_user_interface::update_marks()
 {
     for (int i = 0; i < 4; i++)
     {
         for (int j = 0; j < 4; j++)
         {
-            if (game -> getWinningPatternField(i,j)) marks[i][j] = "----";
+            if (game -> get_winning_pattern_field(i,j)) marks[i][j] = "----";
         }
     }
 }
@@ -136,7 +129,7 @@ void ConsoleUserInterface::updateMarks()
 /*
 Sets piece symbol using bit operations on type value given as an argument.
 */
-string ConsoleUserInterface::createPieceSymbol(char type)
+string Console_user_interface::create_piece_symbol(char type)
 {
     string symbol = "";
 
@@ -183,16 +176,16 @@ string ConsoleUserInterface::createPieceSymbol(char type)
 Goes through the board of game object and sets piece types in
 board of console interface object.
 */
-void ConsoleUserInterface::updateBoard()
+void Console_user_interface::update_board()
 {
-    char pieceType;
+    char piece_type;
     for (int i = 0; i < 4; i++)
     {
         for (int j = 0; j < 4; j++)
         {
-            pieceType = game -> getPieceTypeFromBoardField(i,j);
-            if (pieceType == 0) board[i][j] = "    ";
-            else board[i][j] = createPieceSymbol(pieceType);
+            piece_type = game -> get_piece_type_from_board_field(i,j);
+            if (piece_type == 0) board[i][j] = "    ";
+            else board[i][j] = create_piece_symbol(piece_type);
         }
     }
 }
@@ -200,9 +193,9 @@ void ConsoleUserInterface::updateBoard()
 /*
 Displays the board.
 */
-void ConsoleUserInterface::displayTheBoard()
+void Console_user_interface::display_the_board()
 {
-    updateBoard();
+    update_board();
     if (system("cls")) system("clear");
     cout << "              >>> QUARTO GAME <<<           " << endl << endl;
     cout << internal << "   |    1    |    2    |    3    |    4    |" << endl;
@@ -229,11 +222,11 @@ void ConsoleUserInterface::displayTheBoard()
 Returns actual piece symbol for piece from pieces table in game object
 for free pieces or dashes for used pieces.
 */
-string ConsoleUserInterface::createSymbolOfFreePiece(int numberOfPiece)
+string Console_user_interface::create_symbol_of_free_piece(int number_of_piece)
 {
     string symbol;
-    if ((game -> isPieceUsed(numberOfPiece))) symbol = "----";
-    else symbol = createPieceSymbol(game -> getPieceType(numberOfPiece));
+    if ((game -> is_piece_used(number_of_piece))) symbol = "----";
+    else symbol = create_piece_symbol(game -> get_piece_type(number_of_piece));
     return symbol;
 }
 
@@ -241,11 +234,11 @@ string ConsoleUserInterface::createSymbolOfFreePiece(int numberOfPiece)
 Goes through the table of pieces in game object and sets dashes
 instead of actual symbol in free pieces symbols table for all used pieces.
 */
-void ConsoleUserInterface::updateFreePieces()
+void Console_user_interface::update_free_pieces()
 {
     for (int i = 0; i < 16; i++)
     {
-        freePieces[i] = createSymbolOfFreePiece(i);
+        free_pieces[i] = create_symbol_of_free_piece(i);
     }
 }
 
@@ -253,22 +246,22 @@ void ConsoleUserInterface::updateFreePieces()
 Display table of free pieces. The location of piece symbol in this table
 is always the same. If piece is used, dashes are displayed instead of piece symbol.
 */
-void ConsoleUserInterface::displayFreePieces()
+void Console_user_interface::display_free_pieces()
 {
-    updateFreePieces();
+    update_free_pieces();
     cout << endl;
     cout << "                  FREE PIECES               " << endl;
     cout << "   -----------------------------------------" << endl;
-    cout << internal << "      "<<freePieces[0]<<"      "<<freePieces[1]<<"      "<<freePieces[2]<<"      "<<freePieces[3]<<"    " << endl;
-    cout << internal << "      "<<freePieces[4]<<"      "<<freePieces[5]<<"      "<<freePieces[6]<<"      "<<freePieces[7]<<"    " << endl;
-    cout << internal << "      "<<freePieces[8]<<"      "<<freePieces[9]<<"      "<<freePieces[10]<<"      "<<freePieces[11]<<"    " << endl;
-    cout << internal << "      "<<freePieces[12]<<"      "<<freePieces[13]<<"      "<<freePieces[14]<<"      "<<freePieces[15]<<"    " << endl;
+    cout << internal << "      "<<free_pieces[0]<<"      "<<free_pieces[1]<<"      "<<free_pieces[2]<<"      "<<free_pieces[3]<<"    " << endl;
+    cout << internal << "      "<<free_pieces[4]<<"      "<<free_pieces[5]<<"      "<<free_pieces[6]<<"      "<<free_pieces[7]<<"    " << endl;
+    cout << internal << "      "<<free_pieces[8]<<"      "<<free_pieces[9]<<"      "<<free_pieces[10]<<"      "<<free_pieces[11]<<"    " << endl;
+    cout << internal << "      "<<free_pieces[12]<<"      "<<free_pieces[13]<<"      "<<free_pieces[14]<<"      "<<free_pieces[15]<<"    " << endl;
 }
 
 /*
 Asks user for piece symbol till the format is correct.
 */
-string ConsoleUserInterface::getPieceSymbolFromUser()
+string Console_user_interface::get_piece_symbol_from_user()
 {
     string input = "";
 
@@ -293,7 +286,7 @@ string ConsoleUserInterface::getPieceSymbolFromUser()
 Calculates piece type using bit operations for
 piece symbol received from user.
 */
-char ConsoleUserInterface::changePieceSymbolToType(string symbol)
+char Console_user_interface::change_piece_symbol_to_type(string symbol)
 {
     char type = 0;
 
@@ -313,11 +306,11 @@ char ConsoleUserInterface::changePieceSymbolToType(string symbol)
 Returns index number in pieces table of game object
 corresponding to piece symbol.
 */
-int ConsoleUserInterface::findPieceNumber(string symbol)
+int Console_user_interface::find_piece_number(string symbol)
 {
-    char type = changePieceSymbolToType(symbol);
-    int number = game -> findPieceNumber(type);
-    if (game -> isPieceUsed(number)) number = 16;
+    char type = change_piece_symbol_to_type(symbol);
+    int number = game -> find_piece_number(type);
+    if (game -> is_piece_used(number)) number = 16;
     return number;
 }
 
@@ -326,13 +319,13 @@ Asks users for all arguments of make move method of game
 object and checks the correctness of the entered data.
 Then calls the method with arguments received from used.
 */
-int ConsoleUserInterface::makeMove()
+int Console_user_interface::make_move()
 {
-    displayTheBoard();
-    displayFreePieces();
+    display_the_board();
+    display_free_pieces();
 
     // player making a move (0 is player A, 1 is player B)
-    bool player = game -> getPlayerActive();
+    bool player = game -> get_player_active();
 
     string player1;
     string player2;
@@ -349,7 +342,7 @@ int ConsoleUserInterface::makeMove()
     }
 
     string symbol;
-    int pieceNumber;
+    int piece_number;
     char row;
     char column;
 
@@ -359,18 +352,18 @@ int ConsoleUserInterface::makeMove()
 
     while (true)
     {
-        symbol = getPieceSymbolFromUser();
-        pieceNumber = findPieceNumber(symbol);
+        symbol = get_piece_symbol_from_user();
+        piece_number = find_piece_number(symbol);
         {
-            if (pieceNumber < 16)
+            if (piece_number < 16)
             {
                 break;
             }
-            else if (pieceNumber == 16)
+            else if (piece_number == 16)
             {
                 cout << "This piece is already used. Chose another one:" << endl;
             }
-            else if (pieceNumber == 100)
+            else if (piece_number == 100)
             {
                 cout << "This piece does not exist. Chose another one:" << endl;
             }
@@ -386,7 +379,7 @@ int ConsoleUserInterface::makeMove()
         cout << "Type the row symbol:" << endl;
         while (true)
         {
-            row = getSingleCharacter();
+            row = get_single_character();
             if(row >= 'A' && row <= 'D')
             {
                 break;
@@ -399,7 +392,7 @@ int ConsoleUserInterface::makeMove()
         cout << "Type the column number:" << endl;
         while (true)
         {
-            column = getSingleCharacter();
+            column = get_single_character();
             if(column >= '1' && column <= '4')
             {
                 break;
@@ -409,7 +402,7 @@ int ConsoleUserInterface::makeMove()
                 cout << "There is no such a column number. Use number from 1 to 4 according to the above game board notations. Type again:" << endl;
             }
         }
-        if (game -> isBoardFieldFree(row-'A',column-'1'))
+        if (game -> is_board_field_free(row-'A',column-'1'))
         {
             break;
         }
@@ -419,8 +412,8 @@ int ConsoleUserInterface::makeMove()
         }
     }
 
-    // actual move in QuartoGame object
-    int result = (game -> makeMove(row-'A',column-'1',pieceNumber));
+    // actual move in Quarto game object
+    int result = (game -> make_move(row-'A',column-'1',piece_number));
 
     return result;
 }
@@ -429,21 +422,21 @@ int ConsoleUserInterface::makeMove()
 Displays main menu. Depending on user's choice start game in chosen
 mode or close the program.
 */
-void ConsoleUserInterface::displayMainMenu()
+void Console_user_interface::display_main_menu()
 {
     char choice;
 
     while (true)
     {
-        choice = selectFromMainMenu();
+        choice = select_from_main_menu();
 
         switch (choice)
         {
         case '1':
-            startGame(0);
+            start_game(0);
             break;
         case '2':
-            startGame(1);
+            start_game(1);
             break;
         case '3':
             exit(0);
