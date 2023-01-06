@@ -25,13 +25,12 @@ class ConsoleUserInterface
 
     char getSingleCharacter();
     char selectFromMainMenu();
-
+    void startGame(bool gameDifficultyLevel);
     void clearMarks();
-
+    void updateMarks();
     string createPieceSymbol(char type);
     void updateBoard();
     void displayTheBoard();
-
     string createSymbolOfFreePiece(int numberOfPiece);
     void updateFreePieces();
     void displayFreePieces();
