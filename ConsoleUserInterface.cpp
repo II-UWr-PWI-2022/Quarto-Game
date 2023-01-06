@@ -231,6 +231,7 @@ void ConsoleUserInterface::displayMainMenu()
             //makeMove();
             clearMarks();
             displayTheBoard();
+            displayFreePieces();
             system("pause");
             break;
         case '2':
@@ -355,4 +356,44 @@ void ConsoleUserInterface::clearMarks()
             marks[i][j] = "    ";
         }
     }
+}
+
+/*
+Returns actual piece symbol for piece from pieces table in game object
+for free pieces or dashes for used pieces.
+*/
+string ConsoleUserInterface::createSymbolOfFreePiece(int numberOfPiece)
+{
+    string symbol;
+    if ((game -> isPieceUsed(numberOfPiece))) symbol = "----";
+    else symbol = createPieceSymbol(game -> getPieceType(numberOfPiece));
+    return symbol;
+}
+
+/*
+Goes through the table of pieces in game object and sets dashes
+instead of actual symbol in free pieces symbols table for all used pieces.
+*/
+void ConsoleUserInterface::updateFreePieces()
+{
+    for (int i = 0; i < 16; i++)
+    {
+        freePieces[i] = createSymbolOfFreePiece(i);
+    }
+}
+
+/*
+Display table of free pieces. The location of piece symbol in this table
+is always the same. If piece is used, dashes are displayed instead of piece symbol.
+*/
+void ConsoleUserInterface::displayFreePieces()
+{
+    updateFreePieces();
+    cout << endl;
+    cout << "                  FREE PIECES               " << endl;
+    cout << "   -----------------------------------------" << endl;
+    cout << internal << "      "<<freePieces[0]<<"      "<<freePieces[1]<<"      "<<freePieces[2]<<"      "<<freePieces[3]<<"    " << endl;
+    cout << internal << "      "<<freePieces[4]<<"      "<<freePieces[5]<<"      "<<freePieces[6]<<"      "<<freePieces[7]<<"    " << endl;
+    cout << internal << "      "<<freePieces[8]<<"      "<<freePieces[9]<<"      "<<freePieces[10]<<"      "<<freePieces[11]<<"    " << endl;
+    cout << internal << "      "<<freePieces[12]<<"      "<<freePieces[13]<<"      "<<freePieces[14]<<"      "<<freePieces[15]<<"    " << endl;
 }

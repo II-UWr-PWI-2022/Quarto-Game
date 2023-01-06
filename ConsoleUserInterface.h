@@ -32,6 +32,9 @@ class ConsoleUserInterface
     void updateBoard();
     void displayTheBoard();
 
+    string createSymbolOfFreePiece(int numberOfPiece);
+    void updateFreePieces();
+    void displayFreePieces();
     string getPieceSymbolFromUser();
     char changePieceSymbolToType(string symbol);
     int findPieceNumber(string symbol);
