@@ -1,16 +1,17 @@
 #include "Piece.h"
 
 /*
-This is function is a constructor of "Piece" class. It takes as an argument an integer from 0 to 15 and sets bits
-according to piece characteristics.
-Each piece has four characteristics determined by bits set at 1 according to the below list:
+Constructor. It takes as an argument an integer from 0 to 15
+and sets bits depending on piece characteristics.
+Each piece has four characteristics determined by bits
+set at 1 according to the below list:
     - color: dark (1st bit) or light (2nd bit),
     - shape: round (3rd bit) or square (4th bit),
     - height: tall (5th bit) or short (6th bit),
     - texture: solid (7th bit) or hollow (8th bit).
-Pieces are collected in table "pieces" in object "game" of class "QuartoGame", in the below list given are piece types
-corresponding to each position in the table - position in table "pieces" is equal to "type" argument
-of "Piece" constructor:
+Pieces are collected in table of pieces in object of Quarto game class,,
+in the below list given are piece types corresponding to index number
+in the table of pieces which is given as an constructor argument:
     - 0 - DRTS,
     - 1 - DRTH,
     - 2 - DRSS,
@@ -82,8 +83,7 @@ Piece::~Piece()
 */
 
 /*
-This function sets the private variable "isAlreadyUsed" to true, when piece is chosen and put
-on the game board by the object of class "QuartoGame'.
+Sets the piece as used.
 */
 void Piece::setPieceAsUsed()
 {
@@ -91,7 +91,7 @@ void Piece::setPieceAsUsed()
 }
 
 /*
-This function return the value of private variable "isAlreadyUsed".
+Informs whether the piece has already been used.
 */
 bool Piece::isPieceUsed()
 {
@@ -100,7 +100,7 @@ bool Piece::isPieceUsed()
 }
 
 /*
-This function return the value of private variable "type".
+Informs what is the piece type.
 */
 char Piece::getPieceType()
 {
