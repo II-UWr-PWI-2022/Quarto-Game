@@ -37,6 +37,16 @@ class fieldNextToBoard{
     */
     string whatTypeOfPieceIsOn;
 };
+class piece{
+    public:
+    int Xposition;
+    int Yposiiton;
+    string code;
+    string OnWhichFieldIsIt;
+    Texture tex;
+    Sprite sprt;
+    bool isChosenToBePlaced=false;
+};
 int main(){
     //defining variables
     bool endingConidtion=false;
@@ -49,6 +59,9 @@ int main(){
     //loading textures
     Texture backgroundTexture;
     backgroundTexture.loadFromFile("Resources/plansza.png");
+    //loading textures for pieces
+    Texture dbssTex;
+    dbssTex.loadFromFile("Resources/pieces/dbss.png");
     //making sprites
     Sprite backgroundSprite;
     backgroundSprite.setTexture(backgroundTexture);
@@ -250,6 +263,11 @@ int main(){
     d4.YpositionOfLeftUpCorner=437;
     d4.XpositionOfRightDownCorner=435;
     d4.YpositionOfRightDownCorner=490;
+    //making sprites for pieces;
+    Sprite dbssSprt;
+    dbssSprt.setTexture(dbssTex);
+    dbssSprt.setPosition(Vector2f(l4.XpositionOfLeftUpCorner, l4.YpositionOfLeftUpCorner));
+    dbssSprt.setScale(Vector2f(53,53));
     //game loop
     while(window.isOpen()){
         Event event;
@@ -273,6 +291,7 @@ int main(){
             }
         }*/
         window.draw(backgroundSprite);
+        window.draw(dbssSprt);
         window.display();
     }
 }
