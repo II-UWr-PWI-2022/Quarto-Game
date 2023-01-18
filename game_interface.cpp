@@ -43,9 +43,9 @@ class piece{
     int Yposiiton;
     string code;
     string OnWhichFieldIsIt;
-    Texture tex;
     Sprite sprt;
     bool isChosenToBePlaced=false;
+    Texture tex;
 };
 int main(){
     //defining variables
@@ -59,9 +59,6 @@ int main(){
     //loading textures
     Texture backgroundTexture;
     backgroundTexture.loadFromFile("Resources/plansza.png");
-    //loading textures for pieces
-    Texture dbssTex;
-    dbssTex.loadFromFile("Resources/pieces/dbss.png");
     //making sprites
     Sprite backgroundSprite;
     backgroundSprite.setTexture(backgroundTexture);
@@ -263,11 +260,135 @@ int main(){
     d4.YpositionOfLeftUpCorner=437;
     d4.XpositionOfRightDownCorner=435;
     d4.YpositionOfRightDownCorner=490;
-    //making sprites for pieces;
-    Sprite dbssSprt;
-    dbssSprt.setTexture(dbssTex);
-    dbssSprt.setPosition(Vector2f(l4.XpositionOfLeftUpCorner, l4.YpositionOfLeftUpCorner));
-    dbssSprt.setScale(Vector2f(53,53));
+    //loadig textures for pieces and defining them
+    piece dbch;
+    dbch.tex.loadFromFile("Resources/pieces/dbch.png");
+    dbch.sprt.setTexture(dbch.tex);
+    dbch.Xposition=l1.XpositionOfLeftUpCorner;
+    dbch.Yposiiton=l1.YpositionOfLeftUpCorner;
+    dbch.sprt.setPosition(Vector2f(dbch.Xposition, dbch.Yposiiton));
+    dbch.code="dbch";
+    dbch.OnWhichFieldIsIt="l1";
+    piece dbcs;
+    dbcs.tex.loadFromFile("Resources/pieces/dbcs.png");
+    dbcs.sprt.setTexture(dbcs.tex);
+    dbcs.Xposition=l2.XpositionOfLeftUpCorner;
+    dbcs.Yposiiton=l2.YpositionOfLeftUpCorner;
+    dbcs.sprt.setPosition(Vector2f(dbcs.Xposition, dbcs.Yposiiton));
+    dbcs.code="dbcs";
+    dbcs.OnWhichFieldIsIt="l2";
+    piece dbsh;
+    dbsh.tex.loadFromFile("Resources/pieces/dbsh.png");
+    dbsh.sprt.setTexture(dbsh.tex);
+    dbsh.Xposition=l3.XpositionOfLeftUpCorner;
+    dbsh.Yposiiton=l3.YpositionOfLeftUpCorner;
+    dbsh.sprt.setPosition(Vector2f(dbsh.Xposition, dbsh.Yposiiton));
+    dbsh.code="dbsh";
+    dbsh.OnWhichFieldIsIt="l3";
+    piece dbss;
+    dbss.tex.loadFromFile("Resources/pieces/dbss.png");
+    dbss.sprt.setTexture(dbss.tex);
+    dbss.Xposition=l4.XpositionOfLeftUpCorner;
+    dbss.Yposiiton=l4.YpositionOfLeftUpCorner;
+    dbss.sprt.setPosition(Vector2f(dbss.Xposition, dbss.Yposiiton));
+    dbss.code="dbss";
+    dbss.OnWhichFieldIsIt="l4";
+    piece dsch;
+    dsch.tex.loadFromFile("Resources/pieces/dsch.png");
+    dsch.sprt.setTexture(dsch.tex);
+    dsch.Xposition=l5.XpositionOfLeftUpCorner;
+    dsch.Yposiiton=l5.YpositionOfLeftUpCorner;
+    dsch.sprt.setPosition(Vector2f(dsch.Xposition, dsch.Yposiiton));
+    dsch.code="dsch";
+    dsch.OnWhichFieldIsIt="l5";
+    piece dscs;
+    dscs.tex.loadFromFile("Resources/pieces/dscs.png");
+    dscs.sprt.setTexture(dscs.tex);
+    dscs.Xposition=l6.XpositionOfLeftUpCorner;
+    dscs.Yposiiton=l6.YpositionOfLeftUpCorner;
+    dscs.sprt.setPosition(Vector2f(dscs.Xposition, dscs.Yposiiton));
+    dscs.code="dscs";
+    dscs.OnWhichFieldIsIt="l6";
+    piece dssh;
+    dssh.tex.loadFromFile("Resources/pieces/dssh.png");
+    dssh.sprt.setTexture(dssh.tex);
+    dssh.Xposition=l7.XpositionOfLeftUpCorner;
+    dssh.Yposiiton=l7.YpositionOfLeftUpCorner;
+    dssh.sprt.setPosition(Vector2f(dssh.Xposition, dssh.Yposiiton));
+    dssh.code="dssh";
+    dssh.OnWhichFieldIsIt="l7";
+    piece dsss;
+    dsss.tex.loadFromFile("Resources/pieces/dsss.png");
+    dsss.sprt.setTexture(dsss.tex);
+    dsss.Xposition=l8.XpositionOfLeftUpCorner;
+    dsss.Yposiiton=l8.YpositionOfLeftUpCorner;
+    dsss.sprt.setPosition(Vector2f(dsss.Xposition, dsss.Yposiiton));
+    dsss.code="dsss";
+    dsss.OnWhichFieldIsIt="l8";
+    piece lbch;
+    lbch.tex.loadFromFile("Resources/pieces/lbch.png");
+    lbch.sprt.setTexture(lbch.tex);
+    lbch.Xposition=r1.XpositionOfLeftUpCorner;
+    lbch.Yposiiton=r1.YpositionOfLeftUpCorner;
+    lbch.sprt.setPosition(Vector2f(lbch.Xposition, lbch.Yposiiton));
+    lbch.code="lbch";
+    lbch.OnWhichFieldIsIt="r1";
+    piece lbcs;
+    lbcs.tex.loadFromFile("Resources/pieces/lbcs.png");
+    lbcs.sprt.setTexture(lbcs.tex);
+    lbcs.Xposition=r2.XpositionOfLeftUpCorner;
+    lbcs.Yposiiton=r2.YpositionOfLeftUpCorner;
+    lbcs.sprt.setPosition(Vector2f(lbcs.Xposition, lbcs.Yposiiton));
+    lbcs.code="lbcs";
+    lbcs.OnWhichFieldIsIt="r2";
+    piece lbsh;
+    lbsh.tex.loadFromFile("Resources/pieces/lbsh.png");
+    lbsh.sprt.setTexture(lbsh.tex);
+    lbsh.Xposition=r3.XpositionOfLeftUpCorner;
+    lbsh.Yposiiton=r3.YpositionOfLeftUpCorner;
+    lbsh.sprt.setPosition(Vector2f(lbsh.Xposition, lbsh.Yposiiton));
+    lbsh.code="lbsh";
+    lbsh.OnWhichFieldIsIt="r3";
+    piece lbss;
+    lbss.tex.loadFromFile("Resources/pieces/lbss.png");
+    lbss.sprt.setTexture(lbss.tex);
+    lbss.Xposition=r4.XpositionOfLeftUpCorner;
+    lbss.Yposiiton=r4.YpositionOfLeftUpCorner;
+    lbss.sprt.setPosition(Vector2f(lbss.Xposition, lbss.Yposiiton));
+    lbss.code="lbss";
+    lbss.OnWhichFieldIsIt="r4";
+    piece lsch;
+    lsch.tex.loadFromFile("Resources/pieces/lsch.png");
+    lsch.sprt.setTexture(lsch.tex);
+    lsch.Xposition=r5.XpositionOfLeftUpCorner;
+    lsch.Yposiiton=r5.YpositionOfLeftUpCorner;
+    lsch.sprt.setPosition(Vector2f(lsch.Xposition, lsch.Yposiiton));
+    lsch.code="lsch";
+    lsch.OnWhichFieldIsIt="r5";
+    piece lscs;
+    lscs.tex.loadFromFile("Resources/pieces/lscs.png");
+    lscs.sprt.setTexture(lscs.tex);
+    lscs.Xposition=r6.XpositionOfLeftUpCorner;
+    lscs.Yposiiton=r6.YpositionOfLeftUpCorner;
+    lscs.sprt.setPosition(Vector2f(lscs.Xposition, lscs.Yposiiton));
+    lscs.code="lscs";
+    lscs.OnWhichFieldIsIt="r6";
+    piece lssh;
+    lssh.tex.loadFromFile("Resources/pieces/lssh.png");
+    lssh.sprt.setTexture(lssh.tex);
+    lssh.Xposition=r7.XpositionOfLeftUpCorner;
+    lssh.Yposiiton=r7.YpositionOfLeftUpCorner;
+    lssh.sprt.setPosition(Vector2f(lssh.Xposition, lssh.Yposiiton));
+    lssh.code="lssh";
+    lssh.OnWhichFieldIsIt="r7";
+    piece lsss;
+    lsss.tex.loadFromFile("Resources/pieces/lsss.png");
+    lsss.sprt.setTexture(lsss.tex);
+    lsss.Xposition=r8.XpositionOfLeftUpCorner;
+    lsss.Yposiiton=r8.YpositionOfLeftUpCorner;
+    lsss.sprt.setPosition(Vector2f(lsss.Xposition, lsss.Yposiiton));
+    lsss.code="lsss";
+    lsss.OnWhichFieldIsIt="r8";
     //game loop
     while(window.isOpen()){
         Event event;
@@ -290,8 +411,25 @@ int main(){
 
             }
         }*/
+        //drawing background
         window.draw(backgroundSprite);
-        window.draw(dbssSprt);
+        //drawing pieces
+        window.draw(dbch.sprt);
+        window.draw(dbcs.sprt);
+        window.draw(dbsh.sprt);
+        window.draw(dbss.sprt);
+        window.draw(dsch.sprt);
+        window.draw(dscs.sprt);
+        window.draw(dssh.sprt);
+        window.draw(dsss.sprt);
+        window.draw(lbch.sprt);
+        window.draw(lbcs.sprt);
+        window.draw(lbsh.sprt);
+        window.draw(lbss.sprt);
+        window.draw(lsch.sprt);
+        window.draw(lscs.sprt);
+        window.draw(lssh.sprt);
+        window.draw(lsss.sprt);
         window.display();
     }
 }
