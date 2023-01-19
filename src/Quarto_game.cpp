@@ -259,7 +259,7 @@ char Quarto_game::get_piece_type_from_board_field(int row, int column)
 }
 
 /*
-Returns the number of indexes in table of pieces in Quarto game
+Returns the number of index in table of pieces in Quarto game
 object for piece defined by its type.
 */
 int Quarto_game::find_piece_number(char type_of_piece)
