@@ -1,17 +1,12 @@
 #ifndef CONSOLE_USER_INTERFACE_H
 #define CONSOLE_USER_INTERFACE_H
 
-#include <iostream>
-#include <stdlib.h>
-#include <iomanip>
-
+#include "Libraries_And_Macros.h"
 #include "Quarto_game.h"
-
-using namespace std;
 
 class Console_user_interface
 {
-    string board[4][4];
+    string board[MAX_N][MAX_N];
 
     /*
     Marks are used to show the winning pattern on the board,
@@ -19,8 +14,8 @@ class Console_user_interface
     piece symbol. Lines consists of dashes. If piece is not in winning pattern
     or field is empty, spaces are displayed instead of dashes - marks are invisible.
     */
-    string marks[4][4];
-    string free_pieces[16];
+    string marks[MAX_N][MAX_N];
+    string free_pieces[MAX_NUMBER_OF_PIECES];
     Quarto_game *game;
 
     char get_single_character();

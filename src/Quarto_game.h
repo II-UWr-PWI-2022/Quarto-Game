@@ -1,15 +1,14 @@
 #ifndef QUARTO_GAME_H
 #define QUARTO_GAME_H
 
+#include "Libraries_And_Macros.h"
 #include "Piece.h"
-
-using namespace std;
 
 class Quarto_game
 {
-    char board[4][4] = {{0,0,0,0},{0,0,0,0},{0,0,0,0},{0,0,0,0}};
-    Piece pieces[16] = {0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15};
-    bool winning_pattern[4][4] = {{0,0,0,0},{0,0,0,0},{0,0,0,0},{0,0,0,0}};
+    char board[MAX_N][MAX_N] = {{0,0,0,0},{0,0,0,0},{0,0,0,0},{0,0,0,0}};
+    Piece pieces[MAX_NUMBER_OF_PIECES] = {0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15};
+    bool winning_pattern[MAX_N][MAX_N] = {{0,0,0,0},{0,0,0,0},{0,0,0,0},{0,0,0,0}};
     const bool DIFFICULTY_LEVEL; // game difficulty version (0 is easy, 1 is hard)
     bool player_active; // player making a move (0 is player A, 1 is player B)
     int number_of_used_pieces;

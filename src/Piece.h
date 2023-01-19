@@ -1,7 +1,7 @@
 #ifndef PIECE_H
 #define PIECE_H
 
-using namespace std;
+#include "Libraries_And_Macros.h"
 
 class Piece
 {

@@ -9,7 +9,7 @@ set at 1 according to the below list:
     - shape: round (3rd bit) or square (4th bit),
     - height: tall (5th bit) or short (6th bit),
     - texture: solid (7th bit) or hollow (8th bit).
-Pieces are collected in table of pieces in object of Quarto game class,,
+Pieces are collected in table of pieces in object of Quarto game class,
 in the below list given are piece types corresponding to index number
 in the table of pieces which is given as an constructor argument:
     - 0 - DRTS,
@@ -34,41 +34,45 @@ Piece::Piece(int piece_type)
     type = 0;
     is_already_used = false;
 
-    //color
-    if (piece_type < 8)
+    // color
+    if(piece_type < 8)
     {
         type = type | 1 << 0;
     }
+
     else
     {
         type = type | 1 << 1;
     }
 
-    //shape
-    if (piece_type % 8 < 4)
+    // shape
+    if(piece_type % 8 < 4)
     {
         type = type | 1 << 2;
     }
+
     else
     {
         type = type | 1 << 3;
     }
 
-    //height
-    if (piece_type % 4 < 2)
+    // height
+    if(piece_type % 4 < 2)
     {
         type = type | 1 << 4;
     }
+
     else
     {
         type = type | 1 << 5;
     }
 
-    //texture
-    if (piece_type % 2 < 1)
+    // texture
+    if(piece_type % 2 < 1)
     {
         type = type | 1 << 6;
     }
+
     else
     {
         type = type | 1 << 7;
@@ -88,8 +92,15 @@ Informs whether the piece has already been used.
 */
 bool Piece::is_piece_used()
 {
-    if (is_already_used) return true;
-    else return false;
+    if(is_already_used)
+	{
+		return true;
+	}
+
+	else
+	{
+		return false;
+	}
 }
 
 /*
