@@ -40,7 +40,9 @@ pattern and returns true, it not - it returns false.
 */
 bool Quarto_game::is_game_finished_in_easy_version(int row, int column)
 {
-    if((board[row][0] & board[row][1] & board[row][2] & board[row][3]) != 0)
+    if(board[row][0] != 16 && board[row][1] != 16 && board[row][2] != 16 && board[row][3] != 16 &&
+        ((board[row][0] & board[row][1] & board[row][2] & board[row][3]) != 0 ||
+        (~board[row][0] & ~board[row][1] & ~board[row][2] & ~board[row][3] & ~(1<<4) & ~(1<<5) & ~(1<<6) & ~(1<<7) != 0)))
     {
         winning_pattern[row][0] = 1;
         winning_pattern[row][1] = 1;
@@ -50,7 +52,9 @@ bool Quarto_game::is_game_finished_in_easy_version(int row, int column)
         return true;
     }
 
-    else if((board[0][column] & board[1][column] & board[2][column] & board[3][column]) != 0)
+    else if(board[0][column] != 16 && board[1][column] != 16 && board[2][column] != 16 && board[3][column] != 16 &&
+        ((board[0][column] & board[1][column] & board[2][column] & board[3][column]) != 0 ||
+        (~board[0][column] & ~board[1][column] & ~board[2][column] & ~board[3][column] & ~(1<<4) & ~(1<<5) & ~(1<<6) & ~(1<<7) != 0)))
     {
         winning_pattern[0][column] = 1;
         winning_pattern[1][column] = 1;
@@ -60,7 +64,9 @@ bool Quarto_game::is_game_finished_in_easy_version(int row, int column)
         return true;
     }
 
-    else if((board[0][0] & board[1][1] & board[2][2] & board[3][3]) != 0)
+    else if(board[0][0] != 16 && board[1][1] != 16 && board[2][2] != 16 && board[3][3] != 16 &&
+        ((board[0][0] & board[1][1] & board[2][2] & board[3][3]) != 0 ||
+        (~board[0][0] & ~board[1][1] & ~board[2][2] & ~board[3][3] & ~(1<<4) & ~(1<<5) & ~(1<<6) & ~(1<<7) != 0)))
     {
         winning_pattern[0][0] = 1;
         winning_pattern[1][1] = 1;
@@ -70,7 +76,9 @@ bool Quarto_game::is_game_finished_in_easy_version(int row, int column)
         return true;
     }
 
-    else if((board[3][0] & board[2][1] & board[1][2] & board[0][3]) != 0)
+    else if(board[3][0] != 16 && board[2][1] != 16 && board[1][2] != 16 && board[0][3] != 16 &&
+        ((board[3][0] & board[2][1] & board[1][2] & board[0][3]) != 0 ||
+        (~board[3][0] & ~board[2][1] & ~board[1][2] & ~board[0][3] & ~(1<<4) & ~(1<<5) & ~(1<<6) & ~(1<<7) != 0)))
     {
         winning_pattern[3][0] = 1;
         winning_pattern[2][1] = 1;
@@ -96,7 +104,9 @@ bool Quarto_game::is_game_finished_in_hard_version(int row, int column)
 {
     if(column < 3 && row < 3)
     {
-        if((board[row][column] & board[row][column+1] & board[row+1][column+1] & board[row+1][column]) != 0)
+        if(board[row][column] != 16 && board[row][column+1] != 16 && board[row+1][column+1] != 16 && board[row+1][column] != 16 &&
+        ((board[row][column] & board[row][column+1] & board[row+1][column+1] & board[row+1][column]) != 0 ||
+        (~board[row][column] & ~board[row][column+1] & ~board[row+1][column+1] & ~board[row+1][column] & ~(1<<4) & ~(1<<5) & ~(1<<6) & ~(1<<7) != 0)))
         {
             winning_pattern[row][column] = 1;
             winning_pattern[row][column+1] = 1;
@@ -109,7 +119,9 @@ bool Quarto_game::is_game_finished_in_hard_version(int row, int column)
 
     if(column > 0 && row < 3)
     {
-        if((board[row][column] & board[row+1][column] & board[row+1][column-1] & board[row][column-1]) != 0)
+        if(board[row][column] != 16 && board[row+1][column] != 16 && board[row+1][column-1] != 16 && board[row][column-1] != 16 &&
+        ((board[row][column] & board[row+1][column] & board[row+1][column-1] & board[row][column-1]) != 0 ||
+        (~board[row][column] & ~board[row+1][column] & ~board[row+1][column-1] & ~board[row][column-1] & ~(1<<4) & ~(1<<5) & ~(1<<6) & ~(1<<7) != 0)))
         {
             winning_pattern[row][column] = 1;
             winning_pattern[row+1][column] = 1;
@@ -122,7 +134,9 @@ bool Quarto_game::is_game_finished_in_hard_version(int row, int column)
 
     if(column > 0 && row > 0)
     {
-        if((board[row][column] & board[row][column-1] & board[row-1][column-1] & board[row-1][column]) != 0)
+        if(board[row][column] != 16 && board[row][column-1] != 16 && board[row-1][column-1] != 16 && board[row+1][column] != 16 &&
+        ((board[row][column] & board[row][column-1] & board[row-1][column-1] & board[row+1][column]) != 0 ||
+        (~board[row][column] & ~board[row][column-1] & ~board[row-1][column-1] & ~board[row+1][column] & ~(1<<4) & ~(1<<5) & ~(1<<6) & ~(1<<7) != 0)))
         {
             winning_pattern[row][column] = 1;
             winning_pattern[row][column-1] = 1;
@@ -135,7 +149,9 @@ bool Quarto_game::is_game_finished_in_hard_version(int row, int column)
 
     if(column < 3 && row > 0)
     {
-        if((board[row][column] & board[row-1][column] & board[row-1][column+1] & board[row][column+1]) != 0)
+        if(board[row][column] != 16 && board[row-1][column] != 16 && board[row-1][column+1] != 16 && board[row][column+1] != 16 &&
+        ((board[row][column] & board[row-1][column] & board[row-1][column+1] & board[row][column+1]) != 0 ||
+        (~board[row][column] & ~board[row-1][column] & ~board[row-1][column+1] & ~board[row][column+1] & ~(1<<4) & ~(1<<5) & ~(1<<6) & ~(1<<7) != 0)))
         {
             winning_pattern[row][column] = 1;
             winning_pattern[row-1][column] = 1;
@@ -211,7 +227,7 @@ Checks if particular field on board is free.
 */
 bool Quarto_game::is_board_field_free(int row, int column)
 {
-    if(board[row][column] == 0)
+    if(board[row][column] == 16)
     {
         return true;
     }
