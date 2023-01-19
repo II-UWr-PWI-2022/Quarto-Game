@@ -19,6 +19,7 @@ class fieldOnBoard{
     if empty then ther is no piece
     */
     string whatTypeOfPieceisOn="";
+    Sprite sprt;
 };
 class fieldNextToBoard{
     public:
@@ -44,7 +45,7 @@ class piece{
     string code;
     string OnWhichFieldIsIt;
     Sprite sprt;
-    bool isChosenToBePlaced=false;
+    bool isItPlaced=false;
     Texture tex;
 };
 int main(){
@@ -90,7 +91,7 @@ int main(){
     l3.XpositionOfLeftUpCorner=8;
     l3.YpositionOfLeftUpCorner=166;
     l3.XpositionOfRightDownCorner=61;
-    l3.YpositionOfRightDownCorner=116;
+    l3.YpositionOfRightDownCorner=213;
     l3.whatTypeOfPieceIsOn="dbsh";
     fieldNextToBoard l4;
     l4.XpositionOfLeftUpCorner=8;
@@ -389,19 +390,336 @@ int main(){
     lsss.sprt.setPosition(Vector2f(lsss.Xposition, lsss.Yposiiton));
     lsss.code="lsss";
     lsss.OnWhichFieldIsIt="r8";
-    //game loop
+    //making a field for piece that've been chosen by player
+    RectangleShape fieldForChosenPieces(Vector2f(75,75));
+    fieldForChosenPieces.setFillColor(Color(206, 132, 81));
+    fieldForChosenPieces.setPosition(Vector2f(365,5));
+    bool isSomethingOnMiddleField=false;
+    string whatTypeOfPieceIsOn="";
+    Sprite middleSprt;
     while(window.isOpen()){
         Event event;
+        Vector2i mousePosition=Mouse::getPosition(window);
         //Closing window
         while(window.pollEvent(event)){
             if(event.type==Event::Closed){
                 window.close();
             }
         }
+        //option to choose piece for placing on board
+        if(isSomethingOnMiddleField==false){
+            if(mousePosition.x>=l1.XpositionOfLeftUpCorner && mousePosition.y>=l1.YpositionOfLeftUpCorner && mousePosition.x<=l1.XpositionOfRightDownCorner && mousePosition.y<=l1.YpositionOfRightDownCorner){
+                if(Mouse::isButtonPressed(Mouse::Left)==true){
+                    dbch.sprt.setPosition(Vector2f(376,16));
+                    middleSprt=dbch.sprt;
+                    isSomethingOnMiddleField=true;
+                    whatTypeOfPieceIsOn=dbch.code;
+                    dbch.isItPlaced=true;
+                }
+            }
+            if(mousePosition.x>=l2.XpositionOfLeftUpCorner && mousePosition.y>=l2.YpositionOfLeftUpCorner && mousePosition.x<=l2.XpositionOfRightDownCorner && mousePosition.y<=l2.YpositionOfRightDownCorner){
+                if(Mouse::isButtonPressed(Mouse::Left)==true){
+                    dbcs.sprt.setPosition(Vector2f(376,16));
+                    middleSprt=dbcs.sprt;
+                    isSomethingOnMiddleField=true;
+                    whatTypeOfPieceIsOn=dbcs.code;
+                    dbcs.isItPlaced=true;
+                }
+            }
+            if(mousePosition.x>=l3.XpositionOfLeftUpCorner && mousePosition.y>=l3.YpositionOfLeftUpCorner && mousePosition.x<=l3.XpositionOfRightDownCorner && mousePosition.y<=l3.YpositionOfRightDownCorner){
+                if(Mouse::isButtonPressed(Mouse::Left)==true){
+                    dbsh.sprt.setPosition(Vector2f(376,16));
+                    middleSprt=dbsh.sprt;
+                    isSomethingOnMiddleField=true;
+                    whatTypeOfPieceIsOn=dbsh.code;
+                    dbsh.isItPlaced=true;
+                }
+            }
+            if(mousePosition.x>=l4.XpositionOfLeftUpCorner && mousePosition.y>=l4.YpositionOfLeftUpCorner && mousePosition.x<=l4.XpositionOfRightDownCorner && mousePosition.y<=l4.YpositionOfRightDownCorner){
+                if(Mouse::isButtonPressed(Mouse::Left)==true){
+                    dbss.sprt.setPosition(Vector2f(376,16));
+                    middleSprt=dbss.sprt;
+                    isSomethingOnMiddleField=true;
+                    whatTypeOfPieceIsOn=dbss.code;
+                    dbss.isItPlaced=true;
+                }
+            }
+            if(mousePosition.x>=l5.XpositionOfLeftUpCorner && mousePosition.y>=l5.YpositionOfLeftUpCorner && mousePosition.x<=l5.XpositionOfRightDownCorner && mousePosition.y<=l5.YpositionOfRightDownCorner){
+                if(Mouse::isButtonPressed(Mouse::Left)==true){
+                    dsch.sprt.setPosition(Vector2f(376,16));
+                    middleSprt=dsch.sprt;
+                    isSomethingOnMiddleField=true;
+                    whatTypeOfPieceIsOn=dsch.code;
+                    dsch.isItPlaced=true;
+                }
+            }
+            if(mousePosition.x>=l6.XpositionOfLeftUpCorner && mousePosition.y>=l6.YpositionOfLeftUpCorner && mousePosition.x<=l6.XpositionOfRightDownCorner && mousePosition.y<=l6.YpositionOfRightDownCorner){
+                if(Mouse::isButtonPressed(Mouse::Left)==true){
+                    dscs.sprt.setPosition(Vector2f(376,16));
+                    middleSprt=dscs.sprt;
+                    isSomethingOnMiddleField=true;
+                    whatTypeOfPieceIsOn=dscs.code;
+                    dscs.isItPlaced=true;
+                }
+            }
+            if(mousePosition.x>=l7.XpositionOfLeftUpCorner && mousePosition.y>=l7.YpositionOfLeftUpCorner && mousePosition.x<=l7.XpositionOfRightDownCorner && mousePosition.y<=l7.YpositionOfRightDownCorner){
+                if(Mouse::isButtonPressed(Mouse::Left)==true){
+                    dssh.sprt.setPosition(Vector2f(376,16));
+                    middleSprt=dssh.sprt;
+                    isSomethingOnMiddleField=true;
+                    whatTypeOfPieceIsOn=dssh.code;
+                    dssh.isItPlaced=true;
+                }
+            }
+            if(mousePosition.x>=l8.XpositionOfLeftUpCorner && mousePosition.y>=l8.YpositionOfLeftUpCorner && mousePosition.x<=l8.XpositionOfRightDownCorner && mousePosition.y<=l8.YpositionOfRightDownCorner){
+                if(Mouse::isButtonPressed(Mouse::Left)==true){
+                    dsss.sprt.setPosition(Vector2f(376,16));
+                    middleSprt=dsss.sprt;
+                    isSomethingOnMiddleField=true;
+                    whatTypeOfPieceIsOn=dsss.code;
+                    dsss.isItPlaced=true;
+                }
+            }
+            if(mousePosition.x>=r1.XpositionOfLeftUpCorner && mousePosition.y>=r1.YpositionOfLeftUpCorner && mousePosition.x<=r1.XpositionOfRightDownCorner && mousePosition.y<=r1.YpositionOfRightDownCorner){
+                if(Mouse::isButtonPressed(Mouse::Left)==true){
+                    lbch.sprt.setPosition(Vector2f(376,16));
+                    middleSprt=lbch.sprt;
+                    isSomethingOnMiddleField=true;
+                    whatTypeOfPieceIsOn=lbch.code;
+                    lbch.isItPlaced=true;
+                }
+            }
+            if(mousePosition.x>=r2.XpositionOfLeftUpCorner && mousePosition.y>=r2.YpositionOfLeftUpCorner && mousePosition.x<=r2.XpositionOfRightDownCorner && mousePosition.y<=r2.YpositionOfRightDownCorner){
+                if(Mouse::isButtonPressed(Mouse::Left)==true){
+                    lbcs.sprt.setPosition(Vector2f(376,16));
+                    middleSprt=lbcs.sprt;
+                    isSomethingOnMiddleField=true;
+                    whatTypeOfPieceIsOn=lbcs.code;
+                    lbcs.isItPlaced=true;
+                }
+            }
+            if(mousePosition.x>=r3.XpositionOfLeftUpCorner && mousePosition.y>=r3.YpositionOfLeftUpCorner && mousePosition.x<=r3.XpositionOfRightDownCorner && mousePosition.y<=r3.YpositionOfRightDownCorner){
+                if(Mouse::isButtonPressed(Mouse::Left)==true){
+                    lbsh.sprt.setPosition(Vector2f(376,16));
+                    middleSprt=lbsh.sprt;
+                    isSomethingOnMiddleField=true;
+                    whatTypeOfPieceIsOn=lbsh.code;
+                    lbsh.isItPlaced=true;
+                }
+            }
+            if(mousePosition.x>=r4.XpositionOfLeftUpCorner && mousePosition.y>=r4.YpositionOfLeftUpCorner && mousePosition.x<=r4.XpositionOfRightDownCorner && mousePosition.y<=r4.YpositionOfRightDownCorner){
+                if(Mouse::isButtonPressed(Mouse::Left)==true){
+                    lbss.sprt.setPosition(Vector2f(376,16));
+                    middleSprt=lbss.sprt;
+                    isSomethingOnMiddleField=true;
+                    whatTypeOfPieceIsOn=lbss.code;
+                    lbss.isItPlaced=true;
+                }
+            }
+            if(mousePosition.x>=r5.XpositionOfLeftUpCorner && mousePosition.y>=r5.YpositionOfLeftUpCorner && mousePosition.x<=r5.XpositionOfRightDownCorner && mousePosition.y<=r5.YpositionOfRightDownCorner){
+                if(Mouse::isButtonPressed(Mouse::Left)==true){
+                    lsch.sprt.setPosition(Vector2f(376,16));
+                    middleSprt=lsch.sprt;
+                    isSomethingOnMiddleField=true;
+                    whatTypeOfPieceIsOn=lsch.code;
+                    lsch.isItPlaced=true;
+                }
+            }
+            if(mousePosition.x>=r6.XpositionOfLeftUpCorner && mousePosition.y>=r6.YpositionOfLeftUpCorner && mousePosition.x<=r6.XpositionOfRightDownCorner && mousePosition.y<=r6.YpositionOfRightDownCorner){
+                if(Mouse::isButtonPressed(Mouse::Left)==true){
+                    lscs.sprt.setPosition(Vector2f(376,16));
+                    middleSprt=lscs.sprt;
+                    isSomethingOnMiddleField=true;
+                    whatTypeOfPieceIsOn=lscs.code;
+                    lscs.isItPlaced=true;
+                }
+            }
+            if(mousePosition.x>=r7.XpositionOfLeftUpCorner && mousePosition.y>=r7.YpositionOfLeftUpCorner && mousePosition.x<=r7.XpositionOfRightDownCorner && mousePosition.y<=r7.YpositionOfRightDownCorner){
+                if(Mouse::isButtonPressed(Mouse::Left)==true){
+                    lssh.sprt.setPosition(Vector2f(376,16));
+                    middleSprt=lssh.sprt;
+                    isSomethingOnMiddleField=true;
+                    whatTypeOfPieceIsOn=lssh.code;
+                    lssh.isItPlaced=true;
+                }
+            }
+            if(mousePosition.x>=r8.XpositionOfLeftUpCorner && mousePosition.y>=r8.YpositionOfLeftUpCorner && mousePosition.x<=r8.XpositionOfRightDownCorner && mousePosition.y<=r8.YpositionOfRightDownCorner){
+                if(Mouse::isButtonPressed(Mouse::Left)==true){
+                    lsss.sprt.setPosition(Vector2f(376,16));
+                    middleSprt=lsss.sprt;
+                    isSomethingOnMiddleField=true;
+                    whatTypeOfPieceIsOn=lsss.code;
+                    lsss.isItPlaced=true;
+                }
+            }
+        }
+        //option to place pieces on board
+        else{
+            if(mousePosition.x>=a1.XpositionOfLeftUpCorner && mousePosition.y>=a1.YpositionOfLeftUpCorner && mousePosition.x<=a1.XpositionOfRightDownCorner && mousePosition.y<=a1.YpositionOfRightDownCorner){
+                if(Mouse::isButtonPressed(Mouse::Left)==true && a1.isOccupied==false){
+                    a1.sprt=middleSprt;
+                    a1.sprt.setPosition(Vector2f(a1.XpositionOfLeftUpCorner, a1.YpositionOfLeftUpCorner));
+                    a1.whatTypeOfPieceisOn=whatTypeOfPieceIsOn;
+                    a1.isOccupied=true;
+                    isSomethingOnMiddleField=false;
+
+                }    
+            }
+            if(mousePosition.x>=a2.XpositionOfLeftUpCorner && mousePosition.y>=a2.YpositionOfLeftUpCorner && mousePosition.x<=a2.XpositionOfRightDownCorner && mousePosition.y<=a2.YpositionOfRightDownCorner){
+                if(Mouse::isButtonPressed(Mouse::Left)==true && a2.isOccupied==false){
+                    a2.sprt=middleSprt;
+                    a2.sprt.setPosition(Vector2f(a2.XpositionOfLeftUpCorner, a2.YpositionOfLeftUpCorner));
+                    a2.whatTypeOfPieceisOn=whatTypeOfPieceIsOn;
+                    a2.isOccupied=true;
+                    isSomethingOnMiddleField=false;
+
+                }    
+            }
+            if(mousePosition.x>=a3.XpositionOfLeftUpCorner && mousePosition.y>=a3.YpositionOfLeftUpCorner && mousePosition.x<=a3.XpositionOfRightDownCorner && mousePosition.y<=a3.YpositionOfRightDownCorner){
+                if(Mouse::isButtonPressed(Mouse::Left)==true && a3.isOccupied==false){
+                    a3.sprt=middleSprt;
+                    a3.sprt.setPosition(Vector2f(a3.XpositionOfLeftUpCorner, a3.YpositionOfLeftUpCorner));
+                    a3.whatTypeOfPieceisOn=whatTypeOfPieceIsOn;
+                    a3.isOccupied=true;
+                    isSomethingOnMiddleField=false;
+
+                }    
+            }
+            if(mousePosition.x>=a4.XpositionOfLeftUpCorner && mousePosition.y>=a4.YpositionOfLeftUpCorner && mousePosition.x<=a4.XpositionOfRightDownCorner && mousePosition.y<=a4.YpositionOfRightDownCorner){
+                if(Mouse::isButtonPressed(Mouse::Left)==true && a4.isOccupied==false){
+                    a4.sprt=middleSprt;
+                    a4.sprt.setPosition(Vector2f(a4.XpositionOfLeftUpCorner, a4.YpositionOfLeftUpCorner));
+                    a4.whatTypeOfPieceisOn=whatTypeOfPieceIsOn;
+                    a4.isOccupied=true;
+                    isSomethingOnMiddleField=false;
+
+                }    
+            }
+            if(mousePosition.x>=b1.XpositionOfLeftUpCorner && mousePosition.y>=b1.YpositionOfLeftUpCorner && mousePosition.x<=b1.XpositionOfRightDownCorner && mousePosition.y<=b1.YpositionOfRightDownCorner){
+                if(Mouse::isButtonPressed(Mouse::Left)==true && b1.isOccupied==false){
+                    b1.sprt=middleSprt;
+                    b1.sprt.setPosition(Vector2f(b1.XpositionOfLeftUpCorner, b1.YpositionOfLeftUpCorner));
+                    b1.whatTypeOfPieceisOn=whatTypeOfPieceIsOn;
+                    b1.isOccupied=true;
+                    isSomethingOnMiddleField=false;
+
+                }    
+            }
+            if(mousePosition.x>=b2.XpositionOfLeftUpCorner && mousePosition.y>=b2.YpositionOfLeftUpCorner && mousePosition.x<=b2.XpositionOfRightDownCorner && mousePosition.y<=b2.YpositionOfRightDownCorner){
+                if(Mouse::isButtonPressed(Mouse::Left)==true && b2.isOccupied==false){
+                    b2.sprt=middleSprt;
+                    b2.sprt.setPosition(Vector2f(b2.XpositionOfLeftUpCorner, b2.YpositionOfLeftUpCorner));
+                    b2.whatTypeOfPieceisOn=whatTypeOfPieceIsOn;
+                    b2.isOccupied=true;
+                    isSomethingOnMiddleField=false;
+
+                }    
+            }
+            if(mousePosition.x>=b3.XpositionOfLeftUpCorner && mousePosition.y>=b3.YpositionOfLeftUpCorner && mousePosition.x<=b3.XpositionOfRightDownCorner && mousePosition.y<=b3.YpositionOfRightDownCorner){
+                if(Mouse::isButtonPressed(Mouse::Left)==true && b3.isOccupied==false){
+                    b3.sprt=middleSprt;
+                    b3.sprt.setPosition(Vector2f(b3.XpositionOfLeftUpCorner, b3.YpositionOfLeftUpCorner));
+                    b3.whatTypeOfPieceisOn=whatTypeOfPieceIsOn;
+                    b3.isOccupied=true;
+                    isSomethingOnMiddleField=false;
+
+                }    
+            }
+            if(mousePosition.x>=b4.XpositionOfLeftUpCorner && mousePosition.y>=b4.YpositionOfLeftUpCorner && mousePosition.x<=b4.XpositionOfRightDownCorner && mousePosition.y<=b4.YpositionOfRightDownCorner){
+                if(Mouse::isButtonPressed(Mouse::Left)==true && b4.isOccupied==false){
+                    b4.sprt=middleSprt;
+                    b4.sprt.setPosition(Vector2f(b4.XpositionOfLeftUpCorner, b4.YpositionOfLeftUpCorner));
+                    b4.whatTypeOfPieceisOn=whatTypeOfPieceIsOn;
+                    b4.isOccupied=true;
+                    isSomethingOnMiddleField=false;
+
+                }    
+            }if(mousePosition.x>=c1.XpositionOfLeftUpCorner && mousePosition.y>=c1.YpositionOfLeftUpCorner && mousePosition.x<=c1.XpositionOfRightDownCorner && mousePosition.y<=c1.YpositionOfRightDownCorner){
+                if(Mouse::isButtonPressed(Mouse::Left)==true && a1.isOccupied==false){
+                    c1.sprt=middleSprt;
+                    c1.sprt.setPosition(Vector2f(c1.XpositionOfLeftUpCorner, c1.YpositionOfLeftUpCorner));
+                    c1.whatTypeOfPieceisOn=whatTypeOfPieceIsOn;
+                    c1.isOccupied=true;
+                    isSomethingOnMiddleField=false;
+
+                }    
+            }
+            if(mousePosition.x>=c2.XpositionOfLeftUpCorner && mousePosition.y>=c2.YpositionOfLeftUpCorner && mousePosition.x<=c2.XpositionOfRightDownCorner && mousePosition.y<=c2.YpositionOfRightDownCorner){
+                if(Mouse::isButtonPressed(Mouse::Left)==true && c2.isOccupied==false){
+                    c2.sprt=middleSprt;
+                    c2.sprt.setPosition(Vector2f(c2.XpositionOfLeftUpCorner, c2.YpositionOfLeftUpCorner));
+                    c2.whatTypeOfPieceisOn=whatTypeOfPieceIsOn;
+                    c2.isOccupied=true;
+                    isSomethingOnMiddleField=false;
+
+                }    
+            }
+            if(mousePosition.x>=c3.XpositionOfLeftUpCorner && mousePosition.y>=c3.YpositionOfLeftUpCorner && mousePosition.x<=c3.XpositionOfRightDownCorner && mousePosition.y<=c3.YpositionOfRightDownCorner){
+                if(Mouse::isButtonPressed(Mouse::Left)==true && c3.isOccupied==false){
+                    c3.sprt=middleSprt;
+                    c3.sprt.setPosition(Vector2f(c3.XpositionOfLeftUpCorner, c3.YpositionOfLeftUpCorner));
+                    c3.whatTypeOfPieceisOn=whatTypeOfPieceIsOn;
+                    c3.isOccupied=true;
+                    isSomethingOnMiddleField=false;
+
+                }    
+            }
+            if(mousePosition.x>=c4.XpositionOfLeftUpCorner && mousePosition.y>=c4.YpositionOfLeftUpCorner && mousePosition.x<=c4.XpositionOfRightDownCorner && mousePosition.y<=c4.YpositionOfRightDownCorner){
+                if(Mouse::isButtonPressed(Mouse::Left)==true && c4.isOccupied==false){
+                    c4.sprt=middleSprt;
+                    c4.sprt.setPosition(Vector2f(c4.XpositionOfLeftUpCorner, c4.YpositionOfLeftUpCorner));
+                    c4.whatTypeOfPieceisOn=whatTypeOfPieceIsOn;
+                    c4.isOccupied=true;
+                    isSomethingOnMiddleField=false;
+
+                }    
+            }if(mousePosition.x>=d1.XpositionOfLeftUpCorner && mousePosition.y>=d1.YpositionOfLeftUpCorner && mousePosition.x<=d1.XpositionOfRightDownCorner && mousePosition.y<=d1.YpositionOfRightDownCorner){
+                if(Mouse::isButtonPressed(Mouse::Left)==true && d1.isOccupied==false){
+                    d1.sprt=middleSprt;
+                    d1.sprt.setPosition(Vector2f(d1.XpositionOfLeftUpCorner, d1.YpositionOfLeftUpCorner));
+                    d1.whatTypeOfPieceisOn=whatTypeOfPieceIsOn;
+                    d1.isOccupied=true;
+                    isSomethingOnMiddleField=false;
+
+                }    
+            }
+            if(mousePosition.x>=d2.XpositionOfLeftUpCorner && mousePosition.y>=d2.YpositionOfLeftUpCorner && mousePosition.x<=d2.XpositionOfRightDownCorner && mousePosition.y<=d2.YpositionOfRightDownCorner){
+                if(Mouse::isButtonPressed(Mouse::Left)==true && d2.isOccupied==false){
+                    d2.sprt=middleSprt;
+                    d2.sprt.setPosition(Vector2f(d2.XpositionOfLeftUpCorner, d2.YpositionOfLeftUpCorner));
+                    d2.whatTypeOfPieceisOn=whatTypeOfPieceIsOn;
+                    d2.isOccupied=true;
+                    isSomethingOnMiddleField=false;
+
+                }    
+            }
+            if(mousePosition.x>=d3.XpositionOfLeftUpCorner && mousePosition.y>=d3.YpositionOfLeftUpCorner && mousePosition.x<=d3.XpositionOfRightDownCorner && mousePosition.y<=d3.YpositionOfRightDownCorner){
+                if(Mouse::isButtonPressed(Mouse::Left)==true && d3.isOccupied==false){
+                    d3.sprt=middleSprt;
+                    d3.sprt.setPosition(Vector2f(d3.XpositionOfLeftUpCorner, d3.YpositionOfLeftUpCorner));
+                    d3.whatTypeOfPieceisOn=whatTypeOfPieceIsOn;
+                    d3.isOccupied=true;
+                    isSomethingOnMiddleField=false;
+
+                }    
+            }
+            if(mousePosition.x>=d4.XpositionOfLeftUpCorner && mousePosition.y>=d4.YpositionOfLeftUpCorner && mousePosition.x<=d4.XpositionOfRightDownCorner && mousePosition.y<=d4.YpositionOfRightDownCorner){
+                if(Mouse::isButtonPressed(Mouse::Left)==true && d4.isOccupied==false){
+                    d4.sprt=middleSprt;
+                    d4.sprt.setPosition(Vector2f(d4.XpositionOfLeftUpCorner, d4.YpositionOfLeftUpCorner));
+                    d4.whatTypeOfPieceisOn=whatTypeOfPieceIsOn;
+                    d4.isOccupied=true;
+                    isSomethingOnMiddleField=false;
+
+                }    
+            }
+        }
         //Drawing to screen
         window.clear();
+        //drawing background
+        window.draw(backgroundSprite);
         //if game ends
-        /*if(endingConidtion==true){
+        if(endingConidtion==true){
             //if player won
             if(ifPlayerWon==true){
 
@@ -410,26 +728,76 @@ int main(){
             else{
 
             }
-        }*/
-        //drawing background
-        window.draw(backgroundSprite);
+        }
         //drawing pieces
-        window.draw(dbch.sprt);
-        window.draw(dbcs.sprt);
-        window.draw(dbsh.sprt);
-        window.draw(dbss.sprt);
-        window.draw(dsch.sprt);
-        window.draw(dscs.sprt);
-        window.draw(dssh.sprt);
-        window.draw(dsss.sprt);
-        window.draw(lbch.sprt);
-        window.draw(lbcs.sprt);
-        window.draw(lbsh.sprt);
-        window.draw(lbss.sprt);
-        window.draw(lsch.sprt);
-        window.draw(lscs.sprt);
-        window.draw(lssh.sprt);
-        window.draw(lsss.sprt);
+        window.draw(fieldForChosenPieces);
+        if(isSomethingOnMiddleField==true){
+            window.draw(middleSprt);
+        }
+        if(dbch.isItPlaced==false){
+            window.draw(dbch.sprt);
+        }
+        if(dbcs.isItPlaced==false){
+            window.draw(dbcs.sprt);
+        }
+        if(dbsh.isItPlaced==false){
+            window.draw(dbsh.sprt);
+        }
+        if(dbss.isItPlaced==false){
+            window.draw(dbss.sprt);
+        }
+        if(dsch.isItPlaced==false){
+            window.draw(dsch.sprt);
+        }
+        if(dscs.isItPlaced==false){
+            window.draw(dscs.sprt);
+        }
+        if(dssh.isItPlaced==false){
+            window.draw(dssh.sprt);
+        }
+        if(dsss.isItPlaced==false){
+            window.draw(dsss.sprt);
+        }
+        if(lbch.isItPlaced==false){
+            window.draw(lbch.sprt);
+        }
+        if(lbcs.isItPlaced==false){
+            window.draw(lbcs.sprt);
+        }
+        if(lbsh.isItPlaced==false){
+            window.draw(lbsh.sprt);
+        }
+        if(lbss.isItPlaced==false){
+            window.draw(lbss.sprt);
+        }
+        if(lsch.isItPlaced==false){
+            window.draw(lsch.sprt);
+        }
+        if(lscs.isItPlaced==false){
+            window.draw(lscs.sprt);
+        }
+        if(lssh.isItPlaced==false){
+            window.draw(lssh.sprt);
+        }
+        if(lsss.isItPlaced==false){
+            window.draw(lsss.sprt);
+        }
+        window.draw(a1.sprt);
+        window.draw(a2.sprt);
+        window.draw(a3.sprt);
+        window.draw(a4.sprt);
+        window.draw(b1.sprt);
+        window.draw(b2.sprt);
+        window.draw(b3.sprt);
+        window.draw(b4.sprt);
+        window.draw(c1.sprt);
+        window.draw(c2.sprt);
+        window.draw(c3.sprt);
+        window.draw(c4.sprt);
+        window.draw(d1.sprt);
+        window.draw(d2.sprt);
+        window.draw(d3.sprt);
+        window.draw(d4.sprt);
         window.display();
     }
 }
