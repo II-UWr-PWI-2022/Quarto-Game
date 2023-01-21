@@ -1,4 +1,5 @@
 #include "Console_user_interface.h"
+#include "Bot_minmax.h"
 
 Console_user_interface::Console_user_interface()
 {
@@ -62,6 +63,7 @@ After that calls for method displaying main menu.
 void Console_user_interface::start_game(bool game_difficulty_level)
 {
     game = new Quarto_game(game_difficulty_level);
+    Bot player;
 
     clear_marks();
 
@@ -69,7 +71,7 @@ void Console_user_interface::start_game(bool game_difficulty_level)
 
     do
     {
-        result = make_move();
+        result = make_move(player);
     }
     while(result == 0);
 
@@ -357,7 +359,7 @@ Asks users for all arguments of make move method of game
 object and checks the correctness of the entered data.
 Then calls the method with arguments received from used.
 */
-int Console_user_interface::make_move()
+int Console_user_interface::make_move(Bot bot)
 {
     display_the_board();
     display_free_pieces();
@@ -390,9 +392,12 @@ int Console_user_interface::make_move()
 
     while(true)
     {
-        symbol = get_piece_symbol_from_user();
-        piece_number = find_piece_number(symbol);
-
+        if (player) 
+        {
+            symbol = get_piece_symbol_from_user();
+            piece_number = find_piece_number(symbol);
+        }
+        else piece_number = bot.get_piece_type();
 		{
             if(piece_number < MAX_NUMBER_OF_PIECES)
             {
@@ -413,53 +418,62 @@ int Console_user_interface::make_move()
 
     // asking active player to chose a field on board for his piece
     cout << "\n" << "(Player " << player1 << "):" << "\n";
-    cout << "Chose the field for piece " << symbol << ":" << "\n";
+    cout << "Chose the field for piece " << symbol << "(" << piece_number << "):" << "\n";
 
-    while(true)
+    if (!player)
     {
-        cout << "Type the row symbol:" << "\n";
-
-	    while(true)
-        {
-            row = get_single_character();
-
-		    if(row >= 'A' && row <= 'D')
-            {
-                break;
-            }
-
-            else
-            {
-                cout << "There is no such a row symbol. Use letter from A to D according to the above game board notations. Type again:" << "\n";
-            }
-        }
-
-        cout << "Type the column number:" << "\n";
-
         while(true)
         {
-            column = get_single_character();
+            cout << "Type the row symbol:" << "\n";
 
-            if(column >= '1' && column <= '4')
+            while(true)
+            {
+                row = get_single_character();
+
+                if(row >= 'A' && row <= 'D')
+                {
+                    break;
+                }
+
+                else
+                {
+                    cout << "There is no such a row symbol. Use letter from A to D according to the above game board notations. Type again:" << "\n";
+                }
+            }
+
+            cout << "Type the column number:" << "\n";
+
+            while(true)
+            {
+                column = get_single_character();
+
+                if(column >= '1' && column <= '4')
+                {
+                    break;
+                }
+
+                else
+                {
+                    cout << "There is no such a column number. Use number from 1 to 4 according to the above game board notations. Type again:" << "\n";
+                }
+            }
+
+            if(game->is_board_field_free(row-'A',column-'1'))
             {
                 break;
             }
 
             else
             {
-                cout << "There is no such a column number. Use number from 1 to 4 according to the above game board notations. Type again:" << "\n";
+                cout << "There field is not free. Choose another one:" << "\n";
             }
         }
-
-        if(game->is_board_field_free(row-'A',column-'1'))
-        {
-            break;
-        }
-
-        else
-        {
-            cout << "There field is not free. Choose another one:" << "\n";
-        }
+    }
+    else
+    {
+        pair<int, int> bot_answer = bot.get_board_field(game, piece_number);
+        row = bot_answer.first + 'A';
+        column = bot_answer.second + '1';
     }
 
     // actual move in Quarto game object
