@@ -40,43 +40,43 @@ Piece::Piece(int piece_type)
         type = type | 1 << 0;
     }
 
-    else
+    /*else
     {
         type = type | 1 << 1;
-    }
+    }*/
 
     // shape
     if(piece_type % 8 < 4)
     {
-        type = type | 1 << 2;
+        type = type | 1 << 1;
     }
 
-    else
+    /*else
     {
         type = type | 1 << 3;
-    }
+    }*/
 
     // height
     if(piece_type % 4 < 2)
     {
-        type = type | 1 << 4;
+        type = type | 1 << 2;
     }
 
-    else
+    /*else
     {
         type = type | 1 << 5;
-    }
+    }*/
 
     // texture
     if(piece_type % 2 < 1)
     {
-        type = type | 1 << 6;
+        type = type | 1 << 3;
     }
 
-    else
+    /*else
     {
         type = type | 1 << 7;
-    }
+    }*/
 }
 
 /*

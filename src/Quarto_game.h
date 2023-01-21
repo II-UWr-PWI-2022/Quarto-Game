@@ -6,7 +6,7 @@
 
 class Quarto_game
 {
-    char board[MAX_N][MAX_N] = {{0,0,0,0},{0,0,0,0},{0,0,0,0},{0,0,0,0}};
+    char board[MAX_N][MAX_N] = {{16,16,16,16},{16,16,16,16},{16,16,16,16},{16,16,16,16}};
     Piece pieces[MAX_NUMBER_OF_PIECES] = {0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15};
     bool winning_pattern[MAX_N][MAX_N] = {{0,0,0,0},{0,0,0,0},{0,0,0,0},{0,0,0,0}};
     const bool DIFFICULTY_LEVEL; // game difficulty version (0 is easy, 1 is hard)

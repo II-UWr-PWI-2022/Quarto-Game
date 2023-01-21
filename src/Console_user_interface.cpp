@@ -153,7 +153,7 @@ string Console_user_interface::create_piece_symbol(char type)
         symbol += 'L';
     }
 
-    if((type >> 2) & 1)
+    if((type >> 1) & 1)
     {
         symbol += 'R';
     }
@@ -163,7 +163,7 @@ string Console_user_interface::create_piece_symbol(char type)
         symbol += 'S';
     }
 
-    if((type >> 4) & 1)
+    if((type >> 2) & 1)
     {
         symbol += 'T';
     }
@@ -173,7 +173,7 @@ string Console_user_interface::create_piece_symbol(char type)
         symbol += 'S';
     }
 
-    if((type >> 6) & 1)
+    if((type >> 3) & 1)
     {
         symbol += 'S';
     }
@@ -200,7 +200,7 @@ void Console_user_interface::update_board()
         {
             piece_type = game->get_piece_type_from_board_field(i,j);
 
-            if(piece_type == 0)
+            if(piece_type == 16)
 			{
 				board[i][j] = "    ";
 			}
@@ -326,13 +326,13 @@ char Console_user_interface::change_piece_symbol_to_type(string symbol)
     char type = 0;
 
     if(symbol[0] == 'D') type = type | 1 << 0;
-    if(symbol[0] == 'L') type = type | 1 << 1;
-    if(symbol[1] == 'R') type = type | 1 << 2;
-    if(symbol[1] == 'S') type = type | 1 << 3;
-    if(symbol[2] == 'T') type = type | 1 << 4;
-    if(symbol[2] == 'S') type = type | 1 << 5;
-    if(symbol[3] == 'S') type = type | 1 << 6;
-    if(symbol[3] == 'H') type = type | 1 << 7;
+    //if(symbol[0] == 'L') type = type | 1 << 1;
+    if(symbol[1] == 'R') type = type | 1 << 1;
+    //if(symbol[1] == 'S') type = type | 1 << 3;
+    if(symbol[2] == 'T') type = type | 1 << 2;
+    //if(symbol[2] == 'S') type = type | 1 << 5;
+    if(symbol[3] == 'S') type = type | 1 << 3;
+    //if(symbol[3] == 'H') type = type | 1 << 7;
 
     return type;
 }
