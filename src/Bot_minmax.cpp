@@ -168,7 +168,7 @@ int Bot_Minmax::minmax(int depth, int piece, int max_depth)
 				}
 			}
 
-			for(int opponent_piece = 0; opponent_piece < MAX_NUMBER_OF_PIECES; piece++)
+			for(int opponent_piece = 0; opponent_piece < MAX_NUMBER_OF_PIECES; opponent_piece++)
 			{
 				if(!pieces[piece]) continue;
 

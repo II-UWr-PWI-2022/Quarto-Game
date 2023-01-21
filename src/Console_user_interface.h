@@ -19,7 +19,7 @@ class Console_user_interface
     */
     vector <vector <string>> marks = vector <vector <string>> (MAX_N, vector <string> (MAX_N));
     vector <string> free_pieces = vector <string> (MAX_NUMBER_OF_PIECES);
-    Quarto_game *game;
+    Quarto_game* game;
 
 	/*
 		index = 0 -> human

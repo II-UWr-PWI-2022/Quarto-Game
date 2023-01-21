@@ -364,7 +364,7 @@ corresponding to piece symbol.
 */
 int Console_user_interface::find_piece_number(string symbol)
 {
-    char type = change_piece_symbol_to_type(symbol);
+    int type = change_piece_symbol_to_type(symbol);
 
     int number = game->find_piece_number(type);
 
@@ -458,11 +458,11 @@ int Console_user_interface::make_move()
 			switch(index_player_B)
 			{
 			case BOT_1:
-				piece_number = bot_random_2.get_chosen_piece_type();
+				piece_number = game->find_piece_number(bot_random_2.get_chosen_piece_type());
 
 				break;
 			case BOT_2:
-				piece_number = bot_minmax_2.get_chosen_piece_type();
+				piece_number = game->find_piece_number(bot_minmax_2.get_chosen_piece_type());
 
 				break;
 			case BOT_3:
