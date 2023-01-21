@@ -41,8 +41,6 @@ void Bot_Random::analyze_position(Quarto_game* game, int piece)
 		if(!game->is_piece_used(i))
 		{
 			available_pieces.push_back(i);
-
-			cerr << "D: i = " << i << "\n";
 		}
 	}
 
@@ -50,7 +48,4 @@ void Bot_Random::analyze_position(Quarto_game* game, int piece)
 
 	chosen_piece = available_pieces[chosen_piece_for_oponent];
 	chosen_board_field = fields[field_index];
-
-	cerr << "D: figura: " << chosen_piece << "\n";
-	cerr << "D: figura: " << chosen_board_field.first << " " << chosen_board_field.second << "\n";
 }
