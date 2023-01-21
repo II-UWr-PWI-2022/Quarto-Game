@@ -10,7 +10,7 @@ class Bot
 {
     char board[4][4];
     bool pieces[16] = {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1};
-    bool is_line_winning(int p1, int p2, int p3, int p4);
+    bool is_line_winning(char p1, char p2, char p3, char p4);
     bool is_board_winning();
     int evaluate(int piece);
     int minmax(int depth,int piece,int max_depth);

@@ -1,4 +1,4 @@
-#include "minmax_bot.h"
+#include "Bot_minmax.h"
 
 bool Bot::is_line_winning(char p1, char p2, char p3, char p4)
 {
@@ -18,7 +18,7 @@ bool Bot::is_board_winning()
     {
         if (is_line_winning(board[0][i], board[1][i], board[2][i], board[3][i])) return true;
     }
-    return (is_line_winning(board[0][0], board[1][1], board[2][2], board[3][3]) 
+    return (is_line_winning(board[0][0], board[1][1], board[2][2], board[3][3])
         || is_line_winning(board[0][3], board[1][2], board[2][1], board[3][0]));
 }
 
@@ -38,7 +38,7 @@ int Bot::evaluate(int piece)
         }
     }
     if (value == MAX_BOARD_VALUE) return value;
-    
+
     int count[4][2] = {{0, 0}, {0, 0}, {0, 0}, {0, 0}};
     for (int piece = 0; piece <16; piece++)
     {
@@ -114,8 +114,8 @@ int Bot::minmax(int depth, int piece, int max_depth)
         if(depth&1)
         {
             return MAX_BOARD_VALUE-evaluate(piece);
-        } 
-        else 
+        }
+        else
         {
             return evaluate(piece);
         }
@@ -135,8 +135,8 @@ int Bot::minmax(int depth, int piece, int max_depth)
                 if(depth&1)
                 {
                     return MIN_BOARD_VALUE;
-                } 
-                else 
+                }
+                else
                 {
                     return MAX_BOARD_VALUE;
                 }
@@ -166,8 +166,8 @@ int Bot::minmax(int depth, int piece, int max_depth)
     if(depth&1)
     {
         return min_move;
-    } 
-    else 
+    }
+    else
     {
         return max_move;
     }
@@ -184,7 +184,7 @@ pair<int,int> Bot::get_board_field(Quarto_game *game,int piece)
     for(int row=0;row<4;row++)
     {
         for(int column=0;column<4;column++)
-        {   
+        {
             board[row][column] = game->get_piece_type_from_board_field(row,column);
         }
     }
