@@ -127,6 +127,13 @@ int Bot_Minmax::evaluate(int piece)
 	return value;
 }
 
+void Bot_Minmax::set_choice(int row, int column, int opponent_piece)
+{
+    ans_piece=opponent_piece;
+    ans_board_field.first=row;
+    ans_board_field.second=column;
+}
+
 int Bot_Minmax::minmax(int depth, int piece, int max_depth)
 {
 	if(depth == max_depth)
@@ -159,29 +166,35 @@ int Bot_Minmax::minmax(int depth, int piece, int max_depth)
 			{
 				if(depth & 1)
 				{
+					pieces[piece] = true;
+                    board[row][column] = EMPTY_FIELD;
 					return MIN_BOARD_VALUE;
 				}
 
 				else
 				{
+					if (depth==0)
+                    {
+                        set_choice(row,column, EMPTY_FIELD);
+                    }
+                    pieces[piece] = true;
+                    board[row][column] = EMPTY_FIELD;
 					return MAX_BOARD_VALUE;
 				}
 			}
 
-			for(int opponent_piece = 0; opponent_piece < MAX_NUMBER_OF_PIECES; piece++)
+			for(int opponent_piece = 0; opponent_piece < MAX_NUMBER_OF_PIECES; opponent_piece++)
 			{
-				if(!pieces[piece]) continue;
+				if(!pieces[opponent_piece]) continue;
 
 				evaluated_move = minmax(depth + 1, opponent_piece, max_depth);
 
 				if(depth == 0)
 				{
-					if(max_move < evaluated_move)
+					if(max_move <= evaluated_move)
 					{
 						max_move = evaluated_move;
-						chosen_piece = piece;
-						chosen_board_field.first = row;
-						chosen_board_field.second = column;
+						set_choice(row, column, opponent_piece);
 					}
 
 					continue;
@@ -210,7 +223,8 @@ int Bot_Minmax::minmax(int depth, int piece, int max_depth)
 
 int Bot_Minmax::get_chosen_piece_type()
 {
-	return chosen_piece;
+    pieces[chosen_piece] = false;
+    return chosen_piece;
 }
 
 pair <int, int> Bot_Minmax::get_chosen_board_field()

@@ -380,6 +380,8 @@ Then calls the method with arguments received from used.
 */
 int Console_user_interface::make_move()
 {
+    // cout << "Press X to continue";
+    // char c; cin >> c;
     display_the_board();
     display_free_pieces();
 
