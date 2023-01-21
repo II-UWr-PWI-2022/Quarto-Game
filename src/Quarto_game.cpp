@@ -137,9 +137,9 @@ bool Quarto_game::is_game_finished_in_hard_version(int row, int column)
 
     if(column > 0 && row > 0)
     {
-        if(board[row][column] != EMPTY_FIELD && board[row][column-1] != EMPTY_FIELD && board[row-1][column-1] != EMPTY_FIELD && board[row+1][column] != EMPTY_FIELD
-			&& ((board[row][column] & board[row][column-1] & board[row-1][column-1] & board[row+1][column])
-			|| (~(board[row][column] | board[row][column-1] | board[row-1][column-1] | board[row+1][column]) & MASK)))
+        if(board[row][column] != EMPTY_FIELD && board[row][column-1] != EMPTY_FIELD && board[row-1][column-1] != EMPTY_FIELD && board[row-1][column] != EMPTY_FIELD
+			&& ((board[row][column] & board[row][column-1] & board[row-1][column-1] & board[row-1][column])
+			|| (~(board[row][column] | board[row][column-1] | board[row-1][column-1] | board[row-1][column]) & MASK)))
         {
             winning_pattern[row][column] = true;
             winning_pattern[row][column-1] = true;
