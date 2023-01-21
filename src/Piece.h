@@ -5,14 +5,14 @@
 
 class Piece
 {
-    char type;
+    int type;
     bool is_already_used;
 
 public:
-    Piece(int piece_type);
+    void initialization(int piece_type);
     void set_piece_as_used();
     bool is_piece_used();
-    char get_piece_type();
+    int get_piece_type();
 };
 
 #endif // PIECE_H

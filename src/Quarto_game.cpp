@@ -8,7 +8,12 @@ hard mode, if it is false - in easy mode.
 Quarto_game::Quarto_game(bool game_difficulty_level)
     : DIFFICULTY_LEVEL(game_difficulty_level)
 {
-    player_active = 0;
+	for(int i = 0; i < MAX_NUMBER_OF_PIECES; i++)
+	{
+		pieces[i].initialization(i);
+	}
+
+    player_active = false;
     number_of_used_pieces = 0;
 }
 
@@ -20,7 +25,8 @@ board specified by row and column number.
 void Quarto_game::put_piece_on_board(int row, int column, int piece_number)
 {
     board[row][column] = pieces[piece_number].get_piece_type();
-    pieces[piece_number].set_piece_as_used();
+    //pieces[piece_number].set_piece_as_used();
+
     number_of_used_pieces++;
 }
 
@@ -40,50 +46,55 @@ pattern and returns true, it not - it returns false.
 */
 bool Quarto_game::is_game_finished_in_easy_version(int row, int column)
 {
-    if((board[row][0] & board[row][1] & board[row][2] & board[row][3]) != 0)
+    if(board[row][0] != EMPTY_FIELD && board[row][1] != EMPTY_FIELD && board[row][2] != EMPTY_FIELD && board[row][3] != EMPTY_FIELD
+		&& ((board[row][0] & board[row][1] & board[row][2] & board[row][3])
+		|| (~(board[row][0] | board[row][1] | board[row][2] | board[row][3]) & MASK)))
     {
-        winning_pattern[row][0] = 1;
-        winning_pattern[row][1] = 1;
-        winning_pattern[row][2] = 1;
-        winning_pattern[row][3] = 1;
+        winning_pattern[row][0] = true;
+        winning_pattern[row][1] = true;
+        winning_pattern[row][2] = true;
+        winning_pattern[row][3] = true;
 
         return true;
     }
 
-    else if((board[0][column] & board[1][column] & board[2][column] & board[3][column]) != 0)
+    if(board[0][column] != EMPTY_FIELD && board[1][column] != EMPTY_FIELD && board[2][column] != EMPTY_FIELD && board[3][column] != EMPTY_FIELD
+		&& ((board[0][column] & board[1][column] & board[2][column] & board[3][column])
+		|| (~(board[0][column] | board[1][column] | board[2][column] | board[3][column]) & MASK)))
     {
-        winning_pattern[0][column] = 1;
-        winning_pattern[1][column] = 1;
-        winning_pattern[2][column] = 1;
-        winning_pattern[3][column] = 1;
+        winning_pattern[0][column] = true;
+        winning_pattern[1][column] = true;
+        winning_pattern[2][column] = true;
+        winning_pattern[3][column] = true;
 
         return true;
     }
 
-    else if((board[0][0] & board[1][1] & board[2][2] & board[3][3]) != 0)
+    if(board[0][0] != EMPTY_FIELD && board[1][1] != EMPTY_FIELD && board[2][2] != EMPTY_FIELD && board[3][3] != EMPTY_FIELD
+		&& ((board[0][0] & board[1][1] & board[2][2] & board[3][3])
+		|| (~(board[0][0] | board[1][1] | board[2][2] | board[3][3]) & MASK)))
     {
-        winning_pattern[0][0] = 1;
-        winning_pattern[1][1] = 1;
-        winning_pattern[2][2] = 1;
-        winning_pattern[3][3] = 1;
+        winning_pattern[0][0] = true;
+        winning_pattern[1][1] = true;
+        winning_pattern[2][2] = true;
+        winning_pattern[3][3] = true;
 
         return true;
     }
 
-    else if((board[3][0] & board[2][1] & board[1][2] & board[0][3]) != 0)
+    if(board[3][0] != EMPTY_FIELD && board[2][1] != EMPTY_FIELD && board[1][2] != EMPTY_FIELD && board[0][3] != EMPTY_FIELD
+		&& ((board[3][0] & board[2][1] & board[1][2] & board[0][3])
+		|| (~(board[3][0] | board[2][1] | board[1][2] | board[0][3]) & MASK)))
     {
-        winning_pattern[3][0] = 1;
-        winning_pattern[2][1] = 1;
-        winning_pattern[1][2] = 1;
-        winning_pattern[0][3] = 1;
+        winning_pattern[3][0] = true;
+        winning_pattern[2][1] = true;
+        winning_pattern[1][2] = true;
+        winning_pattern[0][3] = true;
 
         return true;
     }
 
-    else
-	{
-		return false;
-	}
+	return false;
 }
 
 /*
@@ -96,12 +107,14 @@ bool Quarto_game::is_game_finished_in_hard_version(int row, int column)
 {
     if(column < 3 && row < 3)
     {
-        if((board[row][column] & board[row][column+1] & board[row+1][column+1] & board[row+1][column]) != 0)
+        if(board[row][column] != EMPTY_FIELD && board[row][column+1] != EMPTY_FIELD && board[row+1][column+1] != EMPTY_FIELD && board[row+1][column] != EMPTY_FIELD
+			&& ((board[row][column] & board[row][column+1] & board[row+1][column+1] & board[row+1][column])
+			|| (~(board[row][column] | board[row][column+1] | board[row+1][column+1] | board[row+1][column]) & MASK)))
         {
-            winning_pattern[row][column] = 1;
-            winning_pattern[row][column+1] = 1;
-            winning_pattern[row+1][column+1] = 1;
-            winning_pattern[row+1][column] = 1;
+            winning_pattern[row][column] = true;
+            winning_pattern[row][column+1] = true;
+            winning_pattern[row+1][column+1] = true;
+            winning_pattern[row+1][column] = true;
 
             return true;
         }
@@ -109,12 +122,14 @@ bool Quarto_game::is_game_finished_in_hard_version(int row, int column)
 
     if(column > 0 && row < 3)
     {
-        if((board[row][column] & board[row+1][column] & board[row+1][column-1] & board[row][column-1]) != 0)
+        if(board[row][column] != EMPTY_FIELD && board[row+1][column] != EMPTY_FIELD && board[row+1][column-1] != EMPTY_FIELD && board[row][column-1] != EMPTY_FIELD
+			&& ((board[row][column] & board[row+1][column] & board[row+1][column-1] & board[row][column-1])
+			|| (~(board[row][column] | board[row+1][column] | board[row+1][column-1] | board[row][column-1]) & MASK)))
         {
-            winning_pattern[row][column] = 1;
-            winning_pattern[row+1][column] = 1;
-            winning_pattern[row+1][column-1] = 1;
-            winning_pattern[row][column-1] = 1;
+            winning_pattern[row][column] = true;
+            winning_pattern[row+1][column] = true;
+            winning_pattern[row+1][column-1] = true;
+            winning_pattern[row][column-1] = true;
 
             return true;
         }
@@ -122,12 +137,14 @@ bool Quarto_game::is_game_finished_in_hard_version(int row, int column)
 
     if(column > 0 && row > 0)
     {
-        if((board[row][column] & board[row][column-1] & board[row-1][column-1] & board[row-1][column]) != 0)
+        if(board[row][column] != EMPTY_FIELD && board[row][column-1] != EMPTY_FIELD && board[row-1][column-1] != EMPTY_FIELD && board[row-1][column] != EMPTY_FIELD
+			&& ((board[row][column] & board[row][column-1] & board[row-1][column-1] & board[row-1][column])
+			|| (~(board[row][column] | board[row][column-1] | board[row-1][column-1] | board[row-1][column]) & MASK)))
         {
-            winning_pattern[row][column] = 1;
-            winning_pattern[row][column-1] = 1;
-            winning_pattern[row-1][column-1] = 1;
-            winning_pattern[row-1][column] = 1;
+            winning_pattern[row][column] = true;
+            winning_pattern[row][column-1] = true;
+            winning_pattern[row-1][column-1] = true;
+            winning_pattern[row-1][column] = true;
 
             return true;
         }
@@ -135,12 +152,14 @@ bool Quarto_game::is_game_finished_in_hard_version(int row, int column)
 
     if(column < 3 && row > 0)
     {
-        if((board[row][column] & board[row-1][column] & board[row-1][column+1] & board[row][column+1]) != 0)
+        if(board[row][column] != EMPTY_FIELD && board[row-1][column] != EMPTY_FIELD && board[row-1][column+1] != EMPTY_FIELD && board[row][column+1] != EMPTY_FIELD
+			&& ((board[row][column] & board[row-1][column] & board[row-1][column+1] & board[row][column+1])
+			|| (~(board[row][column] | board[row-1][column] | board[row-1][column+1] | board[row][column+1]) & MASK)))
         {
-            winning_pattern[row][column] = 1;
-            winning_pattern[row-1][column] = 1;
-            winning_pattern[row-1][column+1] = 1;
-            winning_pattern[row][column+1] = 1;
+            winning_pattern[row][column] = true;
+            winning_pattern[row-1][column] = true;
+            winning_pattern[row-1][column+1] = true;
+            winning_pattern[row][column+1] = true;
 
             return true;
         }
@@ -211,7 +230,7 @@ Checks if particular field on board is free.
 */
 bool Quarto_game::is_board_field_free(int row, int column)
 {
-    if(board[row][column] == 0)
+    if(board[row][column] == EMPTY_FIELD)
     {
         return true;
     }
@@ -235,7 +254,7 @@ bool Quarto_game::get_winning_pattern_field(int row, int column)
 Returns the type of piece defined by its index number
 in table of pieces in Quarto game object.
 */
-char Quarto_game::get_piece_type(int number_of_piece)
+int Quarto_game::get_piece_type(int number_of_piece)
 {
     return pieces[number_of_piece].get_piece_type();
 }
@@ -253,7 +272,7 @@ bool Quarto_game::get_player_active()
 Returns the value of piece which is located on the board
 field specified by row and column number.
 */
-char Quarto_game::get_piece_type_from_board_field(int row, int column)
+int Quarto_game::get_piece_type_from_board_field(int row, int column)
 {
     return board[row][column];
 }
@@ -262,7 +281,7 @@ char Quarto_game::get_piece_type_from_board_field(int row, int column)
 Returns the number of index in table of pieces in Quarto game
 object for piece defined by its type.
 */
-int Quarto_game::find_piece_number(char type_of_piece)
+int Quarto_game::find_piece_number(int type_of_piece)
 {
     int piece_number = 100;
 
@@ -280,4 +299,19 @@ int Quarto_game::find_piece_number(char type_of_piece)
     }
 
     return piece_number;
+}
+
+bool Quarto_game::get_game_difficulty_level()
+{
+	return DIFFICULTY_LEVEL;
+}
+
+vector <vector <int>> Quarto_game::get_board()
+{
+	return board;
+}
+
+void Quarto_game::set_piece_as_used(int piece_number)
+{
+    pieces[piece_number].set_piece_as_used();
 }

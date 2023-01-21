@@ -29,7 +29,8 @@ in the table of pieces which is given as an constructor argument:
     - 14 - LSSS,
     - 15 - LSSH.
 */
-Piece::Piece(int piece_type)
+
+void Piece::initialization(int piece_type)
 {
     type = 0;
     is_already_used = false;
@@ -37,45 +38,25 @@ Piece::Piece(int piece_type)
     // color
     if(piece_type < 8)
     {
-        type = type | 1 << 0;
-    }
-
-    else
-    {
-        type = type | 1 << 1;
+        type |= (1 << 0);
     }
 
     // shape
     if(piece_type % 8 < 4)
     {
-        type = type | 1 << 2;
-    }
-
-    else
-    {
-        type = type | 1 << 3;
+        type |= (1 << 1);
     }
 
     // height
     if(piece_type % 4 < 2)
     {
-        type = type | 1 << 4;
-    }
-
-    else
-    {
-        type = type | 1 << 5;
+        type |= (1 << 2);
     }
 
     // texture
     if(piece_type % 2 < 1)
     {
-        type = type | 1 << 6;
-    }
-
-    else
-    {
-        type = type | 1 << 7;
+        type |= (1 << 3);
     }
 }
 
@@ -106,7 +87,7 @@ bool Piece::is_piece_used()
 /*
 Informs what is the piece type.
 */
-char Piece::get_piece_type()
+int Piece::get_piece_type()
 {
     return type;
 }
