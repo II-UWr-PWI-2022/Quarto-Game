@@ -129,9 +129,9 @@ int Bot_Minmax::evaluate(int piece)
 
 void Bot_Minmax::set_choice(int row, int column, int opponent_piece)
 {
-    ans_piece=opponent_piece;
-    ans_board_field.first=row;
-    ans_board_field.second=column;
+    chosen_piece=opponent_piece;
+    chosen_board_field.first=row;
+    chosen_board_field.second=column;
 }
 
 int Bot_Minmax::minmax(int depth, int piece, int max_depth)
