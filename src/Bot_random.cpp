@@ -38,7 +38,7 @@ void Bot_Random::analyze_position(Quarto_game* game, int piece)
 
 	for(int i = 0; i < MAX_NUMBER_OF_PIECES; i++)
 	{
-		if(game->is_piece_used(i))
+		if(!game->is_piece_used(i))
 		{
 			available_pieces.push_back(i);
 		}

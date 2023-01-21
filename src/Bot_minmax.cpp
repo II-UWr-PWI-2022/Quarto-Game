@@ -1,9 +1,9 @@
 #include "Bot_minmax.h"
 
-bool Bot_Minmax::is_line_winning(char p1, char p2, char p3, char p4)
+bool Bot_Minmax::is_line_winning(int p1, int p2, int p3, int p4)
 {
     if ((p1|p2|p3|p4)&(1<<4)) return false;
-    char mask = (1<<4)-1;
+    int mask = (1<<4)-1;
     return (p1&p2&p3&p4&mask) || ((p1^mask)&(p2^mask)&(p3^mask)&(p4^mask)&mask);
 }
 
@@ -185,14 +185,16 @@ pair <int, int> Bot_Minmax::get_chosen_board_field()
 
 void Bot_Minmax::analyze_position(Quarto_game* game, int piece)
 {
-    for(int row=0;row<4;row++)
-    {
-        for(int column=0;column<4;column++)
-        {
-            board[row][column] = game->get_piece_type_from_board_field(row,column);
-        }
-    }
-    minmax(0,piece,2);
-    pieces[piece]=false;
-    pieces[chosen_piece]=false;
+    vector <vector <int>> board = game->get_board();
+
+    vector <bool> pieces = vector <bool> (MAX_NUMBER_OF_PIECES, true);
+
+	for(int i = 0; i < MAX_NUMBER_OF_PIECES; i++)
+	{
+		pieces[i] = !game->is_piece_used(i);
+	}
+
+    minmax(0, piece, 2);
+    pieces[piece] = false;
+    pieces[chosen_piece] = false;
 }

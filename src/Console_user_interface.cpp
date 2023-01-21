@@ -602,10 +602,12 @@ int Console_user_interface::make_move()
 			switch(index_player_A)
 			{
 			case BOT_1:
+				bot_random_1.analyze_position(game, piece_number);
 				field = bot_random_1.get_chosen_board_field();
 
 				break;
 			case BOT_2:
+				bot_minmax_1.analyze_position(game, piece_number);
 				field = bot_minmax_1.get_chosen_board_field();
 
 				break;
