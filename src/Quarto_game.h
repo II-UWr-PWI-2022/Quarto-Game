@@ -6,9 +6,12 @@
 
 class Quarto_game
 {
-    char board[MAX_N][MAX_N] = {{16,16,16,16},{16,16,16,16},{16,16,16,16},{16,16,16,16}};
-    Piece pieces[MAX_NUMBER_OF_PIECES] = {0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15};
-    bool winning_pattern[MAX_N][MAX_N] = {{0,0,0,0},{0,0,0,0},{0,0,0,0},{0,0,0,0}};
+	vector <vector <int>> board = vector <vector <int>> (MAX_N, vector <int> (MAX_N, EMPTY_FIELD));
+    // char board[MAX_N][MAX_N] = {{ EMPTY_FIELD, EMPTY_FIELD, EMPTY_FIELD, EMPTY_FIELD},{ EMPTY_FIELD, EMPTY_FIELD, EMPTY_FIELD, EMPTY_FIELD},{ EMPTY_FIELD, EMPTY_FIELD, EMPTY_FIELD, EMPTY_FIELD},{ EMPTY_FIELD, EMPTY_FIELD, EMPTY_FIELD, EMPTY_FIELD}};
+    Piece pieces[MAX_NUMBER_OF_PIECES] = {0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15}; // TODO: to bym dal w konstruktor
+
+	vector <vector <bool>> winning_pattern = vector <vector <bool>> (MAX_N, vector <bool> (MAX_N));
+    // bool winning_pattern[MAX_N][MAX_N] = {{0,0,0,0},{0,0,0,0},{0,0,0,0},{0,0,0,0}};
     const bool DIFFICULTY_LEVEL; // game difficulty version (0 is easy, 1 is hard)
     bool player_active; // player making a move (0 is player A, 1 is player B)
     int number_of_used_pieces;
@@ -29,6 +32,8 @@ public:
     bool get_player_active();
     char get_piece_type_from_board_field(int row, int column);
     int find_piece_number(char type_of_piece);
+
+	// TODO: dodac funkcje zwracajaca trudnosc gry
 };
 
 #endif // QUARTO_GAME_H

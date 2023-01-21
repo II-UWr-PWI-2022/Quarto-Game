@@ -7,7 +7,6 @@ bool Bot::is_line_winning(char p1, char p2, char p3, char p4)
     return (p1&p2&p3&p4&mask) || ((p1^mask)&(p2^mask)&(p3^mask)&(p4^mask)&mask);
 }
 
-
 bool Bot::is_board_winning()
 {
     for (int i = 0; i < 4; i++)
