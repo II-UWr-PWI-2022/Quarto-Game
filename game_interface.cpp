@@ -243,7 +243,7 @@ int main(){
     c4.YpositionOfRightDownCorner=437;
     fieldOnBoard d1;
     d1.XpositionOfLeftUpCorner=215;
-    d1.YpositionOfLeftUpCorner=275;
+    d1.YpositionOfLeftUpCorner=276;
     d1.XpositionOfRightDownCorner=268;
     d1.YpositionOfRightDownCorner=328;
     fieldOnBoard d2;
@@ -635,7 +635,7 @@ int main(){
 
                 }    
             }if(mousePosition.x>=c1.XpositionOfLeftUpCorner && mousePosition.y>=c1.YpositionOfLeftUpCorner && mousePosition.x<=c1.XpositionOfRightDownCorner && mousePosition.y<=c1.YpositionOfRightDownCorner){
-                if(Mouse::isButtonPressed(Mouse::Left)==true && a1.isOccupied==false){
+                if(Mouse::isButtonPressed(Mouse::Left)==true && c1.isOccupied==false){
                     c1.sprt=middleSprt;
                     c1.sprt.setPosition(Vector2f(c1.XpositionOfLeftUpCorner, c1.YpositionOfLeftUpCorner));
                     c1.whatTypeOfPieceisOn=whatTypeOfPieceIsOn;
