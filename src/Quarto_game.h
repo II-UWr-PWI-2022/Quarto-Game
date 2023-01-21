@@ -31,6 +31,7 @@ public:
     int get_piece_type_from_board_field(int row, int column);
     int find_piece_number(int type_of_piece);
 	bool get_game_difficulty_level();
+	vector <vector <int>> get_board();
 };
 
 #endif // QUARTO_GAME_H

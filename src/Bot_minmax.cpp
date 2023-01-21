@@ -1,13 +1,13 @@
 #include "Bot_minmax.h"
 
-bool Bot::is_line_winning(char p1, char p2, char p3, char p4)
+bool Bot_Minmax::is_line_winning(char p1, char p2, char p3, char p4)
 {
     if ((p1|p2|p3|p4)&(1<<4)) return false;
     char mask = (1<<4)-1;
     return (p1&p2&p3&p4&mask) || ((p1^mask)&(p2^mask)&(p3^mask)&(p4^mask)&mask);
 }
 
-bool Bot::is_board_winning()
+bool Bot_Minmax::is_board_winning()
 {
     for (int i = 0; i < 4; i++)
     {
@@ -21,7 +21,7 @@ bool Bot::is_board_winning()
         || is_line_winning(board[0][3], board[1][2], board[2][1], board[3][0]));
 }
 
-int Bot::evaluate(int piece)
+int Bot_Minmax::evaluate(int piece)
 {
     int value = 0;
     for (int i = 0; i < 4; i++)
@@ -106,7 +106,7 @@ int Bot::evaluate(int piece)
     return value;
 }
 
-int Bot::minmax(int depth, int piece, int max_depth)
+int Bot_Minmax::minmax(int depth, int piece, int max_depth)
 {
     if(depth==max_depth)
     {
@@ -149,9 +149,9 @@ int Bot::minmax(int depth, int piece, int max_depth)
                     if(max_move<evaluated_move)
                     {
                         max_move=evaluated_move;
-                        ans_piece=piece;
-                        ans_board_field.first=row;
-                        ans_board_field.second=column;
+                        chosen_piece=piece;
+                        chosen_board_field.first=row;
+                        chosen_board_field.second=column;
                     }
                     continue;
                 }
@@ -173,12 +173,17 @@ int Bot::minmax(int depth, int piece, int max_depth)
 }
 
 
-int Bot::get_piece_type()
+int Bot_Minmax::get_chosen_piece_type()
 {
-    return ans_piece;
+    return chosen_piece;
 }
 
-pair<int,int> Bot::get_board_field(Quarto_game *game,int piece)
+pair <int, int> Bot_Minmax::get_chosen_board_field()
+{
+	return chosen_board_field;
+}
+
+void Bot_Minmax::analyze_position(Quarto_game* game, int piece)
 {
     for(int row=0;row<4;row++)
     {
@@ -189,6 +194,5 @@ pair<int,int> Bot::get_board_field(Quarto_game *game,int piece)
     }
     minmax(0,piece,2);
     pieces[piece]=false;
-    pieces[ans_piece]=false;
-    return ans_board_field;
+    pieces[chosen_piece]=false;
 }

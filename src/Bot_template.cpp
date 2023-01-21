@@ -1,11 +1,11 @@
 #include "Bot_template.h"
 
-int Bot::get_piece_type()
+int Bot::get_chosen_piece_type()
 {
     return ans_piece;
 }
 
-pair<int,int> Bot::get_board_field(Quarto_game *game,int piece)
+pair<int,int> Bot::get_chosen_board_field(Quarto_game *game,int piece)
 {
     for(int row=0;row<4;row++)
     {

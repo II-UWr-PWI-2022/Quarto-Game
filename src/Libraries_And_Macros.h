@@ -14,4 +14,9 @@ const int MAX_NUMBER_OF_PIECES = 16;
 const int EMPTY_FIELD = 16;
 const int MASK = 15;
 
+const int HUMAN = 0;
+const int BOT_1 = 1;
+const int BOT_2 = 2;
+const int BOT_3 = 3;
+
 #endif

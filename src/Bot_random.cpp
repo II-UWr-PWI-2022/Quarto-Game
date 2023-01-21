@@ -5,20 +5,19 @@ int rand(int a, int b)
 	return a + rand() % (b - a + 1);
 }
 
-int Bot::get_piece_type()
+int Bot_Random::get_chosen_piece_type()
 {
-    return ans_piece;
+    return chosen_piece;
 }
 
-pair <int, int> Bot::get_board_field(Quarto_game *game, int piece)
+pair <int, int> Bot_Random::get_chosen_board_field()
 {
-	for(int row = 0; row < MAX_N; row++)
-    {
-        for(int column = 0; column < MAX_N; column++)
-		{
-            board[row][column] = game->get_piece_type_from_board_field(row,column);
-        }
-    }
+	return chosen_board_field;
+}
+
+void Bot_Random::analyze_position(Quarto_game* game, int piece)
+{
+    vector <vector <int>> board = game->get_board();
 
 	vector <pair <int, int>> fields;
 
@@ -39,7 +38,7 @@ pair <int, int> Bot::get_board_field(Quarto_game *game, int piece)
 
 	for(int i = 0; i < MAX_NUMBER_OF_PIECES; i++)
 	{
-		if(pieces[i])
+		if(game->is_piece_used(i))
 		{
 			available_pieces.push_back(i);
 		}
@@ -47,11 +46,6 @@ pair <int, int> Bot::get_board_field(Quarto_game *game, int piece)
 
 	int chosen_piece_for_oponent = rand(0, (int) available_pieces.size() - 1);
 
-	ans_piece = chosen_piece_for_oponent;
-	ans_board_field = fields[field_index];
-
-    pieces[piece]=false;
-    pieces[ans_piece]=false;
-
-    return ans_board_field;
+	chosen_piece = chosen_piece_for_oponent;
+	chosen_board_field = fields[field_index];
 }

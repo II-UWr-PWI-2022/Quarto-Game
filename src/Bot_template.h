@@ -13,6 +13,9 @@ class Bot
     int ans_piece;
 public:
 
+    int get_chosen_piece_type();
+    pair <int, int> get_chosen_board_field(Quarto_game* game, int piece);
+
     int get_piece_type();
     pair<int,int> get_board_field(Quarto_game *game,int piece);
     //char get_row();

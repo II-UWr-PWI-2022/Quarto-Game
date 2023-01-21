@@ -53,6 +53,31 @@ char Console_user_interface::select_from_main_menu()
 }
 
 /*
+Displays player menu and ask for choice, then returns the choice.
+*/
+char Console_user_interface::select_from_player_menu(char player)
+{
+    char choice;
+
+    if(system("cls")) system("clear");
+
+    cout << " >>> QUARTO GAME <<<" << "\n";
+    cout << "---------------------------" << "\n";
+    cout << "Choose who will play as a player " << player << ":" << "\n";
+    cout << "1. Human" << "\n";
+    cout << "2. Bot 1" << "\n";
+    cout << "3. Bot 2" << "\n";
+    cout << "4. Bot 3" << "\n";
+    cout << "5. Exit" << "\n";
+    cout << "---------------------------" << "\n";
+    cout << "Your choice: ";
+
+    choice = get_single_character();
+
+    return choice;
+}
+
+/*
 Starts the game in different mode depending on given argument.
 Calls in loop the method responsible for making moves in game object.
 Displays result of the game depending on the value
@@ -358,21 +383,21 @@ int Console_user_interface::make_move()
     display_the_board();
     display_free_pieces();
 
-    // player making a move (0 is player A, 1 is player B)
-    bool player = game->get_player_active();
+    // is_player_2 (0 is player A, 1 is player B)
+    bool is_player_2 = game->get_player_active();
 
-    string player1;
-    string player2;
+    string player_1;
+    string player_2;
 
-    if(player)
+    if(is_player_2)
     {
-        player1 = "B";
-        player2 = "A";
+        player_1 = "B";
+        player_2 = "A";
     }
     else
     {
-        player1 = "A";
-        player2 = "B";
+        player_1 = "A";
+        player_2 = "B";
     }
 
     string symbol;
@@ -381,82 +406,221 @@ int Console_user_interface::make_move()
     char column;
 
     // asking inactive player to chose a piece for active player
-    cout << "\n" << "(Player " << player2 << "):" << "\n";
-    cout << "Chose the piece for Player " << player1 << ":" << "\n";
+    cout << "\n" << "(Player " << player_2 << "):" << "\n";
+    cout << "Chose the piece for Player " << player_1 << ":" << "\n";
 
-    while(true)
-    {
-        symbol = get_piece_symbol_from_user();
-        piece_number = find_piece_number(symbol);
+	bool is_human = false;
 
+	if(!is_player_2)
+	{
+		if(index_player_B == HUMAN)
 		{
-            if(piece_number < MAX_NUMBER_OF_PIECES)
-            {
-                break;
-            }
+			is_human = true;
+		}
+	}
 
-		    else if(piece_number == MAX_NUMBER_OF_PIECES)
-            {
-                cout << "This piece is already used. Chose another one:" << "\n";
-            }
+	else
+	{
+		if(index_player_A == HUMAN)
+		{
+			is_human = true;
+		}
+	}
 
-		    else if(piece_number == 100)
-            {
-                cout << "This piece does not exist. Chose another one:" << "\n";
-            }
-        }
-    }
+	if(is_human)
+	{
+		while(true)
+		{
+			symbol = get_piece_symbol_from_user();
+			piece_number = find_piece_number(symbol);
+
+			if(piece_number < MAX_NUMBER_OF_PIECES)
+			{
+				break;
+			}
+
+			else if(piece_number == MAX_NUMBER_OF_PIECES)
+			{
+				cout << "This piece is already used. Chose another one:" << "\n";
+			}
+
+			else if(piece_number == 100)
+			{
+				cout << "This piece does not exist. Chose another one:" << "\n";
+			}
+		}
+	}
+
+	else
+	{
+		if(!is_player_2)
+		{
+			switch(index_player_B)
+			{
+			case BOT_1:
+				piece_number = bot_random_2.get_chosen_piece_type();
+
+				break;
+			case BOT_2:
+				piece_number = bot_minmax_2.get_chosen_piece_type();
+
+				break;
+			case BOT_3:
+				// TODO: dorobic
+				break;
+
+			default:
+				break;
+			}
+		}
+
+		else
+		{
+			switch(index_player_A)
+			{
+			case BOT_1:
+				piece_number = bot_random_1.get_chosen_piece_type();
+
+				break;
+			case BOT_2:
+				piece_number = bot_minmax_1.get_chosen_piece_type();
+
+				break;
+			case BOT_3:
+				// TODO: dorobic
+				break;
+
+			default:
+				break;
+			}
+		}
+
+		cout << create_symbol_of_free_piece(piece_number) << "\n";
+	}
 
     // asking active player to chose a field on board for his piece
-    cout << "\n" << "(Player " << player1 << "):" << "\n";
+    cout << "\n" << "(Player " << player_1 << "):" << "\n";
     cout << "Chose the field for piece " << symbol << ":" << "\n";
 
-    while(true)
-    {
-        cout << "Type the row symbol:" << "\n";
+	is_human = false;
 
-	    while(true)
-        {
-            row = get_single_character();
+	if(is_player_2)
+	{
+		if(index_player_B == HUMAN)
+		{
+			is_human = true;
+		}
+	}
 
-		    if(row >= 'A' && row <= 'D')
-            {
-                break;
-            }
+	else
+	{
+		if(index_player_A == HUMAN)
+		{
+			is_human = true;
+		}
+	}
 
-            else
-            {
-                cout << "There is no such a row symbol. Use letter from A to D according to the above game board notations. Type again:" << "\n";
-            }
-        }
+	if(is_human)
+	{
+		while(true)
+		{
+			cout << "Type the row symbol:" << "\n";
 
-        cout << "Type the column number:" << "\n";
+			while(true)
+			{
+				row = get_single_character();
 
-        while(true)
-        {
-            column = get_single_character();
+				if(row >= 'A' && row <= 'D')
+				{
+					break;
+				}
 
-            if(column >= '1' && column <= '4')
-            {
-                break;
-            }
+				else
+				{
+					cout << "There is no such a row symbol. Use letter from A to D according to the above game board notations. Type again:" << "\n";
+				}
+			}
 
-            else
-            {
-                cout << "There is no such a column number. Use number from 1 to 4 according to the above game board notations. Type again:" << "\n";
-            }
-        }
+			cout << "Type the column number:" << "\n";
 
-        if(game->is_board_field_free(row-'A',column-'1'))
-        {
-            break;
-        }
+			while(true)
+			{
+				column = get_single_character();
 
-        else
-        {
-            cout << "There field is not free. Choose another one:" << "\n";
-        }
-    }
+				if(column >= '1' && column <= '4')
+				{
+					break;
+				}
+
+				else
+				{
+					cout << "There is no such a column number. Use number from 1 to 4 according to the above game board notations. Type again:" << "\n";
+				}
+			}
+
+			if(game->is_board_field_free(row-'A',column-'1'))
+			{
+				break;
+			}
+
+			else
+			{
+				cout << "There field is not free. Choose another one:" << "\n";
+			}
+		}
+	}
+
+	else
+	{
+		pair <int, int> field;
+
+		if(is_player_2)
+		{
+			switch(index_player_B)
+			{
+			case BOT_1:
+				bot_random_2.analyze_position(game, piece_number);
+				field = bot_random_2.get_chosen_board_field();
+
+				break;
+			case BOT_2:
+				bot_minmax_2.analyze_position(game, piece_number);
+				field = bot_minmax_2.get_chosen_board_field();
+
+				break;
+			case BOT_3:
+				// TODO: dorobic
+				break;
+
+			default:
+				break;
+			}
+		}
+
+		else
+		{
+			switch(index_player_A)
+			{
+			case BOT_1:
+				field = bot_random_1.get_chosen_board_field();
+
+				break;
+			case BOT_2:
+				field = bot_minmax_1.get_chosen_board_field();
+
+				break;
+			case BOT_3:
+				// TODO: dorobic
+				break;
+
+			default:
+				break;
+			}
+		}
+
+		row = field.first + 'A';
+		column = field.second + '1';
+	}
 
     // actual move in Quarto game object
     int result = (game->make_move(row-'A',column-'1',piece_number));
@@ -479,13 +643,22 @@ void Console_user_interface::display_main_menu()
         switch (choice)
         {
         case '1':
+			index_player_A = display_player_menu('A');
+			index_player_B = display_player_menu('B');
+
             start_game(0);
+
             break;
         case '2':
+			index_player_A = display_player_menu('A');
+			index_player_B = display_player_menu('B');
+
             start_game(1);
+
             break;
         case '3':
             exit(0);
+
             break;
         default:
             cout << "\n" << "There is no such option in the menu." << "\n\n";
@@ -495,6 +668,39 @@ void Console_user_interface::display_main_menu()
             getline(cin, choice);
 
             break;
+        }
+    }
+}
+
+/*
+Displays player menu. Depending on the user's choice, it will start the game against a human or bot with a given ID in the chosen game mode or close the program
+TODO: poprawic
+*/
+int Console_user_interface::display_player_menu(char player)
+{
+    char choice;
+
+    while(true)
+    {
+        choice = select_from_player_menu(player);
+
+		if('1' <= choice && choice <= '5')
+		{
+			if(choice == '5')
+			{
+				exit(0);
+			}
+
+			return choice - '1';
+		}
+
+	   	else
+		{
+            cout << "\n" << "There is no such option in the menu." << "\n\n";
+            cout << "Press enter to go back to try again..." << "\n";
+
+            string choice = "";
+            getline(cin, choice);
         }
     }
 }

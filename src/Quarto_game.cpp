@@ -13,7 +13,7 @@ Quarto_game::Quarto_game(bool game_difficulty_level)
 		pieces[i].initialization(i);
 	}
 
-    player_active = 0;
+    player_active = false;
     number_of_used_pieces = 0;
 }
 
@@ -303,4 +303,9 @@ int Quarto_game::find_piece_number(int type_of_piece)
 bool Quarto_game::get_game_difficulty_level()
 {
 	return DIFFICULTY_LEVEL;
+}
+
+vector <vector <int>> Quarto_game::get_board()
+{
+	return board;
 }
