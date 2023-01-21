@@ -4,7 +4,7 @@ bool Bot::is_line_winning(char p1, char p2, char p3, char p4)
 {
     if ((p1|p2|p3|p4)&(1<<4)) return false;
     char mask = (1<<4)-1;
-    return (p1&p2&p3&p4&mask) || ((p1^mask)&(p2^mask)&(p3^mask)&(p4^mask)&mask);
+    return (((p1&p2&p3&p4&mask)>0) || (((p1^mask)&(p2^mask)&(p3^mask)&(p4^mask)&mask)>0));
 }
 
 
@@ -107,6 +107,13 @@ int Bot::evaluate(int piece)
     return value;
 }
 
+void Bot::set_choice(int row, int column, int opponent_piece)
+{
+    ans_piece=opponent_piece;
+    ans_board_field.first=row;
+    ans_board_field.second=column;
+}
+
 int Bot::minmax(int depth, int piece, int max_depth)
 {
     if(depth==max_depth)
@@ -134,25 +141,31 @@ int Bot::minmax(int depth, int piece, int max_depth)
             {
                 if(depth&1)
                 {
+                    pieces[piece] = true;
+                    board[row][column] = EMPTY;
                     return MIN_BOARD_VALUE;
                 }
                 else
                 {
+                    if (depth==0)
+                    {
+                        set_choice(row,column,10);
+                    }
+                    pieces[piece] = true;
+                    board[row][column] = EMPTY;
                     return MAX_BOARD_VALUE;
                 }
             }
-            for(int opponent_piece=0;opponent_piece<16;piece++)
+            for(int opponent_piece=0;opponent_piece<16;opponent_piece++)
             {
-                if(!pieces[piece]) continue;
+                if(!pieces[opponent_piece]) continue;
                 evaluated_move=minmax(depth+1,opponent_piece,max_depth);
                 if(depth==0)
                 {
-                    if(max_move<evaluated_move)
+                    if(max_move<=evaluated_move)
                     {
                         max_move=evaluated_move;
-                        ans_piece=piece;
-                        ans_board_field.first=row;
-                        ans_board_field.second=column;
+                        set_choice(row, column, opponent_piece);
                     }
                     continue;
                 }
@@ -176,6 +189,7 @@ int Bot::minmax(int depth, int piece, int max_depth)
 
 int Bot::get_piece_type()
 {
+    pieces[ans_piece] = false;
     return ans_piece;
 }
 
@@ -185,11 +199,18 @@ pair<int,int> Bot::get_board_field(Quarto_game *game,int piece)
     {
         for(int column=0;column<4;column++)
         {
-            board[row][column] = game->get_piece_type_from_board_field(row,column);
+            board[row][column] = (game->get_piece_type_from_board_field(row,column));
         }
     }
+    // for (int i = 0; i < 4; i++)
+    // {
+    //     for (int j = 0; j < 4; j++)
+    //     {
+    //         cout << board[i][j] << ' ';
+    //     }
+    //     cout << '\n';
+    // }
     minmax(0,piece,2);
     pieces[piece]=false;
-    pieces[ans_piece]=false;
     return ans_board_field;
 }

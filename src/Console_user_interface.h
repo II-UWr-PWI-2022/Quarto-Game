@@ -33,7 +33,7 @@ class Console_user_interface
     string get_piece_symbol_from_user();
     char change_piece_symbol_to_type(string symbol);
     int find_piece_number(string symbol);
-    int make_move(Bot bot);
+    int make_move(Bot *bot);
 
 public:
     Console_user_interface();

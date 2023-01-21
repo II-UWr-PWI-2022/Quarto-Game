@@ -14,8 +14,9 @@ class Bot
     bool is_board_winning();
     int evaluate(int piece);
     int minmax(int depth,int piece,int max_depth);
+    void set_choice(int row, int column, int opponent_piece);
     pair<int,int> ans_board_field;
-    int ans_piece;
+    int ans_piece = 0;
     const int EMPTY=16;
     const int MAX_BOARD_VALUE=650;
     const int MIN_BOARD_VALUE=0;

@@ -71,7 +71,7 @@ void Console_user_interface::start_game(bool game_difficulty_level)
 
     do
     {
-        result = make_move(player);
+        result = make_move(&player);
     }
     while(result == 0);
 
@@ -359,8 +359,10 @@ Asks users for all arguments of make move method of game
 object and checks the correctness of the entered data.
 Then calls the method with arguments received from used.
 */
-int Console_user_interface::make_move(Bot bot)
+int Console_user_interface::make_move(Bot *bot)
 {
+    // cout << "Press X to continue";
+    // char c; cin >> c;
     display_the_board();
     display_free_pieces();
 
@@ -397,7 +399,7 @@ int Console_user_interface::make_move(Bot bot)
             symbol = get_piece_symbol_from_user();
             piece_number = find_piece_number(symbol);
         }
-        else piece_number = bot.get_piece_type();
+        else piece_number = bot->get_piece_type();
 		{
             if(piece_number < MAX_NUMBER_OF_PIECES)
             {
@@ -471,7 +473,7 @@ int Console_user_interface::make_move(Bot bot)
     }
     else
     {
-        pair<int, int> bot_answer = bot.get_board_field(game, piece_number);
+        pair<int, int> bot_answer = bot->get_board_field(game, piece_number);
         row = bot_answer.first + 'A';
         column = bot_answer.second + '1';
     }
