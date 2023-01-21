@@ -1,15 +1,14 @@
-#ifndef EMPTY_BOT_H
-#define EMPTY_BOT_H
+#ifndef BOT_MINMAX_H
+#define BOT_MINMAX_H
 
-#include <string>
+#include "Libraries_And_Macros.h"
 #include "Quarto_game.h"
-
-using namespace std;
 
 class Bot
 {
-    char board[4][4];
-    bool pieces[16] = {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1};
+	vector <vector <int>> board = vector <vector <int>> (MAX_N, vector <int> (MAX_N));
+    vector <bool> pieces = vector <bool> (MAX_NUMBER_OF_PIECES, true);
+
     bool is_line_winning(char p1, char p2, char p3, char p4);
     bool is_board_winning();
     int evaluate(int piece);

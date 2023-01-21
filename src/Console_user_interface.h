@@ -23,14 +23,14 @@ class Console_user_interface
     void start_game(bool game_difficulty_level);
     void clear_marks();
     void update_marks();
-    string create_piece_symbol(char type);
+    string create_piece_symbol(int type);
     void update_board();
     void display_the_board();
     string create_symbol_of_free_piece(int number_of_piece);
     void update_free_pieces();
     void display_free_pieces();
     string get_piece_symbol_from_user();
-    char change_piece_symbol_to_type(string symbol);
+    int change_piece_symbol_to_type(string symbol);
     int find_piece_number(string symbol);
     int make_move();
 

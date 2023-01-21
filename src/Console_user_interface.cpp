@@ -139,7 +139,7 @@ void Console_user_interface::update_marks()
 /*
 Sets piece symbol using bit operations on type value given as an argument.
 */
-string Console_user_interface::create_piece_symbol(char type)
+string Console_user_interface::create_piece_symbol(int type)
 {
     string symbol = "";
 
@@ -321,18 +321,14 @@ string Console_user_interface::get_piece_symbol_from_user()
 Calculates piece type using bit operations for
 piece symbol received from user.
 */
-char Console_user_interface::change_piece_symbol_to_type(string symbol)
+int Console_user_interface::change_piece_symbol_to_type(string symbol)
 {
-    char type = 0;
+    int type = 0;
 
-    if(symbol[0] == 'D') type = type | 1 << 0;
-    //if(symbol[0] == 'L') type = type | 1 << 1;
-    if(symbol[1] == 'R') type = type | 1 << 1;
-    //if(symbol[1] == 'S') type = type | 1 << 3;
-    if(symbol[2] == 'T') type = type | 1 << 2;
-    //if(symbol[2] == 'S') type = type | 1 << 5;
-    if(symbol[3] == 'S') type = type | 1 << 3;
-    //if(symbol[3] == 'H') type = type | 1 << 7;
+    if(symbol[0] == 'D') type |= (1 << 0);
+    if(symbol[1] == 'R') type |= (1 << 1);
+    if(symbol[2] == 'T') type |= (1 << 2);
+    if(symbol[3] == 'S') type |= (1 << 3);
 
     return type;
 }

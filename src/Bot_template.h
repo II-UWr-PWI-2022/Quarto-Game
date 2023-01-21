@@ -1,18 +1,16 @@
 #ifndef EMPTY_BOT_H
 #define EMPTY_BOT_H
 
-#include <string>
+#include "Libraries_And_Macros.h"
 #include "Quarto_game.h"
-
-using namespace std;
 
 class Bot
 {
-    char board[4][4];
-    bool pieces[16] = {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1};
+	vector <vector <int>> board = vector <vector <int>> (MAX_N, vector <int> (MAX_N));
+    vector <bool> pieces = vector <bool>  (MAX_NUMBER_OF_PIECES, true);
+
     pair<int,int> ans_board_field;
     int ans_piece;
-    const int EMPTY=16;
 public:
 
     int get_piece_type();

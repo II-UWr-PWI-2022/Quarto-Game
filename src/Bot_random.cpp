@@ -26,7 +26,7 @@ pair <int, int> Bot::get_board_field(Quarto_game *game, int piece)
     {
         for(int column = 0; column < MAX_N; column++)
         {
-			if(board[row][column] == EMPTY)
+			if(board[row][column] == EMPTY_FIELD)
 			{
 				fields.push_back({row, column});
 			}

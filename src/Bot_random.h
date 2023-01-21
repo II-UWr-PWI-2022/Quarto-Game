@@ -7,7 +7,7 @@
 
 class Bot
 {
-    char board[MAX_N][MAX_N];
+    vector <vector <int>> board = vector <vector <int>> (MAX_N, vector <int> (MAX_N));
     vector <bool> pieces = vector <bool>  (MAX_NUMBER_OF_PIECES, true);
 
     // bool is_line_winning(char p1, char p2, char p3, char p4);
