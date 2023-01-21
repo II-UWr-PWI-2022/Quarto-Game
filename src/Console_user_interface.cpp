@@ -498,6 +498,8 @@ int Console_user_interface::make_move()
 		cout << create_symbol_of_free_piece(piece_number) << "\n";
 	}
 
+	game -> set_piece_as_used(piece_number);
+
     // asking active player to chose a field on board for his piece
     cout << "\n" << "(Player " << player_1 << "):" << "\n";
     cout << "Chose the field for piece " << symbol << ":" << "\n";

@@ -25,7 +25,7 @@ board specified by row and column number.
 void Quarto_game::put_piece_on_board(int row, int column, int piece_number)
 {
     board[row][column] = pieces[piece_number].get_piece_type();
-    pieces[piece_number].set_piece_as_used();
+    //pieces[piece_number].set_piece_as_used();
 
     number_of_used_pieces++;
 }
@@ -309,4 +309,9 @@ bool Quarto_game::get_game_difficulty_level()
 vector <vector <int>> Quarto_game::get_board()
 {
 	return board;
+}
+
+void Quarto_game::set_piece_as_used(int piece_number)
+{
+    pieces[piece_number].set_piece_as_used();
 }

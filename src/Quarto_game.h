@@ -32,6 +32,7 @@ public:
     int find_piece_number(int type_of_piece);
 	bool get_game_difficulty_level();
 	vector <vector <int>> get_board();
+	void set_piece_as_used(int piece_number);
 };
 
 #endif // QUARTO_GAME_H
