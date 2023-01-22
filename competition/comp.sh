@@ -18,4 +18,4 @@ do
 	fi
 done
 
-echo $bot_A_pts
+echo $bot_1_pts
