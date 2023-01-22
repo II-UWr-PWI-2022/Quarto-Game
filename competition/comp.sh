@@ -11,10 +11,11 @@ do
 	../build/main < easy_AB > out.out &
 	ID=$!
 	kill $ID
-	if ( grep "Player A wins" out.out )
-	then
+	if grep "Player A wins" out.out; then
 		(( bot_A_pts++ ))
 	else
 		(( bot_B_pts++ ))
 	fi
 done
+
+echo $bot_A_pts
