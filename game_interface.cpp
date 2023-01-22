@@ -563,7 +563,7 @@ int main(){
                     a1.isOccupied=true;
                     isSomethingOnMiddleField=false;
 
-                }    
+                }
             }
             if(mousePosition.x>=a2.XpositionOfLeftUpCorner && mousePosition.y>=a2.YpositionOfLeftUpCorner && mousePosition.x<=a2.XpositionOfRightDownCorner && mousePosition.y<=a2.YpositionOfRightDownCorner){
                 if(Mouse::isButtonPressed(Mouse::Left)==true && a2.isOccupied==false){
@@ -573,7 +573,7 @@ int main(){
                     a2.isOccupied=true;
                     isSomethingOnMiddleField=false;
 
-                }    
+                }
             }
             if(mousePosition.x>=a3.XpositionOfLeftUpCorner && mousePosition.y>=a3.YpositionOfLeftUpCorner && mousePosition.x<=a3.XpositionOfRightDownCorner && mousePosition.y<=a3.YpositionOfRightDownCorner){
                 if(Mouse::isButtonPressed(Mouse::Left)==true && a3.isOccupied==false){
@@ -583,7 +583,7 @@ int main(){
                     a3.isOccupied=true;
                     isSomethingOnMiddleField=false;
 
-                }    
+                }
             }
             if(mousePosition.x>=a4.XpositionOfLeftUpCorner && mousePosition.y>=a4.YpositionOfLeftUpCorner && mousePosition.x<=a4.XpositionOfRightDownCorner && mousePosition.y<=a4.YpositionOfRightDownCorner){
                 if(Mouse::isButtonPressed(Mouse::Left)==true && a4.isOccupied==false){
@@ -593,7 +593,7 @@ int main(){
                     a4.isOccupied=true;
                     isSomethingOnMiddleField=false;
 
-                }    
+                }
             }
             if(mousePosition.x>=b1.XpositionOfLeftUpCorner && mousePosition.y>=b1.YpositionOfLeftUpCorner && mousePosition.x<=b1.XpositionOfRightDownCorner && mousePosition.y<=b1.YpositionOfRightDownCorner){
                 if(Mouse::isButtonPressed(Mouse::Left)==true && b1.isOccupied==false){
@@ -603,7 +603,7 @@ int main(){
                     b1.isOccupied=true;
                     isSomethingOnMiddleField=false;
 
-                }    
+                }
             }
             if(mousePosition.x>=b2.XpositionOfLeftUpCorner && mousePosition.y>=b2.YpositionOfLeftUpCorner && mousePosition.x<=b2.XpositionOfRightDownCorner && mousePosition.y<=b2.YpositionOfRightDownCorner){
                 if(Mouse::isButtonPressed(Mouse::Left)==true && b2.isOccupied==false){
@@ -613,7 +613,7 @@ int main(){
                     b2.isOccupied=true;
                     isSomethingOnMiddleField=false;
 
-                }    
+                }
             }
             if(mousePosition.x>=b3.XpositionOfLeftUpCorner && mousePosition.y>=b3.YpositionOfLeftUpCorner && mousePosition.x<=b3.XpositionOfRightDownCorner && mousePosition.y<=b3.YpositionOfRightDownCorner){
                 if(Mouse::isButtonPressed(Mouse::Left)==true && b3.isOccupied==false){
@@ -623,7 +623,7 @@ int main(){
                     b3.isOccupied=true;
                     isSomethingOnMiddleField=false;
 
-                }    
+                }
             }
             if(mousePosition.x>=b4.XpositionOfLeftUpCorner && mousePosition.y>=b4.YpositionOfLeftUpCorner && mousePosition.x<=b4.XpositionOfRightDownCorner && mousePosition.y<=b4.YpositionOfRightDownCorner){
                 if(Mouse::isButtonPressed(Mouse::Left)==true && b4.isOccupied==false){
@@ -633,7 +633,7 @@ int main(){
                     b4.isOccupied=true;
                     isSomethingOnMiddleField=false;
 
-                }    
+                }
             }if(mousePosition.x>=c1.XpositionOfLeftUpCorner && mousePosition.y>=c1.YpositionOfLeftUpCorner && mousePosition.x<=c1.XpositionOfRightDownCorner && mousePosition.y<=c1.YpositionOfRightDownCorner){
                 if(Mouse::isButtonPressed(Mouse::Left)==true && a1.isOccupied==false){
                     c1.sprt=middleSprt;
@@ -642,7 +642,7 @@ int main(){
                     c1.isOccupied=true;
                     isSomethingOnMiddleField=false;
 
-                }    
+                }
             }
             if(mousePosition.x>=c2.XpositionOfLeftUpCorner && mousePosition.y>=c2.YpositionOfLeftUpCorner && mousePosition.x<=c2.XpositionOfRightDownCorner && mousePosition.y<=c2.YpositionOfRightDownCorner){
                 if(Mouse::isButtonPressed(Mouse::Left)==true && c2.isOccupied==false){
@@ -652,7 +652,7 @@ int main(){
                     c2.isOccupied=true;
                     isSomethingOnMiddleField=false;
 
-                }    
+                }
             }
             if(mousePosition.x>=c3.XpositionOfLeftUpCorner && mousePosition.y>=c3.YpositionOfLeftUpCorner && mousePosition.x<=c3.XpositionOfRightDownCorner && mousePosition.y<=c3.YpositionOfRightDownCorner){
                 if(Mouse::isButtonPressed(Mouse::Left)==true && c3.isOccupied==false){
@@ -662,7 +662,7 @@ int main(){
                     c3.isOccupied=true;
                     isSomethingOnMiddleField=false;
 
-                }    
+                }
             }
             if(mousePosition.x>=c4.XpositionOfLeftUpCorner && mousePosition.y>=c4.YpositionOfLeftUpCorner && mousePosition.x<=c4.XpositionOfRightDownCorner && mousePosition.y<=c4.YpositionOfRightDownCorner){
                 if(Mouse::isButtonPressed(Mouse::Left)==true && c4.isOccupied==false){
@@ -672,7 +672,7 @@ int main(){
                     c4.isOccupied=true;
                     isSomethingOnMiddleField=false;
 
-                }    
+                }
             }if(mousePosition.x>=d1.XpositionOfLeftUpCorner && mousePosition.y>=d1.YpositionOfLeftUpCorner && mousePosition.x<=d1.XpositionOfRightDownCorner && mousePosition.y<=d1.YpositionOfRightDownCorner){
                 if(Mouse::isButtonPressed(Mouse::Left)==true && d1.isOccupied==false){
                     d1.sprt=middleSprt;
@@ -681,7 +681,7 @@ int main(){
                     d1.isOccupied=true;
                     isSomethingOnMiddleField=false;
 
-                }    
+                }
             }
             if(mousePosition.x>=d2.XpositionOfLeftUpCorner && mousePosition.y>=d2.YpositionOfLeftUpCorner && mousePosition.x<=d2.XpositionOfRightDownCorner && mousePosition.y<=d2.YpositionOfRightDownCorner){
                 if(Mouse::isButtonPressed(Mouse::Left)==true && d2.isOccupied==false){
@@ -691,7 +691,7 @@ int main(){
                     d2.isOccupied=true;
                     isSomethingOnMiddleField=false;
 
-                }    
+                }
             }
             if(mousePosition.x>=d3.XpositionOfLeftUpCorner && mousePosition.y>=d3.YpositionOfLeftUpCorner && mousePosition.x<=d3.XpositionOfRightDownCorner && mousePosition.y<=d3.YpositionOfRightDownCorner){
                 if(Mouse::isButtonPressed(Mouse::Left)==true && d3.isOccupied==false){
@@ -701,7 +701,7 @@ int main(){
                     d3.isOccupied=true;
                     isSomethingOnMiddleField=false;
 
-                }    
+                }
             }
             if(mousePosition.x>=d4.XpositionOfLeftUpCorner && mousePosition.y>=d4.YpositionOfLeftUpCorner && mousePosition.x<=d4.XpositionOfRightDownCorner && mousePosition.y<=d4.YpositionOfRightDownCorner){
                 if(Mouse::isButtonPressed(Mouse::Left)==true && d4.isOccupied==false){
@@ -711,7 +711,7 @@ int main(){
                     d4.isOccupied=true;
                     isSomethingOnMiddleField=false;
 
-                }    
+                }
             }
         }
         //Drawing to screen
