@@ -7,6 +7,15 @@
 #include <string.h>
 #include <vector>
 #include <assert.h>
+#include <thread>
+
+#define wait(x) this_thread::sleep_for((x)*1ms);
+
+#if defined(_WIN32) || defined(_WIN64)
+#define clear_console() system("cls")
+#else
+#define clear_console() system("clear")
+#endif
 
 using namespace std;
 

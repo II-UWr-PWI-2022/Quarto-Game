@@ -37,7 +37,7 @@ char Console_user_interface::select_from_main_menu()
 {
     char choice;
 
-    if(system("cls")) system("clear");
+    clear_console();
 
     cout << " >>> QUARTO GAME <<<" << "\n";
     cout << "---------------------------" << "\n";
@@ -59,7 +59,7 @@ char Console_user_interface::select_from_player_menu(char player)
 {
     char choice;
 
-    if(system("cls")) system("clear");
+    clear_console();
 
     cout << " >>> QUARTO GAME <<<" << "\n";
     cout << "---------------------------" << "\n";
@@ -245,7 +245,7 @@ void Console_user_interface::display_the_board()
 {
     update_board();
 
-    if(system("cls")) system("clear");
+    clear_console();
 
     cout << "              >>> QUARTO GAME <<<           " << "\n\n";
     cout << internal << "   |    1    |    2    |    3    |    4    |" << "\n";
@@ -453,6 +453,7 @@ int Console_user_interface::make_move()
 
 	else
 	{
+		wait(500);
 		if(!is_player_2)
 		{
 			switch(index_player_B)
@@ -574,6 +575,7 @@ int Console_user_interface::make_move()
 
 	else
 	{
+		wait(1000);
 		pair <int, int> field;
 
 		if(is_player_2)
