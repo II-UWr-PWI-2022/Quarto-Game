@@ -2,7 +2,7 @@
 
 bool Bot_Minmax::is_line_winning(int p1, int p2, int p3, int p4)
 {
-	return (((p1 | p2 | p3 | p4) & EMPTY_FIELD == 0) && (p1 & p2 & p3 & p4) || (~(p1 | p2 | p3 | p4) & MASK));
+	return ((((p1 | p2 | p3 | p4) & EMPTY_FIELD) == 0) && ((p1 & p2 & p3 & p4) || (~(p1 | p2 | p3 | p4) & MASK)));
 }
 
 bool Bot_Minmax::is_board_winning()
@@ -158,7 +158,6 @@ int Bot_Minmax::minmax(int depth, int piece, int max_depth)
 		for(int column = 0; column < MAX_N; column++)
 		{
 			if(board[row][column] != EMPTY_FIELD) continue;
-
 			pieces[piece] = false;
 			board[row][column] = piece;
 
@@ -234,15 +233,14 @@ pair <int, int> Bot_Minmax::get_chosen_board_field()
 
 void Bot_Minmax::analyze_position(Quarto_game* game, int piece)
 {
-	vector <vector <int>> board = game->get_board();
+	board = game->get_board();
 
-	vector <bool> pieces = vector <bool> (MAX_NUMBER_OF_PIECES, true);
+	// pieces = vector <bool> (MAX_NUMBER_OF_PIECES, true);
 
 	for(int i = 0; i < MAX_NUMBER_OF_PIECES; i++)
 	{
 		pieces[i] = !game->is_piece_used(i);
 	}
-
 	minmax(0, piece, 2);
 
 	pieces[piece] = false;
