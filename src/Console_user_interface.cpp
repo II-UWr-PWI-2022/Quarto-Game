@@ -494,8 +494,8 @@ int Console_user_interface::make_move()
 				break;
 			}
 		}
-
-		cout << create_symbol_of_free_piece(piece_number) << "\n";
+		symbol = create_symbol_of_free_piece(piece_number);
+		cout << symbol << "\n";
 	}
 
 	game -> set_piece_as_used(piece_number);
