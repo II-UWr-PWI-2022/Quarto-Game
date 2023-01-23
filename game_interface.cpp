@@ -1,6 +1,6 @@
-#include<SFML/Window.hpp>
-#include<SFML/Graphics.hpp>
 #include<iostream>
+#include"SFML-2.5.1/include/SFML/Graphics.hpp"
+#include"SFML-2.5.1/include/SFML/Window.hpp"
 using namespace std;
 using namespace sf;
 class fieldOnBoard{
@@ -49,15 +49,15 @@ class piece{
     Texture tex;
 };
 int main(){
-    //defining variables
-    bool endingConidtion=false;
-    bool ifPlayerWon;
     //Rendering window
     RenderWindow window(VideoMode(800,600), "Quarto game", Style::Close);
     window.display();
     //Setting Vsync
     window.setVerticalSyncEnabled(true);
     //loading textures
+    //defining variables
+    bool endingConidtion=false;
+    bool ifPlayerWon;
     Texture backgroundTexture;
     backgroundTexture.loadFromFile("Resources/plansza.png");
     //making sprites
