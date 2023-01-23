@@ -6,6 +6,7 @@
 #include "Bot_random.h"
 #include "Bot_minmax.h"
 #include "Bot_superior.h"
+#include <time.h>
 // #include "Bot_template.h"
 
 class Console_user_interface

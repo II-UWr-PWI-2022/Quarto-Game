@@ -283,15 +283,15 @@ void Bot_Superior::analyze_position(Quarto_game* game, int piece)
 		if(pieces[i]) pieces_left++;
 	}
 	//cerr << pieces_left << "\n";
-	if(pieces_left<=7){
+	if(pieces_left<=6){
 		minmax(0,piece,7);
 		return;
 	}
-	if(pieces_left<=8){
+	if(pieces_left<=7){
 		minmax(0,piece,4);
 		return;
 	}
-	if(pieces_left<=11){
+	if(pieces_left<=9){
 		minmax(0,piece,3);
 		return;
 	}

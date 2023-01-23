@@ -87,7 +87,7 @@ After that calls for method displaying main menu.
 void Console_user_interface::start_game(bool game_difficulty_level)
 {
     game = new Quarto_game(game_difficulty_level);
-
+    srand(time(NULL));
     clear_marks();
 
     int result;
