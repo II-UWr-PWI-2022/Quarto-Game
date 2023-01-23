@@ -8,7 +8,6 @@
 using namespace std;
 
 Player::Player(DB_manager &db_manager) :
-    email(""),
     password(""),
     connection_status(false),
     nickname(""),
@@ -34,7 +33,7 @@ void Player::save_account()
 void Player::print_statistics()
 {
     if(is_logged())
-        cout << email << " "<< nickname << " " << password << " " << wins << " " << draws << " " << loses << " " << points << "\n";
+        cout << nickname << " " << password << " " << wins << " " << draws << " " << loses << " " << points << "\n";
     else
         cout << nickname << " " << wins << " " << draws << " " << loses << " " << points << "\n";
 }
@@ -88,16 +87,10 @@ bool Player::log_out()
     return true;
 }
 
-bool Player::create_accout(string _email ,string _nickname, string _password)
+bool Player::create_accout(string _nickname, string _password)
 {
     if(!log_out())
         return false;
-
-    if(!validate_email(_email))
-    {
-        cerr << "Incorrect email format\n";
-        return false;
-    }
     
     if(validate_nickname(_nickname))
     {
@@ -119,96 +112,13 @@ bool Player::create_accout(string _email ,string _nickname, string _password)
         return false;
     }
 
-    email = _email;
-    password = _password;
     nickname = _nickname;
+    password = _password;
 
     DB->add_player(*this);
     connection_status = true;
     return true;
 
-}
-
-bool Player::delete_account(string _password)
-{
-    if(DB == nullptr){
-        cerr << "Player is not connected with DB_manager, operation unavailable\n";
-        return false;
-    }
-
-    if(is_logged())
-    {
-        if(password == _password)
-        {
-            DB->remove_player(*this);
-            log_out();
-            return true;
-        }
-        else
-            cerr << "Password doesnt match. Try again\n";
-    }
-    else
-        cerr << "Player is not logged in\n";
-
-    return false;
-}
-
-
-bool Player::change_password(string new_password)
-{
-    if(DB == nullptr){
-        cerr << "Player is not connected with DB_manager, operation unavailable\n";
-        return false;
-    }
-
-    if(is_logged())
-    {
-        if(!validate_password(new_password))
-        {
-            cerr << "Incorrect pasword format\n";
-            return false;
-        }
-        
-        password = new_password;
-        save_account();
-        return true;
-    }
-    else
-        cerr << "Player is not logged in\n";
-    
-    return false;
-}
-
-bool Player::change_nickname(string new_nickname)
-{
-    if(DB == nullptr){
-        cerr << "Player is not connected with DB_manager, operation unavailable\n";
-        return false;
-    }
-
-    if(is_logged())
-    {
-        if(!validate_nickname(new_nickname))
-        {
-            cerr << "Incorrect nickname format\n";
-            return false;
-        }
-
-        if(DB->search_nickname(new_nickname).first == true)
-        {
-            cerr << "The given nickname is already taken\n";
-            return false;
-        }
-        
-        DB->remove_player(*this);
-        nickname = new_nickname;
-        save_account();
-        return true;
-    }
-    else
-        cerr << "Player is not logged in\n";
-    
-    return false;
 }
 
 
@@ -319,65 +229,6 @@ bool Player::validate_password(string _password)
     return (lower && upper && digit);
 
 }
-
-
-#define EMAIL_MIN_LENGTH 5
-#define EMAIL_MAX_LENGTH 60
-
-bool Player::validate_email(string &_email)
-{
-    if(_email.size() < EMAIL_MIN_LENGTH || _email.size() > EMAIL_MAX_LENGTH)
-        return false;
-
-    int at_counter = 0;
-
-    int names_in_user = 0, names_in_domain = 0;
-
-    if( !isalnum(_email[0]) || !isalnum(_email[_email.size() -1]))
-        return false;
-
-    for(string::size_type i = 1; i < _email.size()-1; ++i)
-    {
-        if(_email[i] == '@')
-        {
-            if( !isalnum(_email[i-1]) || !isalnum(_email[i+1]))
-                return false;
-
-            ++at_counter;
-        }
-        else if(_email[i] == '.')
-        {
-            if(_email[i+1] == '.' || _email[i+1] == '-')
-                return false;
-
-            if(at_counter < 1)
-                ++names_in_user;
-            else
-                ++names_in_domain;
-        }
-        else if(_email[i] == '-')
-        {
-            if(_email[i+1] == '-' || _email[i+1] == '.')
-                return false;
-        }
-        else if( !isalnum(_email[i]))
-        {
-            return false;
-        }
-        else if(isalpha(_email[i]))
-        {
-            _email[i] = tolower(_email[i]);
-        }         
-    }
-
-        ++names_in_user, ++names_in_domain;
-
-        if(names_in_user < 1 || names_in_domain < 2)
-            return false;
-
-    return true;
-}
-
 
 
 int max_bet_value(const Player &player1,const Player &player2)

@@ -66,16 +66,6 @@ vector<Player> DB_manager::generate_ranking(Sort_by key, Order order_type)
     return tmp;
 }
 
-void DB_manager::remove_player(const Player &player)
-{
-    users.erase(player.nickname);
-    for(auto it : users)
-    {
-        cout << it.first << " ";
-    }cout << endl;
-
-}
-
 
 void DB_manager::add_player(const Player &player)
 {

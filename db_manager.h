@@ -48,8 +48,7 @@ public:
 private:
     // adds a player to the database
     void add_player(const Player &player);
-    // removes a player from the database
-    void remove_player(const Player &player);
+
     // updates the player's state in the database with the real state
     void update_player(const Player &player);
     

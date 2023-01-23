@@ -26,7 +26,6 @@ class Player
     friend class XML_scanner;
     friend class DB_manager;
 private:
-    std::string email;
     std::string password;
     bool connection_status;
 public:
@@ -47,15 +46,7 @@ public:
     bool is_logged();
 
     // Creates a new player account - email may already exist in the database, but the nickname must be unique
-    bool create_accout(std::string _email, std::string _nickname, std::string _password);
-    
-    // Deletes the player's account, the player must be logged in and re-enter the password to confirm his decision
-    bool delete_account(std::string _password);
-
-    // changes the player's nickname, the player must be logged in
-    bool change_nickname(std::string new_nickname);
-    // changes the player's password, the player must be logged in
-    bool change_password(std::string new_password);
+    bool create_accout(std::string _nickname, std::string _password);
 
     void play_match(Opponent rival_type, Game_status status, int bet_value = 0);
     
@@ -70,10 +61,6 @@ private:
     // Checks whether the given nickname is in the correct form:    length (3 - 20)
     // It cannot consist of non-printable characters and @, <, > other characters are allowed 
     bool validate_nickname(std::string _nickname);
-    
-    // Checks whether the given e-mail is in the correct form length(5-60)
-    // should follow the standard email format
-    bool validate_email(std::string &_email);
 
     // Saves the current state of the player's account to the database
     void save_account();

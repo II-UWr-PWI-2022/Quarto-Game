@@ -14,14 +14,13 @@ static const string prolog = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
 
 static const map<string, int> element  = {
     {"</player>", 1},
-    {"</email>", 2},
+    {"</nickname>", 2},
     {"</password>", 3},
-    {"</nickname>", 4},
-    {"</wins>", 5},
-    {"</draws>", 6},
-    {"</loses>", 7},
-    {"</points>", 8},
-    {"</Quarto>", 9}
+    {"</wins>", 4},
+    {"</draws>", 5},
+    {"</loses>", 6},
+    {"</points>", 7},
+    {"</Quarto>", 8}
 };
 
 void XML_scanner::read_database(string access_path, map<string, Player> &users)
@@ -64,24 +63,21 @@ void XML_scanner::read_database(string access_path, map<string, Player> &users)
                                 users[player.nickname] = player;
                                 break;
                             case 2:
-                                player.email = text;
+                               player.nickname = text;
                                 break;
                             case 3:
                                 player.password = text;
                                 break;
                             case 4:
-                                player.nickname = text;
-                                break;
-                            case 5:
                                 player.wins = stoi(text);
                                 break;
-                            case 6:
+                            case 5:
                                 player.draws = stoi(text);
                                 break;
-                            case 7:
+                            case 6:
                                 player.loses = stoi(text);
                                 break;
-                            case 8:
+                            case 7:
                                 player.points = stoi(text);
                                 break;
                         }
@@ -117,7 +113,6 @@ void XML_scanner::write_database(std::string access_path,const map<string, Playe
         for(auto it : users)
         {
             file<< "    <player id=\""  << index            << "\">\n"
-                << "        <email>"    << it.second.email  << "</email>\n"
                 << "        <nickname>" << it.second.nickname  << "</nickname>\n"
                 << "        <password>" << it.second.password  << "</password>\n"
                 << "        <wins>"     << it.second.wins      << "</wins>\n"
