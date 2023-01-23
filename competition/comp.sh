@@ -1,6 +1,5 @@
 #!/bin/bash
 
-num_of_games=3
 bot_1_pts=0
 bot_2_pts=0
 bot_3_pts=0
