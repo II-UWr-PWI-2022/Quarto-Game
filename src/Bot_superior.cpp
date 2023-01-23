@@ -273,16 +273,30 @@ pair <int, int> Bot_Superior::get_chosen_board_field()
 void Bot_Superior::analyze_position(Quarto_game* game, int piece)
 {
 	board = game->get_board();
-
 	// pieces = vector <bool> (MAX_NUMBER_OF_PIECES, true);
 	GAME_DIFFICULTY=game->get_game_difficulty_level();
 
+	int pieces_left=0;
 	for(int i = 0; i < MAX_NUMBER_OF_PIECES; i++)
 	{
 		pieces[i] = !game->is_piece_used(i);
+		if(pieces[i]) pieces_left++;
+	}
+	//cerr << pieces_left << "\n";
+	if(pieces_left<=7){
+		minmax(0,piece,7);
+		return;
+	}
+	if(pieces_left<=8){
+		minmax(0,piece,4);
+		return;
+	}
+	if(pieces_left<=11){
+		minmax(0,piece,3);
+		return;
 	}
 	minmax(0, piece, 2);
 
-	pieces[piece] = false;
-	pieces[chosen_piece] = false;
+	//pieces[piece] = false;
+	//pieces[chosen_piece] = false;
 }
