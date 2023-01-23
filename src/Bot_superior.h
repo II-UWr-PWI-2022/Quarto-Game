@@ -17,7 +17,7 @@ class Bot_Superior
     void set_choice(int row, int column, int opponent_piece);
     pair<int,int> chosen_board_field = {0, 0};
     int chosen_piece = 0;
-    const int MAX_BOARD_VALUE = 650;
+    const int MAX_BOARD_VALUE = 18;
     const int MIN_BOARD_VALUE = 0;
     bool GAME_DIFFICULTY;
 public:

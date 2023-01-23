@@ -85,7 +85,7 @@ bool Bot_Superior::is_triple(int given_piece, vector<int>pattern)
 
 int Bot_Superior::evaluate(int given_piece)
 {
-	int value = 0;
+	int value = 1;
 
 	for(int i = 0; i < MAX_N; i++)
 	{
@@ -107,14 +107,14 @@ int Bot_Superior::evaluate(int given_piece)
     
 	if (!GAME_DIFFICULTY) //easy version
 	{
-		for (int row = 0; row < 4; row++)
+		for (int row = 0; row < MAX_N; row++)
 		{
 			if (is_triple(given_piece, {board[row][0], board[row][1], board[row][2], board[row][3]}))
 			{
 				collision[row][0] = collision[row][1] = collision[row][2] = collision[row][3] = true;
 			}
 		}
-		for (int column = 0; column < 4; column++)
+		for (int column = 0; column < MAX_N; column++)
 		{
 			if (is_triple(given_piece, {board[0][column], board[1][column], board[2][column], board[3][column]}))
 			{
