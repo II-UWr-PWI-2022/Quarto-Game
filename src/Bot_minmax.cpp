@@ -1,5 +1,10 @@
 #include "Bot_minmax.h"
 
+int random(int a, int b)
+{	
+	return a + rand() % (b - a + 1);
+}
+
 bool Bot_Minmax::is_line_winning(int p1, int p2, int p3, int p4)
 {
 	return ((((p1 | p2 | p3 | p4) & EMPTY_FIELD) == 0) && ((p1 & p2 & p3 & p4) || (~(p1 | p2 | p3 | p4) & MASK)));
@@ -192,6 +197,7 @@ int Bot_Minmax::minmax(int depth, int piece, int max_depth)
 				{
 					if(max_move <= evaluated_move)
 					{
+						if(max_move == evaluated_move && random(0,1)) continue;
 						max_move = evaluated_move;
 						set_choice(row, column, opponent_piece);
 					}
