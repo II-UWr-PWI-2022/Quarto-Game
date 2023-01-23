@@ -6,7 +6,7 @@ bot_2_pts=0
 bot_3_pts=0
 
 # bots 1 and 2, easy mode
-for i in {1..$num_of_games}
+for i in {1..5}
 do
 	../build/main < easy12 > out.out &
 	ID=$!
@@ -19,7 +19,7 @@ do
 done
 
 # bots 1 and 2, hard mode
-for i in {1..$num_of_games}
+for i in {1..5}
 do
 	../build/main < hard12 > out.out &
 	ID=$!
@@ -32,7 +32,7 @@ do
 done
 
 # bots 1 and 3, easy mode
-for i in {1..$num_of_games}
+for i in {1..5}
 do
 	../build/main < easy13 > out.out &
 	ID=$!
@@ -45,7 +45,7 @@ do
 done
 
 # bots 1 and 3, hard mode
-for i in {1..$num_of_games}
+for i in {1..5}
 do
 	../build/main < hard13 > out.out &
 	ID=$!
@@ -58,7 +58,7 @@ do
 done
 
 # bots 2 and 3, easy mode
-for i in {1..$num_of_games}
+for i in {1..5}
 do
 	../build/main < easy23 > out.out &
 	ID=$!
@@ -71,7 +71,7 @@ do
 done
 
 # bots 2 and 3, hard mode
-for i in {1..$num_of_games}
+for i in {1..5}
 do
 	../build/main < hard23 > out.out &
 	ID=$!
