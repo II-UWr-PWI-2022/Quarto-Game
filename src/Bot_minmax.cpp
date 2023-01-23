@@ -5,7 +5,7 @@ int random(int a, int b)
 	return a + rand() % (b - a + 1);
 }
 
-bool Bot_Minmax::is_line_winning(int p1, int p2, int p3, int p4)
+bool Bot_Minmax::is_pattern_winning(int p1, int p2, int p3, int p4)
 {
 	return ((((p1 | p2 | p3 | p4) & EMPTY_FIELD) == 0) && ((p1 & p2 & p3 & p4) || (~(p1 | p2 | p3 | p4) & MASK)));
 }
@@ -16,22 +16,22 @@ bool Bot_Minmax::is_board_winning()
 	{
 		for(int row = 0; row < MAX_N; row++)
 		{
-			if(is_line_winning(board[row][0], board[row][1], board[row][2], board[row][3])) return true;
+			if(is_pattern_winning(board[row][0], board[row][1], board[row][2], board[row][3])) return true;
 		}
 
 		for(int column = 0; column < MAX_N; column++)
 		{
-			if(is_line_winning(board[0][column], board[1][column], board[2][column], board[3][column])) return true;
+			if(is_pattern_winning(board[0][column], board[1][column], board[2][column], board[3][column])) return true;
 		}
 
-		return (is_line_winning(board[0][0], board[1][1], board[2][2], board[3][3])
-			|| is_line_winning(board[0][3], board[1][2], board[2][1], board[3][0]));
+		return (is_pattern_winning(board[0][0], board[1][1], board[2][2], board[3][3])
+			|| is_pattern_winning(board[0][3], board[1][2], board[2][1], board[3][0]));
 	}
 	else 
 	{
 		for(int row = 0; row < MAX_N-1; row++){
 			for(int column = 0; column < MAX_N-1; column++){
-				if(is_line_winning(board[row][column],board[row+1][column],board[row][column+1],board[row+1][column+1])) return true;
+				if(is_pattern_winning(board[row][column],board[row+1][column],board[row][column+1],board[row+1][column+1])) return true;
 			}
 		}
 	}
