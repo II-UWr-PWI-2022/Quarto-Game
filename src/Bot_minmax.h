@@ -18,6 +18,7 @@ class Bot_Minmax
     int chosen_piece = 0;
     const int MAX_BOARD_VALUE = 650;
     const int MIN_BOARD_VALUE = 0;
+    bool GAME_DIFFICULTY;
 public:
     int get_chosen_piece_type();
     pair <int, int> get_chosen_board_field();

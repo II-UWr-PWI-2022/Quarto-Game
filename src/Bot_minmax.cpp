@@ -11,19 +11,30 @@ bool Bot_Minmax::is_line_winning(int p1, int p2, int p3, int p4)
 }
 
 bool Bot_Minmax::is_board_winning()
-{
-	for(int i = 0; i < MAX_N; i++)
+{	
+	if(!GAME_DIFFICULTY)
 	{
-		if(is_line_winning(board[i][0], board[i][1], board[i][2], board[i][3])) return true;
-	}
+		for(int row = 0; row < MAX_N; row++)
+		{
+			if(is_line_winning(board[row][0], board[row][1], board[row][2], board[row][3])) return true;
+		}
 
-	for(int i = 0; i < MAX_N; i++)
+		for(int column = 0; column < MAX_N; column++)
+		{
+			if(is_line_winning(board[0][column], board[1][column], board[2][column], board[3][column])) return true;
+		}
+
+		return (is_line_winning(board[0][0], board[1][1], board[2][2], board[3][3])
+			|| is_line_winning(board[0][3], board[1][2], board[2][1], board[3][0]));
+	}
+	else 
 	{
-		if(is_line_winning(board[0][i], board[1][i], board[2][i], board[3][i])) return true;
+		for(int row = 0; row < MAX_N-1; row++){
+			for(int column = 0; column < MAX_N-1; column++){
+				if(is_line_winning(board[row][column],board[row+1][column],board[row][column+1],board[row+1][column+1])) return true;
+			}
+		}
 	}
-
-	return (is_line_winning(board[0][0], board[1][1], board[2][2], board[3][3])
-		|| is_line_winning(board[0][3], board[1][2], board[2][1], board[3][0]));
 }
 
 int Bot_Minmax::evaluate(int piece)
@@ -242,6 +253,7 @@ void Bot_Minmax::analyze_position(Quarto_game* game, int piece)
 	board = game->get_board();
 
 	// pieces = vector <bool> (MAX_NUMBER_OF_PIECES, true);
+	GAME_DIFFICULTY=game->get_game_difficulty_level();
 
 	for(int i = 0; i < MAX_NUMBER_OF_PIECES; i++)
 	{
