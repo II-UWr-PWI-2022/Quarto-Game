@@ -11,6 +11,7 @@ class Bot_Superior
 
     bool is_pattern_winning(int p1, int p2, int p3, int p4);
     bool is_board_winning();
+    bool is_triple(int given_piece, vector<int> pattern);
     int evaluate(int piece);
     int minmax(int depth,int piece,int max_depth);
     void set_choice(int row, int column, int opponent_piece);

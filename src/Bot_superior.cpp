@@ -1,4 +1,4 @@
-#include "Bot_Superior.h"
+#include "Bot_superior.h"
 
 /*
 Returns random value from the range of numbers [a,b]
@@ -50,6 +50,31 @@ bool Bot_Superior::is_board_winning()
 	}
 }
 
+
+/*
+	Sets move as best
+*/
+void Bot_Superior::set_choice(int row, int column, int opponent_piece)
+{
+    chosen_piece=opponent_piece;
+    chosen_board_field.first=row;
+    chosen_board_field.second=column;
+}
+
+bool Bot_Superior::is_triple(int given_piece, vector<int>pattern)
+{
+	int count = 0;
+	int andv = MASK, and_neg = MASK;
+	for (int field: pattern)
+	{
+		if (field == EMPTY_FIELD) continue;
+		andv &= field;
+		and_neg &= ~(field);
+	}
+	if (((andv&given_piece) || (and_neg&(~given_piece))) && count == 2) return true;
+	return false;
+}
+
 int Bot_Superior::evaluate(int given_piece)
 {
 	int value = 0;
@@ -68,109 +93,49 @@ int Bot_Superior::evaluate(int given_piece)
 			}
 		}
 	}
-
 	if(value == MAX_BOARD_VALUE) return value;
 
-	int count[MAX_N][2] = {{0, 0}, {0, 0}, {0, 0}, {0, 0}};
-
-	for(int piece = 0; piece < MAX_NUMBER_OF_PIECES; piece++)
-	{
-		if(pieces[piece] == false) continue;
-
-		for(int i = 0; i < MAX_N; i++)
+    vector <vector <bool>> collision(MAX_N, vector<bool>(MAX_N));
+    for (int row = 0; row < 4; row++)
+    {
+		if (is_triple(given_piece, {board[row][0], board[row][1], board[row][2], board[row][3]}))
 		{
-			count[i][((piece & (1 << i)) > 0)]++;
+			collision[row][0] = collision[row][1] = collision[row][2] = collision[row][3];
+		}
+    }
+	for (int column = 0; column < 4; column++)
+    {
+		if (is_triple(given_piece, {board[0][column], board[1][column], board[2][column], board[3][column]}))
+		{
+			collision[0][column] = collision[1][column] = collision[2][column] = collision[3][column];
+		}
+    }
+	if (is_triple(given_piece, {board[0][0], board[1][1], board[2][2], board[3][3]}))
+	{
+		collision[0][0] = collision[1][1] = collision[2][2] = collision[3][3];
+	}
+	if (is_triple(given_piece, {board[0][3], board[1][2], board[2][1], board[3][0]}))
+	{
+		collision[0][3] = collision[1][2] = collision[2][1] = collision[3][0];
+	}
+	for (int row = 0; row < MAX_N; row++)
+	{
+		for (int column = 0; column < MAX_N; column++)
+		{
+			if ((board[row][column] == EMPTY_FIELD) && (!collision[row][column])) value++;
 		}
 	}
-
-	for(int i = 0; i < MAX_N; i++)
-	{
-		int andv = MASK, and_neg = MASK;
-
-		for(int j = 0; j < MAX_N; j++)
-		{
-			if(board[i][j] == EMPTY_FIELD) continue;
-
-			andv &= board[i][j];
-			and_neg &= (board[i][j] ^ MASK);
-		}
-
-		for(int j = 0; j < MAX_N; j++)
-		{
-			if(andv & (1 << j)) value += count[j][1];
-			if(and_neg & (1 << j)) value += count[j][0];
-		}
-	}
-
-	for(int i = 0; i < MAX_N; i++)
-	{
-		int andv = MASK, and_neg = MASK;
-
-		for(int j = 0; j < MAX_N; j++)
-		{
-			if(board[j][i] == EMPTY_FIELD) continue;
-
-			andv &= board[j][i];
-			and_neg &= (board[j][i] ^ MASK);
-		}
-
-		for(int j = 0; j < MAX_N; j++)
-		{
-			if(andv & (1 << j)) value += count[j][1];
-			if(and_neg & (1 << j)) value += count[j][0];
-		}
-	}
-
-	int andv = MASK, and_neg = MASK;
-
-	for(int i = 0, j = 0; i < MAX_N && j < MAX_N; i++, j++)
-	{
-		if(board[i][j] == EMPTY_FIELD) continue;
-
-		andv &= board[i][j];
-		and_neg &= (board[i][j]^MASK);
-	}
-
-	for(int i = 0; i < MAX_N; i++)
-	{
-		if(andv & (1 << i)) value += count[i][1];
-		if(and_neg & (1 << i)) value += count[i][0];
-	}
-
-	andv = MASK, and_neg = MASK;
-
-	for(int i = 0, j = MAX_N - 1; i < MAX_N && j >= 0; i++, j--)
-	{
-		if(board[i][j] == EMPTY_FIELD) continue;
-
-		andv &= board[i][j];
-		and_neg &= (board[i][j] ^ MASK);
-	}
-
-	for(int i = 0; i < MAX_N; i++)
-	{
-		if(andv & (1 << i)) value += count[i][1];
-		if(and_neg & (1 << i)) value += count[i][0];
-	}
-
-	return MAX_BOARD_VALUE-value;
+	return value;
 }
 
-/*
-	Sets move as best
-*/
-void Bot_Superior::set_choice(int row, int column, int opponent_piece)
-{
-    chosen_piece=opponent_piece;
-    chosen_board_field.first=row;
-    chosen_board_field.second=column;
-}
 
 /*
 	Analizes potential arrangement of pieces on board using recursive minmax algorithm
 	and depending on results chooses the best move
 	Maximum depth of algorithm is sets to 2
 */
+
+
 int Bot_Superior::minmax(int depth, int piece, int max_depth)
 {
 	if(depth == max_depth)
