@@ -1,19 +1,30 @@
 #include "Bot_minmax.h"
 
+/*
+Returns random value from the range of numbers [a,b]
+*/
 int random(int a, int b)
 {	
 	return a + rand() % (b - a + 1);
 }
 
+/*
+Checks whether the given four fields share at least one common characteristics 
+*/
 bool Bot_Minmax::is_pattern_winning(int p1, int p2, int p3, int p4)
 {
 	return ((((p1 | p2 | p3 | p4) & EMPTY_FIELD) == 0) && ((p1 & p2 & p3 & p4) || (~(p1 | p2 | p3 | p4) & MASK)));
 }
 
+/*
+Depending on game difficulty checks if there is a line or square 
+of fields that share at least one common characteristics 
+*/
 bool Bot_Minmax::is_board_winning()
 {	
 	if(!GAME_DIFFICULTY)
 	{
+		//easy version of game, checks all the lines
 		for(int row = 0; row < MAX_N; row++)
 		{
 			if(is_pattern_winning(board[row][0], board[row][1], board[row][2], board[row][3])) return true;
@@ -29,6 +40,7 @@ bool Bot_Minmax::is_board_winning()
 	}
 	else 
 	{
+		//hard version of game, checks all the squares
 		for(int row = 0; row < MAX_N-1; row++){
 			for(int column = 0; column < MAX_N-1; column++){
 				if(is_pattern_winning(board[row][column],board[row+1][column],board[row][column+1],board[row+1][column+1])) return true;
@@ -143,6 +155,9 @@ int Bot_Minmax::evaluate(int piece)
 	return value;
 }
 
+/*
+	Sets move as best
+*/
 void Bot_Minmax::set_choice(int row, int column, int opponent_piece)
 {
     chosen_piece=opponent_piece;
@@ -150,6 +165,11 @@ void Bot_Minmax::set_choice(int row, int column, int opponent_piece)
     chosen_board_field.second=column;
 }
 
+/*
+	Analizes potential arrangement of pieces on board using recursive minmax algorithm
+	and depending on results chooses the best move
+	Maximum depth of algorithm is sets to 2
+*/
 int Bot_Minmax::minmax(int depth, int piece, int max_depth)
 {
 	if(depth == max_depth)
@@ -237,17 +257,26 @@ int Bot_Minmax::minmax(int depth, int piece, int max_depth)
 }
 
 
+/*
+	Returns a piece that bot wants to give to the opponent
+*/
 int Bot_Minmax::get_chosen_piece_type()
 {
     pieces[chosen_piece] = false;
     return chosen_piece;
 }
 
+/*
+	Returns a field where bot wants to place given piece
+*/
 pair <int, int> Bot_Minmax::get_chosen_board_field()
 {
 	return chosen_board_field;
 }
 
+/*
+	Reads board and game difficulty, and launches minmax function to find the best move
+*/
 void Bot_Minmax::analyze_position(Quarto_game* game, int piece)
 {
 	board = game->get_board();
