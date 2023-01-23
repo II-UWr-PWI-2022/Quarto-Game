@@ -33,14 +33,14 @@ class Console_user_interface
 	int index_player_A;
 	int index_player_B;
 
-	Bot_Random bot_random_1;
-	Bot_Random bot_random_2;
+	Bot_Random* bot_random_1;
+	Bot_Random* bot_random_2;
 
-	Bot_Minmax bot_minmax_1;
-	Bot_Minmax bot_minmax_2;
+	Bot_Minmax* bot_minmax_1;
+	Bot_Minmax* bot_minmax_2;
 
-    Bot_Superior bot_superior_1;
-    Bot_Superior bot_superior_2;
+    Bot_Superior *bot_superior_1;
+    Bot_Superior *bot_superior_2;
 
     char get_single_character();
     char select_from_main_menu();

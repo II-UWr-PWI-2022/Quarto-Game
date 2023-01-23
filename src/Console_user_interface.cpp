@@ -3,6 +3,12 @@
 Console_user_interface::Console_user_interface()
 {
     game = NULL;
+    bot_random_1 = NULL;
+    bot_random_2 = NULL;
+    bot_minmax_1 = NULL;
+    bot_minmax_2 = NULL;
+    bot_superior_1 = NULL;
+    bot_superior_2 = NULL;
 }
 
 /*
@@ -87,6 +93,12 @@ After that calls for method displaying main menu.
 void Console_user_interface::start_game(bool game_difficulty_level)
 {
     game = new Quarto_game(game_difficulty_level);
+    bot_random_1 = new Bot_Random();
+    bot_random_2 = new Bot_Random();
+	bot_minmax_1 = new Bot_Minmax();
+	bot_minmax_2 = new Bot_Minmax();
+	bot_superior_1 = new Bot_Superior();
+	bot_superior_2 = new Bot_Superior();
     srand(time(NULL));
     clear_marks();
 
@@ -121,7 +133,19 @@ void Console_user_interface::start_game(bool game_difficulty_level)
     cout << "   -----------------------------------------" << "\n" << "\n";
 
     delete game;
+    delete bot_random_1;
+    delete bot_random_2;
+    delete bot_minmax_1;
+    delete bot_minmax_2;
+    delete bot_superior_1;
+    delete bot_superior_2;
     game = NULL;
+    bot_random_1 = NULL;
+    bot_random_2 = NULL;
+    bot_minmax_1 = NULL;
+    bot_minmax_2 = NULL;
+    bot_superior_1 = NULL;
+    bot_superior_2 = NULL;
 
     cout << "Press enter to go back to main menu..." << "\n";
 
@@ -459,16 +483,16 @@ int Console_user_interface::make_move()
 			switch(index_player_B)
 			{
 			case BOT_1:
-				piece_number = bot_random_2.get_chosen_piece_type();
+				piece_number = bot_random_2->get_chosen_piece_type();
 
 				break;
 			case BOT_2:
-				piece_number = bot_minmax_2.get_chosen_piece_type();
+				piece_number = bot_minmax_2->get_chosen_piece_type();
 
 				break;
 			case BOT_3:
-				piece_number = bot_superior_2.get_chosen_piece_type();
-				
+				piece_number = bot_superior_2->get_chosen_piece_type();
+
                 break;
 			default:
 				break;
@@ -480,22 +504,22 @@ int Console_user_interface::make_move()
 			switch(index_player_A)
 			{
 			case BOT_1:
-				piece_number = bot_random_1.get_chosen_piece_type();
+				piece_number = bot_random_1->get_chosen_piece_type();
 
 				break;
 			case BOT_2:
-				piece_number = bot_minmax_1.get_chosen_piece_type();
+				piece_number = bot_minmax_1->get_chosen_piece_type();
 
 				break;
 			case BOT_3:
-				piece_number = bot_superior_1.get_chosen_piece_type();
-				
+				piece_number = bot_superior_1->get_chosen_piece_type();
+
                 break;
 			default:
 				break;
 			}
 		}
-		symbol = create_symbol_of_free_piece(piece_number);
+		symbol = create_piece_symbol(game->get_piece_type(piece_number));
 		cout << symbol << "\n";
 	}
 
@@ -583,18 +607,18 @@ int Console_user_interface::make_move()
 			switch(index_player_B)
 			{
 			case BOT_1:
-				bot_random_2.analyze_position(game, piece_number);
-				field = bot_random_2.get_chosen_board_field();
+				bot_random_2->analyze_position(game, piece_number);
+				field = bot_random_2->get_chosen_board_field();
 
 				break;
 			case BOT_2:
-				bot_minmax_2.analyze_position(game, piece_number);
-				field = bot_minmax_2.get_chosen_board_field();
+				bot_minmax_2->analyze_position(game, piece_number);
+				field = bot_minmax_2->get_chosen_board_field();
 
 				break;
 			case BOT_3:
-				bot_superior_2.analyze_position(game, piece_number);
-				field = bot_superior_2.get_chosen_board_field();
+				bot_superior_2->analyze_position(game, piece_number);
+				field = bot_superior_2->get_chosen_board_field();
 				break;
 
 			default:
@@ -607,18 +631,18 @@ int Console_user_interface::make_move()
 			switch(index_player_A)
 			{
 			case BOT_1:
-				bot_random_1.analyze_position(game, piece_number);
-				field = bot_random_1.get_chosen_board_field();
+				bot_random_1->analyze_position(game, piece_number);
+				field = bot_random_1->get_chosen_board_field();
 
 				break;
 			case BOT_2:
-				bot_minmax_1.analyze_position(game, piece_number);
-				field = bot_minmax_1.get_chosen_board_field();
+				bot_minmax_1->analyze_position(game, piece_number);
+				field = bot_minmax_1->get_chosen_board_field();
 
 				break;
 			case BOT_3:
-				bot_superior_1.analyze_position(game, piece_number);
-				field = bot_superior_1.get_chosen_board_field();
+				bot_superior_1->analyze_position(game, piece_number);
+				field = bot_superior_1->get_chosen_board_field();
 
 				break;
 
