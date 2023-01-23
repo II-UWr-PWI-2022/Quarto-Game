@@ -49,7 +49,7 @@ bool Bot_Minmax::is_board_winning()
 	}
 }
 
-int Bot_Minmax::evaluate(int piece)
+int Bot_Minmax::evaluate(int given_piece)
 {
 	int value = 0;
 
@@ -59,7 +59,7 @@ int Bot_Minmax::evaluate(int piece)
 		{
 			if(board[i][j] == EMPTY_FIELD)
 			{
-				board[i][j] = piece;
+				board[i][j] = given_piece;
 
 				if(is_board_winning()) value = MAX_BOARD_VALUE;
 
