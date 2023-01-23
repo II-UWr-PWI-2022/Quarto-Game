@@ -5,6 +5,7 @@
 
 using namespace std;
 
+// function checks the basic functionality provided by the classes: Player, DB_manager or XML_scanner
 void test_start()
 {
     DB_manager DB("db.xml");

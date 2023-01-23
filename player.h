@@ -38,25 +38,44 @@ public:
 //***********************************************
     Player() = default;
     explicit Player(DB_manager &db_manager);
-
+    
+    // The function accepts nick and password as arguments, if logging in successfully returns true, otherwise false
     bool log_in(std::string _nickname, std::string _password);
+    // Saves the player's data to the database and logs him out
     bool log_out();
+    // The function returns the player's current login status
     bool is_logged();
 
+    // Creates a new player account - email may already exist in the database, but the nickname must be unique
     bool create_accout(std::string _email, std::string _nickname, std::string _password);
+    
+    // Deletes the player's account, the player must be logged in and re-enter the password to confirm his decision
     bool delete_account(std::string _password);
 
+    // changes the player's nickname, the player must be logged in
     bool change_nickname(std::string new_nickname);
+    // changes the player's password, the player must be logged in
     bool change_password(std::string new_password);
 
     void play_match(Opponent rival_type, Game_status status, int bet_value = 0);
+    
+    // Prints all data of the current player
     void print_statistics();
 
 private:
+    // Checks whether the given password is in the correct form:    length (8 - 60) 
+    // It should consist of at least one uppercase letter, lowercase letter, number and any other characters    
     bool validate_password(std::string _password);
+
+    // Checks whether the given nickname is in the correct form:    length (3 - 20)
+    // It cannot consist of non-printable characters and @, <, > other characters are allowed 
     bool validate_nickname(std::string _nickname);
+    
+    // Checks whether the given e-mail is in the correct form length(5-60)
+    // should follow the standard email format
     bool validate_email(std::string &_email);
 
+    // Saves the current state of the player's account to the database
     void save_account();
 
     DB_manager *DB;

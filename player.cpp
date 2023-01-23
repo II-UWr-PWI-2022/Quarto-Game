@@ -321,7 +321,7 @@ bool Player::validate_password(string _password)
 }
 
 
-#define EMAIL_MIN_LENGTH 8
+#define EMAIL_MIN_LENGTH 5
 #define EMAIL_MAX_LENGTH 60
 
 bool Player::validate_email(string &_email)
