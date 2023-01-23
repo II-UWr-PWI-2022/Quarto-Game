@@ -14,6 +14,7 @@ class Bot_Superior
     bool is_triple(int given_piece, vector<int> pattern);
     int evaluate(int piece);
     int minmax(int depth,int piece,int max_depth);
+    void last_move();
     void set_choice(int row, int column, int opponent_piece);
     pair<int,int> chosen_board_field = {0, 0};
     int chosen_piece = 0;

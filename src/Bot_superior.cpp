@@ -74,13 +74,14 @@ bool Bot_Superior::is_triple(int given_piece, vector<int>pattern)
 		if (field == EMPTY_FIELD) continue;
 		andv &= field;
 		and_neg &= ~(field);
+		count++;
 	}
-	if (((andv&given_piece) || (and_neg&(~given_piece))) && count == 2) return true;
+	if (((andv&given_piece) || (and_neg&(~given_piece))) && (count == 2)) return true;
 	return false;
 }
 
 /*
-	Counts value of the board with a piece that will be put on it, based on how many ways of putinng that piece form a tripple - the less such moves the better
+	Counts value of the board with a piece that will be put on it, based on how many ways of putting that piece form a tripple - the less such moves the better
 */
 
 int Bot_Superior::evaluate(int given_piece)
@@ -157,7 +158,7 @@ int Bot_Superior::evaluate(int given_piece)
 /*
 	Analizes potential arrangement of pieces on board using recursive minmax algorithm
 	and depending on results chooses the best move
-	Maximum depth of algorithm is sets to 2
+	Maximum depth of algorithm depends on how many pieces are left
 */
 
 
@@ -249,6 +250,24 @@ int Bot_Superior::minmax(int depth, int piece, int max_depth)
 	}
 }
 
+/*
+	Finds the last empty field for the last piece
+*/
+void Bot_Superior::last_move()
+{
+	for (int row = 0; row < MAX_N; row++)
+	{
+		for (int column = 0; column < MAX_N; column++)
+		{
+			if (board[row][column] == EMPTY_FIELD)
+			{
+				set_choice(row, column, EMPTY_FIELD);
+				return;
+			}
+		}
+	}
+}
+
 
 /*
 	Returns a piece that bot wants to give to the opponent
@@ -283,15 +302,23 @@ void Bot_Superior::analyze_position(Quarto_game* game, int piece)
 		if(pieces[i]) pieces_left++;
 	}
 	//cerr << pieces_left << "\n";
-	if(pieces_left<=6){
-		minmax(0,piece,7);
+	if(pieces_left == 0)
+	{
+		last_move();
 		return;
 	}
-	if(pieces_left<=7){
+	if(pieces_left<=6)
+	{
+		minmax(0,piece,min(7, pieces_left));
+		return;
+	}
+	if(pieces_left<=7)
+	{
 		minmax(0,piece,4);
 		return;
 	}
-	if(pieces_left<=9){
+	if(pieces_left<=9)
+	{
 		minmax(0,piece,3);
 		return;
 	}

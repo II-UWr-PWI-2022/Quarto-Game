@@ -257,6 +257,24 @@ int Bot_Minmax::minmax(int depth, int piece, int max_depth)
 	}
 }
 
+/*
+	Finds the last empty field for the last piece
+*/
+void Bot_Minmax::last_move()
+{
+	for (int row = 0; row < MAX_N; row++)
+	{
+		for (int column = 0; column < MAX_N; column++)
+		{
+			if (board[row][column] == EMPTY_FIELD)
+			{
+				set_choice(row, column, EMPTY_FIELD);
+				return;
+			}
+		}
+	}
+}
+
 
 /*
 	Returns a piece that bot wants to give to the opponent
@@ -285,12 +303,12 @@ void Bot_Minmax::analyze_position(Quarto_game* game, int piece)
 	// pieces = vector <bool> (MAX_NUMBER_OF_PIECES, true);
 	GAME_DIFFICULTY=game->get_game_difficulty_level();
 
+	int pieces_left = 0;
 	for(int i = 0; i < MAX_NUMBER_OF_PIECES; i++)
 	{
 		pieces[i] = !game->is_piece_used(i);
+		if(pieces[i]) pieces_left++;
 	}
-	minmax(0, piece, 2);
-
-	pieces[piece] = false;
-	pieces[chosen_piece] = false;
+	if (pieces_left == 0) last_move();
+	else minmax(0, piece, min(2, pieces_left));
 }
