@@ -1,5 +1,5 @@
-#include "player.h"
-#include "db_manager.h"
+#include "Player.h"
+#include "DB_manager.h"
 #include <algorithm>
 #include <iostream>
 #include <cctype>

@@ -1,7 +1,7 @@
 #ifndef DB_MANAGER
 #define DB_MANAGER
 
-#include "xml_scanner.h"
+#include "XML_scanner.h"
 #include <string>
 #include <vector>
 #include <map>
