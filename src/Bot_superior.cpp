@@ -61,6 +61,10 @@ void Bot_Superior::set_choice(int row, int column, int opponent_piece)
     chosen_board_field.second=column;
 }
 
+/*
+	Checks if putting given piece on one of the empty fields from "pattern" forms a triple with at least one common characteristic
+*/
+
 bool Bot_Superior::is_triple(int given_piece, vector<int>pattern)
 {
 	int count = 0;
@@ -74,6 +78,10 @@ bool Bot_Superior::is_triple(int given_piece, vector<int>pattern)
 	if (((andv&given_piece) || (and_neg&(~given_piece))) && count == 2) return true;
 	return false;
 }
+
+/*
+	Counts value of the board with a piece that will be put on it, based on how many ways of putinng that piece form a tripple - the less such moves the better
+*/
 
 int Bot_Superior::evaluate(int given_piece)
 {
@@ -96,28 +104,45 @@ int Bot_Superior::evaluate(int given_piece)
 	if(value == MAX_BOARD_VALUE) return value;
 
     vector <vector <bool>> collision(MAX_N, vector<bool>(MAX_N));
-    for (int row = 0; row < 4; row++)
-    {
-		if (is_triple(given_piece, {board[row][0], board[row][1], board[row][2], board[row][3]}))
-		{
-			collision[row][0] = collision[row][1] = collision[row][2] = collision[row][3];
-		}
-    }
-	for (int column = 0; column < 4; column++)
-    {
-		if (is_triple(given_piece, {board[0][column], board[1][column], board[2][column], board[3][column]}))
-		{
-			collision[0][column] = collision[1][column] = collision[2][column] = collision[3][column];
-		}
-    }
-	if (is_triple(given_piece, {board[0][0], board[1][1], board[2][2], board[3][3]}))
+    
+	if (!GAME_DIFFICULTY) //easy version
 	{
-		collision[0][0] = collision[1][1] = collision[2][2] = collision[3][3];
+		for (int row = 0; row < 4; row++)
+		{
+			if (is_triple(given_piece, {board[row][0], board[row][1], board[row][2], board[row][3]}))
+			{
+				collision[row][0] = collision[row][1] = collision[row][2] = collision[row][3] = true;
+			}
+		}
+		for (int column = 0; column < 4; column++)
+		{
+			if (is_triple(given_piece, {board[0][column], board[1][column], board[2][column], board[3][column]}))
+			{
+				collision[0][column] = collision[1][column] = collision[2][column] = collision[3][column] = true;
+			}
+		}
+		if (is_triple(given_piece, {board[0][0], board[1][1], board[2][2], board[3][3]}))
+		{
+			collision[0][0] = collision[1][1] = collision[2][2] = collision[3][3] = true;
+		}
+		if (is_triple(given_piece, {board[0][3], board[1][2], board[2][1], board[3][0]}))
+		{
+			collision[0][3] = collision[1][2] = collision[2][1] = collision[3][0] = true;
+		}
 	}
-	if (is_triple(given_piece, {board[0][3], board[1][2], board[2][1], board[3][0]}))
+	
+	else //hard version
 	{
-		collision[0][3] = collision[1][2] = collision[2][1] = collision[3][0];
+		for(int row = 0; row < MAX_N-1; row++){
+			for(int column = 0; column < MAX_N-1; column++){
+				if(is_triple(given_piece, {board[row][column],board[row+1][column],board[row][column+1],board[row+1][column+1]}))
+				{
+					collision[row][column] = collision[row+1][column] = collision[row][column+1] = collision[row+1][column+1] = true;
+				};
+			}
+		}
 	}
+	
 	for (int row = 0; row < MAX_N; row++)
 	{
 		for (int column = 0; column < MAX_N; column++)
