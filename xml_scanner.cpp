@@ -103,3 +103,33 @@ void XML_scanner::read_database(string access_path, map<string, Player> &users)
     }
     else cerr << "Unable to open database\n";
 }
+
+
+void XML_scanner::write_database(std::string access_path,const map<string, Player> &users)
+{
+    ofstream file(access_path, ios::out | ios::trunc);
+
+    if(file.is_open())
+    {
+        int index = 1;
+        file << prolog;
+        file << "\n<Quarto users=\"" << users.size() << "\">\n";
+        for(auto it : users)
+        {
+            file<< "    <player id=\""  << index            << "\">\n"
+                << "        <email>"    << it.second.email  << "</email>\n"
+                << "        <nickname>" << it.second.nickname  << "</nickname>\n"
+                << "        <password>" << it.second.password  << "</password>\n"
+                << "        <wins>"     << it.second.wins      << "</wins>\n"
+                << "        <draws>"    << it.second.draws     << "</draws>\n"
+                << "        <loses>"    << it.second.loses     << "</loses>\n"
+                << "        <points>"   << it.second.points    << "</points>\n"
+                << "    </player>\n";
+            ++index;
+        }
+        file << "</Quarto>\n";
+
+        file.close();
+    }
+    else cerr << "Unable to open database\n";
+}
