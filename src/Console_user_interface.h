@@ -6,6 +6,8 @@
 #include "Bot_random.h"
 #include "Bot_minmax.h"
 #include "Bot_superior.h"
+#include "Player.h"
+#include "DB_manager.h"
 #include <time.h>
 // #include "Bot_template.h"
 
@@ -42,10 +44,14 @@ class Console_user_interface
     Bot_Superior *bot_superior_1;
     Bot_Superior *bot_superior_2;
 
+    DB_manager db_manager;
+    Player human_player_1;
+    Player human_player_2;
+
     char get_single_character();
-    char select_from_main_menu();
-    char select_from_player_menu(char player);
-    void start_game(bool game_difficulty_level);
+    char select_from_main_menu();   // dodanie rekordu 3
+    char select_from_player_menu(char player);  //
+    void start_game(bool game_difficulty_level);    // Rozgrywka 
     void clear_marks();
     void update_marks();
     string create_piece_symbol(int type);
@@ -62,7 +68,7 @@ class Console_user_interface
 
 public:
     Console_user_interface();
-    void display_main_menu();
+    void display_main_menu(); // Wyswietlanie opcji
 };
 
 #endif // CONSOLE_USER_INTERFACE_H

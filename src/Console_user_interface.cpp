@@ -1,7 +1,10 @@
 #include "Console_user_interface.h"
 
-Console_user_interface::Console_user_interface()
+Console_user_interface::Console_user_interface() : db_manager("../db/users.xml")
 {
+    human_player_1.connect_with_database(db_manager);
+    human_player_2.connect_with_database(db_manager);
+
     game = NULL;
     bot_random_1 = NULL;
     bot_random_2 = NULL;

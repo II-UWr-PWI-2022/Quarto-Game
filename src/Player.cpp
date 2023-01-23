@@ -18,6 +18,11 @@ Player::Player(DB_manager &db_manager) :
     DB(&db_manager){};
 
 
+void Player::connect_with_database(DB_manager &db_manager)
+{
+    DB = &db_manager;
+}
+
 bool Player::is_logged()
 {
     return connection_status;

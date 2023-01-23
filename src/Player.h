@@ -53,6 +53,8 @@ public:
     // Prints all data of the current player
     void print_statistics();
 
+    void connect_with_database(DB_manager &DB);
+
 private:
     // Checks whether the given password is in the correct form:    length (8 - 60) 
     // It should consist of at least one uppercase letter, lowercase letter, number and any other characters    
