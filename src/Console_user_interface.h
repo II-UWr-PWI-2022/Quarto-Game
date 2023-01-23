@@ -41,8 +41,6 @@ class Console_user_interface
     Bot_Superior bot_superior_1;
     Bot_Superior bot_superior_2;
 
-	// TODO: dodac potem jeszcze 3. bota
-
     char get_single_character();
     char select_from_main_menu();
     char select_from_player_menu(char player);
