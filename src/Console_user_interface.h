@@ -5,6 +5,7 @@
 #include "Quarto_game.h"
 #include "Bot_random.h"
 #include "Bot_minmax.h"
+#include "Bot_superior.h"
 // #include "Bot_template.h"
 
 class Console_user_interface
@@ -36,6 +37,9 @@ class Console_user_interface
 
 	Bot_Minmax bot_minmax_1;
 	Bot_Minmax bot_minmax_2;
+
+    Bot_Superior bot_superior_1;
+    Bot_Superior bot_superior_2;
 
 	// TODO: dodac potem jeszcze 3. bota
 

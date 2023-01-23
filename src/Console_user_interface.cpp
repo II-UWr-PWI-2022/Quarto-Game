@@ -467,9 +467,9 @@ int Console_user_interface::make_move()
 
 				break;
 			case BOT_3:
-				// TODO: dorobic
-				break;
-
+				piece_number = bot_superior_2.get_chosen_piece_type();
+				
+                break;
 			default:
 				break;
 			}
@@ -488,9 +488,9 @@ int Console_user_interface::make_move()
 
 				break;
 			case BOT_3:
-				// TODO: dorobic
-				break;
-
+				piece_number = bot_superior_1.get_chosen_piece_type();
+				
+                break;
 			default:
 				break;
 			}
@@ -593,7 +593,8 @@ int Console_user_interface::make_move()
 
 				break;
 			case BOT_3:
-				// TODO: dorobic
+				bot_superior_2.analyze_position(game, piece_number);
+				field = bot_superior_2.get_chosen_board_field();
 				break;
 
 			default:
@@ -616,7 +617,9 @@ int Console_user_interface::make_move()
 
 				break;
 			case BOT_3:
-				// TODO: dorobic
+				bot_superior_1.analyze_position(game, piece_number);
+				field = bot_superior_1.get_chosen_board_field();
+
 				break;
 
 			default:
