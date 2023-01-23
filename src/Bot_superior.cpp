@@ -222,7 +222,7 @@ int Bot_Superior::minmax(int depth, int piece, int max_depth)
 				{
 					if(max_move <= evaluated_move)
 					{
-						if(max_move == evaluated_move && random_int2(0,1)) continue;
+						if(max_move == evaluated_move && chosen_board_field.first != -1 && random_int2(0,1)) continue;
 						max_move = evaluated_move;
 						set_choice(row, column, opponent_piece);
 					}
@@ -302,6 +302,7 @@ void Bot_Superior::analyze_position(Quarto_game* game, int piece)
 		if(pieces[i]) pieces_left++;
 	}
 	//cerr << pieces_left << "\n";
+	chosen_board_field = {-1, -1};
 	if(pieces_left == 0)
 	{
 		last_move();
