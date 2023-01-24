@@ -3,49 +3,46 @@
 bot_1_pts=0
 bot_2_pts=0
 bot_3_pts=0
-num_of_tests=20
+num_of_tests=5
 
 # bots 1 and 2, easy mode
-echo "bots 1 and 2, easy mode" > scriptres.txt
+echo "bots 1 and 2, easy mode" >> scriptres.txt
 for (( i=1; i<=$num_of_tests; i++ ))
 do
-	timeout 20 ../build/main < easy12 > out.out
-	ID=$!
-	kill $ID
+	../build/main < easy12 > out.out
 	if grep "Player A wins" out.out; then
 		(( bot_1_pts++ ))
-		echo "bot 1 won" > scriptres.txt
+		echo "bot 1 won" >> scriptres.txt
 	elif grep "Player B wins" out.out; then
 		(( bot_2_pts++ ))
-		echo "bot 2 won" > scriptres.txt
-	elif grep "DRAW" out.out; then
-		echo "no one won" > scriptres.txt
+		echo "bot 2 won" >> scriptres.txt
+	elif grep "Draw" out.out; then
+		echo "no one won" >> scriptres.txt
 	else
-		echo "error" > scriptres.txt
+		echo "error" >> scriptres.txt
 	fi
 done
 
-echo "bots 1 and 2, hard mode" > scriptres.txt
 # bots 1 and 2, hard mode
+echo "bots 1 and 2, hard mode" >> scriptres.txt
 for (( i=1; i<=$num_of_tests; i++ ))
 do
-	../build/main < hard12 > out.out &
-	ID=$!
-	kill $ID
+	../build/main < hard12 > out.out
 	if grep "Player A wins" out.out; then
 		(( bot_1_pts += 3 ))
-		echo "bot 1 won" > scriptres.txt
+		echo "bot 1 won" >> scriptres.txt
 	elif grep "Player B wins" out.out; then
 		(( bot_2_pts += 3 ))
-		echo "bot 2 won" > scriptres.txt
-	elif grep "DRAW" out.out; then
-		echo "no one won" > scriptres.txt
+		echo "bot 2 won" >> scriptres.txt
+	elif grep "Draw" out.out; then
+		echo "no one won" >> scriptres.txt
 	else
-		echo "error" > scriptres.txt
+		echo "error" >> scriptres.txt
 	fi
 done
 
 # bots 1 and 3, easy mode
+echo "bots 1 and 3, easy mode" >> scriptres.txt
 for (( i=1; i<=$num_of_tests; i++ ))
 do
 	../build/main < easy13 > out.out &
@@ -53,9 +50,14 @@ do
 	kill $ID
 	if grep "Player A wins" out.out; then
 		(( bot_1_pts++ ))
-	fi
-	if grep "Player B wins" out.out; then
+		echo "bot 1 won" >> scriptres.txt
+	elif grep "Player B wins" out.out; then
 		(( bot_3_pts++ ))
+		echo "bot 3 won" >> scriptres.txt
+	elif grep "Draw" out.out; then
+		echo "draw" >> scriptres.txt	
+	else
+		echo "error" >> scriptres.txt
 	fi
 done
 
@@ -67,9 +69,14 @@ do
 	kill $ID
 	if grep "Player A wins" out.out; then
 		(( bot_1_pts += 3 ))
-	fi
-	if grep "Player B wins" out.out; then
+		echo "bot 1 won" >> scriptres.txt
+	elif grep "Player B wins" out.out; then
 		(( bot_3_pts += 3 ))
+		echo "bot 3 won" >> scriptres.txt
+	elif grep "Draw" out.out; then
+		echo "draw" >> scriptres.txt	
+	else
+		echo "error" >> scriptres.txt
 	fi
 done
 
