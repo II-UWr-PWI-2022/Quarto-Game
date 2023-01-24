@@ -3,7 +3,7 @@
 bot_1_pts=0
 bot_2_pts=0
 bot_3_pts=0
-num_of_tests=1
+num_of_tests=20
 
 # clear the script log
 echo "" > scriptres.txt
@@ -195,10 +195,10 @@ do
 	../build/main < easy32 > out.out
 	if grep "Player A wins" out.out; then
 		(( bot_3_pts++ ))
-		echo "bot 2 won" >> scriptres.txt
+		echo "bot 3 won" >> scriptres.txt
 	elif grep "Player B wins" out.out; then
 		(( bot_2_pts++ ))
-		echo "bot 3 won" >> scriptres.txt
+		echo "bot 2 won" >> scriptres.txt
 	elif grep "Draw" out.out; then
 		echo "draw" >> scriptres.txt	
 	else
@@ -213,10 +213,10 @@ do
 	../build/main < hard32 > out.out
 	if grep "Player A wins" out.out; then
 		(( bot_3_pts += 3 ))
-		echo "bot 2 won" >> scriptres.txt
+		echo "bot 3 won" >> scriptres.txt
 	elif grep "Player B wins" out.out; then
 		(( bot_2_pts += 3 ))
-		echo "bot 3 won" >> scriptres.txt
+		echo "bot 2 won" >> scriptres.txt
 	elif grep "Draw" out.out; then
 		echo "draw" >> scriptres.txt	
 	else
@@ -224,6 +224,6 @@ do
 	fi
 done
 
-echo "score of bot 1:" $bot_1_pts
-echo "score of bot 2:" $bot_2_pts
-echo "score of bot 3:" $bot_3_pts
+echo "score of bot 1:" $bot_1_pts > report.txt
+echo "score of bot 2:" $bot_2_pts >> report.txt
+echo "score of bot 3:" $bot_3_pts >> report.txt

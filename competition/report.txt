@@ -1,0 +1,3 @@
+score of bot 1: 0
+score of bot 2: 170
+score of bot 3: 234
