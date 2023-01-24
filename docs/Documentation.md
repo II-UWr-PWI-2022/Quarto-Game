@@ -167,3 +167,19 @@ Game piece class. It contains:
 		* ```void set_piece_as_used()``` - sets the piece as used in game
 		* ```bool is_piece_used()``` -
 		* ```int get_piece_type()``` - returns a type representing its attributes
+
+## DB_menager
+### class DB_Menager
+#### private:
+```void add_player(const Player &player)``` -  adds a player to the database.
+
+```void update_player(const Player &player)``` - updates the player's state in the database with the real state
+
+#### public:
+```DB_manager(const std::string access_path)``` - The constructor takes the path to the xml file as an argument and loads the database from it.
+
+```~DB_manager()``` - The destructor saves the database to an xml file.
+
+```pair<bool, Player> search_nickname(std::string _nick_name)``` -  Searches for a player in the database by given nickname. Returns Pair<True/False, Player> Depending on the success of the search operation.
+
+```vector<Player> generate_ranking(Sort_by key, Order order_type)``` - It generates a ranking of players by sorting in terms of the indicated feature and in the designated order.
