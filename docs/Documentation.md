@@ -104,7 +104,7 @@ A bot based on min-max algorithm, searching the moves tree deeper than Bot_minma
 ```void analyze_position(Quarto_game* game, int piece)``` - Reads board and game difficulty, and launches minmax function to find the best move.
 
 ## Quarto_game
-###class Quarto_game 
+### class Quarto_game 
 Main game class
 #### private:
 ```void put_piece_on_board(int row, int column, int piece_number)``` - Search for type of piece defined by its number in table of pieces in Quarto game object. Then this value is assigned to the field in the board specified by row and column number.
