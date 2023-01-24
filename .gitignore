@@ -2,3 +2,5 @@
 /bin
 Quarto.*
 /build
+game_interface.o
+sfml-app
