@@ -913,8 +913,6 @@ void Console_user_interface::account_settings()
     }
 }
 
-// #define NUMBER_OF_PLAYERS_GENERATED_BY_DB 20
-
 void Console_user_interface::display_ranking()
 {
     while(true)
@@ -961,7 +959,7 @@ void Console_user_interface::display_ranking()
         cout << "|       NICKNAME:       |  WINS:  |  DRAWS:  |    LOSES:    |   POINTS:   |\n";
         cout << " =========================================================================\n";
 
-        for(vector<Player>::size_type i = 0; i < ranking.size() /*&& i < NUMBER_OF_PLAYERS_GENERATED_BY_DB*/; i++)
+        for(vector<Player>::size_type i = 0; i < ranking.size(); i++)
         {
             cout << "|" << (i+1) << "."<< setw(20) << ranking[i].nickname << " | " << setw(7)<< ranking[i].wins << " | "
                 << setw(8) << ranking[i].draws << " | " << setw(12) << ranking[i].loses << " | " << setw(12) << ranking[i].points << "|\n";
