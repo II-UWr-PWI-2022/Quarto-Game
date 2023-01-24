@@ -103,6 +103,19 @@ A bot based on min-max algorithm, searching the moves tree deeper than Bot_minma
 
 ```void analyze_position(Quarto_game* game, int piece)``` - Reads board and game difficulty, and launches minmax function to find the best move.
 
+## Bot_random.cpp
+### Classes
+#### Bot_random
+A bot that makes random moves, with equal probability of choosing each possible move. It contains:
+
+```int random_int(int L, int R)``` - returns random integer from range [L, R].
+
+```int get_chosen_piece_type()``` - Returns a piece that bot wants to give to the opponent.
+
+```pair <int, int> get_chosen_board_field()``` - Returns a field where bot wants to place given piece.
+
+```void analyze_position(Quarto_game* game, int piece)``` - Reads board and game difficulty and chooses random move to make.
+
 ## Quarto_game
 ### class Quarto_game 
 Main game class
