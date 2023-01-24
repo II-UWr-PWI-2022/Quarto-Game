@@ -4,3 +4,4 @@ Quarto.*
 /build
 game_interface.o
 sfml-app
+competition/out.out

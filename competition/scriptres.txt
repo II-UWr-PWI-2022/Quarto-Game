@@ -1,0 +1,253 @@
+
+bots 1 and 2, easy mode
+bot 2 won
+bot 2 won
+bot 2 won
+bot 2 won
+bot 2 won
+bot 2 won
+bot 2 won
+bot 2 won
+bot 2 won
+bot 2 won
+bot 2 won
+bot 2 won
+bot 2 won
+bot 2 won
+bot 2 won
+bot 2 won
+bot 2 won
+bot 2 won
+bot 2 won
+bot 2 won
+bots 1 and 2, hard mode
+bot 2 won
+bot 2 won
+bot 2 won
+bot 2 won
+bot 2 won
+bot 2 won
+bot 2 won
+bot 2 won
+bot 2 won
+bot 2 won
+bot 2 won
+bot 2 won
+bot 2 won
+bot 2 won
+bot 2 won
+bot 2 won
+bot 2 won
+bot 2 won
+bot 2 won
+bot 2 won
+bots 2 and 1, easy mode
+bot 2 won
+bot 2 won
+bot 2 won
+bot 2 won
+bot 2 won
+bot 2 won
+bot 2 won
+bot 2 won
+bot 2 won
+bot 2 won
+bot 2 won
+bot 2 won
+bot 2 won
+bot 2 won
+bot 2 won
+bot 2 won
+bot 2 won
+bot 2 won
+bot 2 won
+bot 2 won
+bots 2 and 1, hard mode
+bot 2 won
+bot 2 won
+bot 2 won
+bot 2 won
+bot 2 won
+bot 2 won
+bot 2 won
+bot 2 won
+bot 2 won
+bot 2 won
+bot 2 won
+bot 2 won
+bot 2 won
+bot 2 won
+bot 2 won
+bot 2 won
+bot 2 won
+bot 2 won
+bot 2 won
+bot 2 won
+bots 1 and 3, easy mode
+bot 3 won
+bot 3 won
+bot 3 won
+bot 3 won
+bot 3 won
+bot 3 won
+bot 3 won
+bot 3 won
+bot 3 won
+bot 3 won
+bot 3 won
+bot 3 won
+bot 3 won
+bot 3 won
+bot 3 won
+bot 3 won
+bot 3 won
+bot 3 won
+bot 3 won
+bot 3 won
+bots 1 and 3, hard mode
+bot 3 won
+bot 3 won
+bot 3 won
+bot 3 won
+bot 3 won
+bot 3 won
+bot 3 won
+bot 3 won
+bot 3 won
+bot 3 won
+bot 3 won
+bot 3 won
+bot 3 won
+bot 3 won
+bot 3 won
+bot 3 won
+bot 3 won
+bot 3 won
+bot 3 won
+bot 3 won
+bots 3 and 1, easy mode
+bot 3 won
+bot 3 won
+bot 3 won
+bot 3 won
+bot 3 won
+bot 3 won
+bot 3 won
+bot 3 won
+bot 3 won
+bot 3 won
+bot 3 won
+bot 3 won
+bot 3 won
+bot 3 won
+bot 3 won
+bot 3 won
+bot 3 won
+bot 3 won
+bot 3 won
+bot 3 won
+bots 3 and 1, hard mode
+bot 3 won
+bot 3 won
+bot 3 won
+bot 3 won
+bot 3 won
+bot 3 won
+bot 3 won
+bot 3 won
+bot 3 won
+bot 3 won
+bot 3 won
+bot 3 won
+bot 3 won
+bot 3 won
+bot 3 won
+bot 3 won
+bot 3 won
+bot 3 won
+bot 3 won
+bot 3 won
+bots 2 and 3, easy mode
+bot 2 won
+bot 3 won
+bot 3 won
+bot 3 won
+bot 2 won
+bot 2 won
+bot 2 won
+bot 3 won
+draw
+bot 2 won
+bot 3 won
+bot 3 won
+bot 3 won
+bot 2 won
+bot 2 won
+bot 3 won
+bot 3 won
+bot 3 won
+bot 3 won
+bot 3 won
+bots 2 and 3, hard mode
+bot 3 won
+draw
+draw
+draw
+draw
+draw
+draw
+bot 3 won
+draw
+draw
+bot 3 won
+bot 3 won
+draw
+bot 3 won
+draw
+draw
+bot 3 won
+draw
+draw
+draw
+bots 3 and 2, easy mode
+bot 3 won
+bot 3 won
+bot 3 won
+bot 3 won
+bot 3 won
+bot 3 won
+bot 3 won
+bot 3 won
+bot 3 won
+bot 3 won
+bot 3 won
+bot 3 won
+bot 3 won
+bot 3 won
+bot 3 won
+bot 3 won
+bot 3 won
+bot 3 won
+bot 3 won
+bot 3 won
+bots 3 and 2, hard mode
+draw
+draw
+draw
+bot 3 won
+bot 3 won
+draw
+bot 2 won
+draw
+draw
+draw
+bot 3 won
+bot 3 won
+bot 3 won
+draw
+draw
+draw
+bot 3 won
+bot 3 won
+draw
+bot 3 won
