@@ -397,6 +397,7 @@ int main(){
     bool isSomethingOnMiddleField=false;
     string whatTypeOfPieceIsOn="";
     Sprite middleSprt;
+    //game loop 
     while(window.isOpen()){
         Event event;
         Vector2i mousePosition=Mouse::getPosition(window);
