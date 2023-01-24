@@ -688,8 +688,8 @@ int Console_user_interface::make_move()
 }
 
 /*
-Displays main menu. Depending on user's choice start game in chosen
-mode or close the program.
+	Displays main menu. Depending on user's choice start game in chosen
+	mode or close the program.
 */
 void Console_user_interface::display_main_menu()
 {

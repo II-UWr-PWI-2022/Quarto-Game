@@ -1,5 +1,5 @@
-#ifndef DB_MANAGER
-#define DB_MANAGER
+#ifndef DB_MANAGER_H
+#define DB_MANAGER_H
 
 #include "XML_scanner.h"
 #include <string>
@@ -7,12 +7,14 @@
 #include <map>
 #include <utility>
 
-enum class Order{
+enum class Order
+{
     ascending = 1,
     descending
 };
 
-enum class Sort_by{
+enum class Sort_by
+{
     nickname = 1,
     wins,
     draws,
@@ -22,7 +24,8 @@ enum class Sort_by{
 
 class Player;
 
-class DB_manager{
+class DB_manager
+{
     friend class Player;
     friend class XML_scanner;
 private:
@@ -30,6 +33,14 @@ private:
     std::string db_access_path;
     // The map stores players sorted by nickname
     std::map<std::string, Player> users;
+
+    // adds a player to the database
+    void add_player(const Player &player);
+
+    // updates the player's state in the database with the real state
+    void update_player(const Player &player);
+
+    XML_scanner scanner;
 
 public:
     // The constructor takes the path to the xml file as an argument and loads the database from it
@@ -44,15 +55,6 @@ public:
 
     // It generates a ranking of players by sorting in terms of the indicated feature and in the designated order
     std::vector<Player> generate_ranking(Sort_by key, Order order_type);
-
-private:
-    // adds a player to the database
-    void add_player(const Player &player);
-
-    // updates the player's state in the database with the real state
-    void update_player(const Player &player);
-
-    XML_scanner scanner;
 };
 
 #endif

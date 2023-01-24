@@ -42,7 +42,9 @@ void XML_scanner::read_database(const string access_path, map<string, Player> &u
             for(string::size_type i = 0; i < line.size(); i++)
             {
                 if(isspace(line[i]))
+				{
                     continue;
+				}
 
                 if(line[i] == '<')
                 {
@@ -51,6 +53,7 @@ void XML_scanner::read_database(const string access_path, map<string, Player> &u
                         command += line[i];
                         i++;
                     }
+
                     command += line[i];
 
                     auto it = element.find(command);
@@ -59,34 +62,36 @@ void XML_scanner::read_database(const string access_path, map<string, Player> &u
                     {
                         switch(it->second)
                         {
-                            case 1:
-                                users[player.nickname] = player;
-                                break;
-                            case 2:
-                               player.nickname = text;
-                                break;
-                            case 3:
-                                player.password = text;
-                                break;
-                            case 4:
-                                player.wins = stoi(text);
-                                break;
-                            case 5:
-                                player.draws = stoi(text);
-                                break;
-                            case 6:
-                                player.loses = stoi(text);
-                                break;
-                            case 7:
-                                player.points = stoi(text);
-                                break;
+						case 1:
+							users[player.nickname] = player;
+							break;
+						case 2:
+							player.nickname = text;
+							break;
+						case 3:
+							player.password = text;
+							break;
+						case 4:
+							player.wins = stoi(text);
+							break;
+						case 5:
+							player.draws = stoi(text);
+							break;
+						case 6:
+							player.loses = stoi(text);
+							break;
+						case 7:
+							player.points = stoi(text);
+							break;
                         }
                     }
+
                     else
                     {
                         command.clear();
                         text.clear();
                     }
+
                     continue;
                 }
 
@@ -97,9 +102,9 @@ void XML_scanner::read_database(const string access_path, map<string, Player> &u
 
         file.close();
     }
+
     else cerr << "Unable to open database\n";
 }
-
 
 void XML_scanner::write_database(std::string access_path,const map<string, Player> &users)
 {
@@ -108,8 +113,10 @@ void XML_scanner::write_database(std::string access_path,const map<string, Playe
     if(file.is_open())
     {
         int index = 1;
+
         file << prolog;
         file << "\n<Quarto users=\"" << users.size() << "\">\n";
+
         for(auto it : users)
         {
             file<< "    <player id=\""  << index            << "\">\n"
@@ -120,11 +127,13 @@ void XML_scanner::write_database(std::string access_path,const map<string, Playe
                 << "        <loses>"    << it.second.loses     << "</loses>\n"
                 << "        <points>"   << it.second.points    << "</points>\n"
                 << "    </player>\n";
-            ++index;
+            index++;
         }
+
         file << "</Quarto>\n";
 
         file.close();
     }
+
     else cerr << "Unable to open database\n";
 }

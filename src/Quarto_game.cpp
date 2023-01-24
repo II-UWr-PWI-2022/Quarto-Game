@@ -1,9 +1,9 @@
 #include "Quarto_game.h"
 
 /*
-Constructor. It takes as an argument a bool variable.
-If the value of argument is true, the game is played in
-hard mode, if it is false - in easy mode.
+	Constructor. It takes as an argument a bool variable.
+	If the value of argument is true, the game is played in
+	hard mode, if it is false - in easy mode.
 */
 Quarto_game::Quarto_game(bool game_difficulty_level)
     : DIFFICULTY_LEVEL(game_difficulty_level)
@@ -18,20 +18,19 @@ Quarto_game::Quarto_game(bool game_difficulty_level)
 }
 
 /*
-Search for type of piece defined by its number in table of pieces in
-Quarto game object. Then this value is assigned to the field in the
-board specified by row and column number.
+	Search for type of piece defined by its number in table of pieces in
+	Quarto game object. Then this value is assigned to the field in the
+	board specified by row and column number.
 */
 void Quarto_game::put_piece_on_board(int row, int column, int piece_number)
 {
     board[row][column] = pieces[piece_number].get_piece_type();
-    //pieces[piece_number].set_piece_as_used();
 
     number_of_used_pieces++;
 }
 
 /*
-Sets the value of active player to the opposite.
+	Sets the value of active player to the opposite.
 */
 void Quarto_game::change_player()
 {
@@ -39,10 +38,10 @@ void Quarto_game::change_player()
 }
 
 /*
-Checks, in easy mode, by using bit operations if after last move
-are there four pieces on appropriate fields, which have the same
-value of at least one characteristic. If yes, it sets the winning
-pattern and returns true, it not - it returns false.
+	Checks, in easy mode, by using bit operations if after last move
+	are there four pieces on appropriate fields, which have the same
+	value of at least one characteristic. If yes, it sets the winning
+	pattern and returns true, it not - it returns false.
 */
 bool Quarto_game::is_game_finished_in_easy_version(int row, int column)
 {
@@ -98,10 +97,10 @@ bool Quarto_game::is_game_finished_in_easy_version(int row, int column)
 }
 
 /*
-Checks, in hard mode, by using bit operations if after last move
-are there four pieces on appropriate fields, which have the same
-value of at least one characteristic. If yes, it sets the winning
-pattern and returns true, it not - it returns false.
+	Checks, in hard mode, by using bit operations if after last move
+	are there four pieces on appropriate fields, which have the same
+	value of at least one characteristic. If yes, it sets the winning
+	pattern and returns true, it not - it returns false.
 */
 bool Quarto_game::is_game_finished_in_hard_version(int row, int column)
 {
@@ -169,14 +168,15 @@ bool Quarto_game::is_game_finished_in_hard_version(int row, int column)
 }
 
 /*
-Puts piece on board, then checks if there are any winning pattern and game is finished,
-if yes it returns different value depending on the player making the last move, if not
-it checks how many pieces have been used and if there is draw, if not it changes the
-active user and returns 0.
+	Puts piece on board, then checks if there are any winning pattern and game is finished,
+	if yes it returns different value depending on the player making the last move, if not
+	it checks how many pieces have been used and if there is draw, if not it changes the
+	active user and returns 0.
 */
 int Quarto_game::make_move(int row, int column, int piece_number)
 {
     put_piece_on_board(row,column,piece_number);
+
     bool is_finished;
     int result = 0;
 
@@ -217,8 +217,8 @@ int Quarto_game::make_move(int row, int column, int piece_number)
 }
 
 /*
-Checks if particular piece from table of pieces in
-Quarto game object has been used.
+	Checks if particular piece from table of pieces in
+	Quarto game object has been used.
 */
 bool Quarto_game::is_piece_used(int number_of_piece)
 {
@@ -226,7 +226,7 @@ bool Quarto_game::is_piece_used(int number_of_piece)
 }
 
 /*
-Checks if particular field on board is free.
+	Checks if particular field on board is free.
 */
 bool Quarto_game::is_board_field_free(int row, int column)
 {
@@ -242,8 +242,8 @@ bool Quarto_game::is_board_field_free(int row, int column)
 }
 
 /*
-Checks if on particular field of board is located
-one of pieces forming a winning pattern.
+	Checks if on particular field of board is located
+	one of pieces forming a winning pattern.
 */
 bool Quarto_game::get_winning_pattern_field(int row, int column)
 {
@@ -251,8 +251,8 @@ bool Quarto_game::get_winning_pattern_field(int row, int column)
 }
 
 /*
-Returns the type of piece defined by its index number
-in table of pieces in Quarto game object.
+	Returns the type of piece defined by its index number
+	in table of pieces in Quarto game object.
 */
 int Quarto_game::get_piece_type(int number_of_piece)
 {
@@ -260,8 +260,8 @@ int Quarto_game::get_piece_type(int number_of_piece)
 }
 
 /*
-Returns true when player B is active and false when it is player A.
-Active player is the one making move.
+	Returns true when player B is active and false when it is player A.
+	Active player is the one making move.
 */
 bool Quarto_game::get_player_active()
 {
@@ -269,8 +269,8 @@ bool Quarto_game::get_player_active()
 }
 
 /*
-Returns the value of piece which is located on the board
-field specified by row and column number.
+	Returns the value of piece which is located on the board
+	field specified by row and column number.
 */
 int Quarto_game::get_piece_type_from_board_field(int row, int column)
 {
@@ -278,8 +278,8 @@ int Quarto_game::get_piece_type_from_board_field(int row, int column)
 }
 
 /*
-Returns the number of index in table of pieces in Quarto game
-object for piece defined by its type.
+	Returns the number of index in table of pieces in Quarto game
+	object for piece defined by its type.
 */
 int Quarto_game::find_piece_number(int type_of_piece)
 {

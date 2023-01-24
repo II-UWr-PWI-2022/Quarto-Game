@@ -7,7 +7,6 @@
 
 using namespace std;
 
-
 DB_manager::DB_manager(const string access_path) : db_access_path(access_path)
 {
     scanner.read_database(access_path, users);
@@ -30,6 +29,7 @@ pair<bool, Player> DB_manager::search_nickname(string nickname)
 vector<Player> DB_manager::generate_ranking(Sort_by key, Order order_type)
 {
     vector<Player> tmp;
+
     for(auto it : users)
     {
         tmp.push_back(it.second);
@@ -38,30 +38,58 @@ vector<Player> DB_manager::generate_ranking(Sort_by key, Order order_type)
     if(order_type == Order::ascending)
     {
         if(key == Sort_by::nickname)
-            sort(tmp.begin(), tmp.end(), [](const Player &p1, const Player &p2){ return p1.nickname < p2.nickname;});
-        else if(key == Sort_by::points)
-            sort(tmp.begin(), tmp.end(), [](const Player &p1, const Player &p2){ return p1.points < p2.points;});
-        else if(key == Sort_by::wins)
-            sort(tmp.begin(), tmp.end(), [](const Player &p1, const Player &p2){ return p1.wins < p2.wins;});
-        else if(key == Sort_by::draws)
-            sort(tmp.begin(), tmp.end(), [](const Player &p1, const Player &p2){ return p1.draws < p2.draws;});
-        else if(key == Sort_by::loses)
-            sort(tmp.begin(), tmp.end(), [](const Player &p1, const Player &p2){ return p1.loses < p2.loses;});
+		{
+            sort(tmp.begin(), tmp.end(), [](const Player &p1, const Player &p2) { return p1.nickname < p2.nickname;} );
+        }
 
+		else if(key == Sort_by::points)
+		{
+			sort(tmp.begin(), tmp.end(), [](const Player &p1, const Player &p2) { return p1.points < p2.points;} );
+        }
+
+		else if(key == Sort_by::wins)
+        {
+			sort(tmp.begin(), tmp.end(), [](const Player &p1, const Player &p2) { return p1.wins < p2.wins;} );
+        }
+
+		else if(key == Sort_by::draws)
+		{
+            sort(tmp.begin(), tmp.end(), [](const Player &p1, const Player &p2) { return p1.draws < p2.draws;} );
+        }
+
+		else if(key == Sort_by::loses)
+		{
+			sort(tmp.begin(), tmp.end(), [](const Player &p1, const Player &p2) { return p1.loses < p2.loses;} );
+		}
     }
+
     else
     {
         if(key == Sort_by::nickname)
-            sort(tmp.begin(), tmp.end(), [](const Player &p1, const Player &p2){ return p1.nickname > p2.nickname;});
-        else if(key == Sort_by::points)
-            sort(tmp.begin(), tmp.end(), [](const Player &p1, const Player &p2){ return p1.points > p2.points;});
-        else if(key == Sort_by::wins)
-            sort(tmp.begin(), tmp.end(), [](const Player &p1, const Player &p2){ return p1.wins > p2.wins;});
-        else if(key == Sort_by::draws)
-            sort(tmp.begin(), tmp.end(), [](const Player &p1, const Player &p2){ return p1.draws > p2.draws;});
-        else if(key == Sort_by::loses)
-            sort(tmp.begin(), tmp.end(), [](const Player &p1, const Player &p2){ return p1.loses > p2.loses;});
-    }
+		{
+            sort(tmp.begin(), tmp.end(), [](const Player &p1, const Player &p2) { return p1.nickname > p2.nickname;} );
+        }
+
+		else if(key == Sort_by::points)
+		{
+			sort(tmp.begin(), tmp.end(), [](const Player &p1, const Player &p2) { return p1.points > p2.points;} );
+        }
+
+		else if(key == Sort_by::wins)
+        {
+			sort(tmp.begin(), tmp.end(), [](const Player &p1, const Player &p2) { return p1.wins > p2.wins;} );
+        }
+
+		else if(key == Sort_by::draws)
+		{
+            sort(tmp.begin(), tmp.end(), [](const Player &p1, const Player &p2) { return p1.draws > p2.draws;} );
+        }
+
+		else if(key == Sort_by::loses)
+		{
+			sort(tmp.begin(), tmp.end(), [](const Player &p1, const Player &p2) { return p1.loses > p2.loses;} );
+    	}
+	}
 
     return tmp;
 }

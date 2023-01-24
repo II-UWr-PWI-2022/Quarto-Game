@@ -6,7 +6,8 @@
 
 class Player;
 
-class XML_scanner{
+class XML_scanner
+{
 public:
     // function that reads data from an xml file and saves it to the map<string, Player>
     void read_database(std::string access_path, std::map<std::string,Player> &users);

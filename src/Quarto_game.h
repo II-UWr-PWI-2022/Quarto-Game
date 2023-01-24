@@ -6,6 +6,7 @@
 
 class Quarto_game
 {
+private:
 	vector <vector <int>> board = vector <vector <int>> (MAX_N, vector <int> (MAX_N, EMPTY_FIELD));
     vector <Piece> pieces = vector <Piece> (MAX_NUMBER_OF_PIECES);
 

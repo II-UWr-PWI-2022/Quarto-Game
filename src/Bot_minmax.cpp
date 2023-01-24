@@ -288,7 +288,6 @@ void Bot_Minmax::last_move()
 	}
 }
 
-
 /*
 	Returns a piece that bot wants to give to the opponent
 */

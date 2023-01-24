@@ -9,20 +9,22 @@
 #include "Player.h"
 #include "DB_manager.h"
 #include <time.h>
-// #include "Bot_template.h"
 
 class Console_user_interface
 {
+private:
     vector <vector <string>> board = vector <vector <string>> (MAX_N, vector <string> (MAX_N));
 
     /*
-    Marks are used to show the winning pattern on the board,
-    they consists of lines displayed over and under the
-    piece symbol. Lines consists of dashes. If piece is not in winning pattern
-    or field is empty, spaces are displayed instead of dashes - marks are invisible.
+		Marks are used to show the winning pattern on the board,
+		they consists of lines displayed over and under the
+		piece symbol. Lines consists of dashes. If piece is not in winning pattern
+		or field is empty, spaces are displayed instead of dashes - marks are invisible.
     */
+
     vector <vector <string>> marks = vector <vector <string>> (MAX_N, vector <string> (MAX_N));
     vector <string> free_pieces = vector <string> (MAX_NUMBER_OF_PIECES);
+
     Quarto_game* game;
 
 	/*

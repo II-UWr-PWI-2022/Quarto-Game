@@ -5,6 +5,7 @@
 
 class Piece
 {
+private:
     int type;
     bool is_already_used;
 
