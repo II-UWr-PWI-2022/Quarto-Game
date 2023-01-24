@@ -33,11 +33,11 @@ private:
 
 public:
     // The constructor takes the path to the xml file as an argument and loads the database from it
-    DB_manager(std::string access_path);
-    
+    DB_manager(const std::string access_path);
+
     // The destructor saves the database to an xml file
     ~DB_manager();
-    
+
     // Searches for a player in the database by given nickname. Returns Pair<True/False, Player>
     // Depending on the success of the search operation
     std::pair<bool, Player> search_nickname(std::string _nick_name);
@@ -51,7 +51,7 @@ private:
 
     // updates the player's state in the database with the real state
     void update_player(const Player &player);
-    
+
     XML_scanner scanner;
 };
 

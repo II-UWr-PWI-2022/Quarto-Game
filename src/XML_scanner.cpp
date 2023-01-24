@@ -23,23 +23,23 @@ static const map<string, int> element  = {
     {"</Quarto>", 8}
 };
 
-void XML_scanner::read_database(string access_path, map<string, Player> &users)
+void XML_scanner::read_database(const string access_path, map<string, Player> &users)
 {
     ifstream file(access_path, ios::in);
-    
+
     if(file.is_open())
     {
         string line;
         getline(file, line);
 
         Player player;
-        
+
         while(getline(file, line))
         {
             string command;
             string text;
 
-            for(string::size_type i = 0; i < line.size(); ++i)
+            for(string::size_type i = 0; i < line.size(); i++)
             {
                 if(isspace(line[i]))
                     continue;
@@ -49,12 +49,12 @@ void XML_scanner::read_database(string access_path, map<string, Player> &users)
                     while(line[i] != '>')
                     {
                         command += line[i];
-                        ++i;
+                        i++;
                     }
                     command += line[i];
 
                     auto it = element.find(command);
-    
+
                     if(it != element.end())
                     {
                         switch(it->second)

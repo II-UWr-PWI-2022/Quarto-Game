@@ -8,10 +8,10 @@
 using namespace std;
 
 
-DB_manager::DB_manager(string access_path) : db_access_path(access_path)
+DB_manager::DB_manager(const string access_path) : db_access_path(access_path)
 {
     scanner.read_database(access_path, users);
-} 
+}
 
 DB_manager::~DB_manager()
 {
@@ -47,7 +47,7 @@ vector<Player> DB_manager::generate_ranking(Sort_by key, Order order_type)
             sort(tmp.begin(), tmp.end(), [](const Player &p1, const Player &p2){ return p1.draws < p2.draws;});
         else if(key == Sort_by::loses)
             sort(tmp.begin(), tmp.end(), [](const Player &p1, const Player &p2){ return p1.loses < p2.loses;});
-        
+
     }
     else
     {

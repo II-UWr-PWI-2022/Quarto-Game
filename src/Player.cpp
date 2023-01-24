@@ -196,7 +196,7 @@ bool Player::validate_nickname(string _nickname)
     if(_nickname.size() < NICKNAME_MIN_LENGTH || _nickname.size() > NICKNAME_MAX_LENGTH)
         return false;
 
-    for(string::size_type i = 0; i < _nickname.size(); ++i)
+    for(string::size_type i = 0; i < _nickname.size(); i++)
     {
         if(!isprint(_nickname[i]) || _nickname[i] == '@' || _nickname[i] == '<' || _nickname[i] == '>')
             return false;
@@ -218,7 +218,7 @@ bool Player::validate_password(string _password)
     bool upper = false;
     bool digit = false;
 
-   for(string::size_type i = 0; i < _password.size(); ++i)
+   for(string::size_type i = 0; i < _password.size(); i++)
    {
         if(isdigit(_password[i]))
             digit = true;

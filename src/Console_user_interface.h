@@ -47,10 +47,12 @@ class Console_user_interface
     DB_manager db_manager;
     Player user;
 
+	const string PATH = "../db/users.xml";
+
     char get_single_character();
     char select_from_main_menu();   // dodanie rekordu 3
     char select_from_player_menu(char player);  //
-    void start_game(bool game_difficulty_level);    // Rozgrywka 
+    void start_game(bool game_difficulty_level);    // Rozgrywka
     void clear_marks();
     void update_marks();
     string create_piece_symbol(int type);

@@ -3,16 +3,19 @@
 Console_user_interface::Console_user_interface() : db_manager("../db/users.xml"), user(db_manager)
 {
     game = NULL;
+
     bot_random_1 = NULL;
     bot_random_2 = NULL;
+
     bot_minmax_1 = NULL;
     bot_minmax_2 = NULL;
+
     bot_superior_1 = NULL;
     bot_superior_2 = NULL;
 }
 
 /*
-Asks user for input till get a single character, then returns it.
+	Asks user for input till get a single character, then returns it.
 */
 char Console_user_interface::get_single_character()
 {
@@ -37,7 +40,7 @@ char Console_user_interface::get_single_character()
 }
 
 /*
-Displays main menu and ask for choice, then returns the choice.
+	Displays main menu and ask for choice, then returns the choice.
 */
 char Console_user_interface::select_from_main_menu()
 {
@@ -47,9 +50,13 @@ char Console_user_interface::select_from_main_menu()
 
     cout << " >>> QUARTO GAME <<<" << "\n";
     cout << "--------------------------------" << "\n";
+
     if(user.is_logged())
+	{
         cout << "Logged >> " << user.nickname << " << points: "<< user.points << " <--\n";
-    else 
+	}
+
+	else
     {
         cout << "Current number of points: " << user.points << "\n";
         cout << "Remember you must be logged in to save your score\n";
@@ -70,7 +77,7 @@ char Console_user_interface::select_from_main_menu()
 }
 
 /*
-Displays player menu and ask for choice, then returns the choice.
+	Displays player menu and ask for choice, then returns the choice.
 */
 char Console_user_interface::select_from_player_menu(char player)
 {
@@ -95,22 +102,25 @@ char Console_user_interface::select_from_player_menu(char player)
 }
 
 /*
-Starts the game in different mode depending on given argument.
-Calls in loop the method responsible for making moves in game object.
-Displays result of the game depending on the value
-returned from last call of make move method.
-After that calls for method displaying main menu.
+	Starts the game in different mode depending on given argument.
+	Calls in loop the method responsible for making moves in game object.
+	Displays result of the game depending on the value
+	returned from last call of make move method.
+	After that calls for method displaying main menu.
 */
 void Console_user_interface::start_game(bool game_difficulty_level)
 {
     game = new Quarto_game(game_difficulty_level);
+
     bot_random_1 = new Bot_Random();
     bot_random_2 = new Bot_Random();
 	bot_minmax_1 = new Bot_Minmax();
 	bot_minmax_2 = new Bot_Minmax();
 	bot_superior_1 = new Bot_Superior();
 	bot_superior_2 = new Bot_Superior();
+
     srand(time(NULL));
+
     clear_marks();
 
     int result;
@@ -152,6 +162,7 @@ void Console_user_interface::start_game(bool game_difficulty_level)
     delete bot_minmax_2;
     delete bot_superior_1;
     delete bot_superior_2;
+
     game = NULL;
     bot_random_1 = NULL;
     bot_random_2 = NULL;
@@ -169,8 +180,8 @@ void Console_user_interface::start_game(bool game_difficulty_level)
 }
 
 /*
-Sets marks as invisible for every field of displayed board
-(see mark description in class declaration).
+	Sets marks as invisible for every field of displayed board
+	(see mark description in class declaration).
 */
 void Console_user_interface::clear_marks()
 {
@@ -184,8 +195,8 @@ void Console_user_interface::clear_marks()
 }
 
 /*
-Sets dashes instead spaces for every field of board corresponding to winner
-pattern - makes marks visible for these fields.
+	Sets dashes instead spaces for every field of board corresponding to winner
+	pattern - makes marks visible for these fields.
 */
 void Console_user_interface::update_marks()
 {
@@ -199,7 +210,7 @@ void Console_user_interface::update_marks()
 }
 
 /*
-Sets piece symbol using bit operations on type value given as an argument.
+	Sets piece symbol using bit operations on type value given as an argument.
 */
 string Console_user_interface::create_piece_symbol(int type)
 {
@@ -249,8 +260,8 @@ string Console_user_interface::create_piece_symbol(int type)
 }
 
 /*
-Goes through the board of game object and sets piece types in
-board of console interface object.
+	Goes through the board of game object and sets piece types in
+	board of console interface object.
 */
 void Console_user_interface::update_board()
 {
@@ -276,7 +287,7 @@ void Console_user_interface::update_board()
 }
 
 /*
-Displays the board.
+	Displays the board.
 */
 void Console_user_interface::display_the_board()
 {
@@ -306,8 +317,8 @@ void Console_user_interface::display_the_board()
 }
 
 /*
-Returns actual piece symbol for piece from pieces table in game object
-for free pieces or dashes for used pieces.
+	Returns actual piece symbol for piece from pieces table in game object
+	for free pieces or dashes for used pieces.
 */
 string Console_user_interface::create_symbol_of_free_piece(int number_of_piece)
 {
@@ -327,8 +338,8 @@ string Console_user_interface::create_symbol_of_free_piece(int number_of_piece)
 }
 
 /*
-Goes through the table of pieces in game object and sets dashes
-instead of actual symbol in free pieces symbols table for all used pieces.
+	Goes through the table of pieces in game object and sets dashes
+	instead of actual symbol in free pieces symbols table for all used pieces.
 */
 void Console_user_interface::update_free_pieces()
 {
@@ -339,12 +350,13 @@ void Console_user_interface::update_free_pieces()
 }
 
 /*
-Display table of free pieces. The location of piece symbol in this table
-is always the same. ifpiece is used, dashes are displayed instead of piece symbol.
+	Display table of free pieces. The location of piece symbol in this table
+	is always the same. ifpiece is used, dashes are displayed instead of piece symbol.
 */
 void Console_user_interface::display_free_pieces()
 {
     update_free_pieces();
+
     cout << "\n";
     cout << "                  FREE PIECES               " << "\n";
     cout << "   -----------------------------------------" << "\n";
@@ -355,7 +367,7 @@ void Console_user_interface::display_free_pieces()
 }
 
 /*
-Asks user for piece symbol till the format is correct.
+	Asks user for piece symbol till the format is correct.
 */
 string Console_user_interface::get_piece_symbol_from_user()
 {
@@ -365,23 +377,21 @@ string Console_user_interface::get_piece_symbol_from_user()
     {
         getline(cin, input);
 
-        if(input.length() == MAX_N
-            && (input[0] == 'D' || input[0] == 'L')
-            && (input[1] == 'R' || input[1] == 'S')
-            && (input[2] == 'T' || input[2] == 'S')
-            && (input[3] == 'S' || input[3] == 'H'))
+        if(input.length() == MAX_N && (input[0] == 'D' || input[0] == 'L') && (input[1] == 'R' || input[1] == 'S')
+            && (input[2] == 'T' || input[2] == 'S') && (input[3] == 'S' || input[3] == 'H'))
         {
             break;
         }
 
         cout << "There is no such a symbol. Use the four-letter symbol according to the above table of free pieces. Type again:" << "\n";
     }
+
     return input;
 }
 
 /*
-Calculates piece type using bit operations for
-piece symbol received from user.
+	Calculates piece type using bit operations for
+	piece symbol received from user.
 */
 int Console_user_interface::change_piece_symbol_to_type(string symbol)
 {
@@ -396,8 +406,8 @@ int Console_user_interface::change_piece_symbol_to_type(string symbol)
 }
 
 /*
-Returns index number in pieces table of game object
-corresponding to piece symbol.
+	Returns index number in pieces table of game object
+	corresponding to piece symbol.
 */
 int Console_user_interface::find_piece_number(string symbol)
 {
@@ -411,9 +421,9 @@ int Console_user_interface::find_piece_number(string symbol)
 }
 
 /*
-Asks users for all arguments of make move method of game
-object and checks the correctness of the entered data.
-Then calls the method with arguments received from used.
+	Asks users for all arguments of make move method of game
+	object and checks the correctness of the entered data.
+	Then calls the method with arguments received from used.
 */
 int Console_user_interface::make_move()
 {
@@ -491,6 +501,7 @@ int Console_user_interface::make_move()
 	else
 	{
 		wait(500);
+
 		if(!is_player_2)
 		{
 			switch(index_player_B)
@@ -532,6 +543,7 @@ int Console_user_interface::make_move()
 				break;
 			}
 		}
+
 		symbol = create_piece_symbol(game->get_piece_type(piece_number));
 		cout << symbol << "\n";
 	}
@@ -613,6 +625,7 @@ int Console_user_interface::make_move()
 	else
 	{
 		wait(1000);
+
 		pair <int, int> field;
 
 		if(is_player_2)
@@ -688,42 +701,48 @@ void Console_user_interface::display_main_menu()
 
         switch (choice)
         {
-            case '0':
-                account_settings();
-                break;
-            case '1':
-                display_ranking();
-                break;
-            case '2':
-			    index_player_A = display_player_menu('A');
-			    index_player_B = display_player_menu('B');
+		case '0':
+			account_settings();
 
-                start_game(0);
-                break;
-            case '3':
-			    index_player_A = display_player_menu('A');
-			    index_player_B = display_player_menu('B');
+			break;
+		case '1':
+			display_ranking();
 
-                start_game(1);
-                break;
-            case '4':
-                this->~Console_user_interface();
-                exit(0);
-                break;
-            default:
-                cout << "\n" << "There is no such option in the menu." << "\n\n";
-                cout << "Press enter to go back to try again..." << "\n";
+			break;
+		case '2':
+			index_player_A = display_player_menu('A');
+			index_player_B = display_player_menu('B');
 
-                string choice = "";
-                getline(cin, choice);
-                break;
+			start_game(0);
+
+			break;
+		case '3':
+			index_player_A = display_player_menu('A');
+			index_player_B = display_player_menu('B');
+
+			start_game(1);
+
+			break;
+		case '4':
+			this->~Console_user_interface();
+
+			exit(0);
+
+			break;
+		default:
+			cout << "\n" << "There is no such option in the menu." << "\n\n";
+			cout << "Press enter to go back to try again..." << "\n";
+
+			string choice = "";
+			getline(cin, choice);
+
+			break;
         }
     }
 }
 
 /*
-Displays player menu. Depending on the user's choice, it will start the game against a human or bot with a given ID in the chosen game mode or close the program
-TODO: poprawic
+	Displays player menu. Depending on the user's choice, it will start the game against a human or bot with a given ID in the chosen game mode or close the program
 */
 int Console_user_interface::display_player_menu(char player)
 {
@@ -738,6 +757,7 @@ int Console_user_interface::display_player_menu(char player)
 			if(choice == '5')
 			{
                 this->~Console_user_interface();
+
 				exit(0);
 			}
 
@@ -755,45 +775,55 @@ int Console_user_interface::display_player_menu(char player)
     }
 }
 
-
 void Console_user_interface::assign_points(int game_status)
 {
     if(index_player_A == 0 && index_player_B != 0)
-    {   
+    {
         switch(game_status)
         {
-            case 1:
-                user.play_match(static_cast<Opponent>(index_player_B), Game_status::win);
-                break;
-            case 2:
-                user.play_match(static_cast<Opponent>(index_player_B), Game_status::lose);
-                break;
-            case 3:
-                user.play_match(static_cast<Opponent>(index_player_B), Game_status::draw);
-                break;
+		case 1:
+			user.play_match(static_cast<Opponent>(index_player_B), Game_status::win);
+
+			break;
+		case 2:
+			user.play_match(static_cast<Opponent>(index_player_B), Game_status::lose);
+
+			break;
+		case 3:
+			user.play_match(static_cast<Opponent>(index_player_B), Game_status::draw);
+
+			break;
+		default:
+			break;
         }
     }
+
     else if(index_player_B == 0 && index_player_A != 0)
     {
         switch(game_status)
         {
-            case 1:
-                user.play_match(static_cast<Opponent>(index_player_B), Game_status::lose);
-                break;
-            case 2:
-                user.play_match(static_cast<Opponent>(index_player_B), Game_status::win);
-                break;
-            case 3:
-                user.play_match(static_cast<Opponent>(index_player_B), Game_status::draw);
-                break;
+		case 1:
+			user.play_match(static_cast<Opponent>(index_player_B), Game_status::lose);
+
+			break;
+		case 2:
+			user.play_match(static_cast<Opponent>(index_player_B), Game_status::win);
+
+			break;
+		case 3:
+			user.play_match(static_cast<Opponent>(index_player_B), Game_status::draw);
+
+			break;
+		default:
+			break;
         }
     }
 }
 
-
 void Console_user_interface::account_settings()
 {
     char choice;
+
     while(true)
     {
         clear_console();
@@ -813,59 +843,73 @@ void Console_user_interface::account_settings()
 
         switch(choice)
         {
-            case '1':
-                user.print_statistics();
-                break;
-            case '2':
-            {
-                string nickname, password;
-                cout << "Enter nickname : ";
-                getline(cin, nickname);
-                cout << "Enter password : ";
-                getline(cin, password);
-                if( user.log_in(nickname, password))
-                    cout << "Player logged in successfully\n";
-                // else
-                //     cout << "Player login failen";
-                break;
-            }
-            case '3':
-            {
-                if(user.log_out())
-                    cout << "Successful player logout\n";
-                else
-                    cout << "Player logout failed\n";
-                break;
-            }
+		case '1':
+			user.print_statistics();
 
-            case '4':
-            {
-                string nickname, password;
-                cout << "Enter nickname : ";
-                getline(cin, nickname);
-                cout << "Enter password : ";
-                getline(cin, password);
-                if( user.create_accout(nickname, password))
-                    cout << "Player account created successfully\n";
+			break;
+		case '2':
+		{
+			string nickname, password;
 
-                break;
-            }
+			cout << "Enter nickname : ";
+			getline(cin, nickname);
+			cout << "Enter password : ";
+			getline(cin, password);
 
-            case '5':
-                return;
+			if(user.log_in(nickname, password))
+			{
+				cout << "Player logged in successfully\n";
+			}
 
-            default:
-                cout << "Command not recognized, please try again\n";
-                break;
+			break;
+		}
+
+		case '3':
+		{
+			if(user.log_out())
+			{
+				cout << "Successful player logout\n";
+			}
+
+			else
+			{
+				cout << "Player logout failed\n";
+			}
+
+			break;
+		}
+
+		case '4':
+		{
+			string nickname, password;
+
+			cout << "Enter nickname : ";
+			getline(cin, nickname);
+			cout << "Enter password : ";
+			getline(cin, password);
+
+			if(user.create_accout(nickname, password))
+			{
+				cout << "Player account created successfully\n";
+			}
+
+			break;
+		}
+
+		case '5':
+			return;
+		default:
+			cout << "Command not recognized, please try again\n";
+
+			break;
         }
 
         cout << "Press enter to continue..." << "\n";
+
         string text;
         getline(cin,text);
-
     }
 }
-
 
 #define NUMBER_OF_PLAYERS_GENERATED_BY_DB 20
 
@@ -874,12 +918,18 @@ void Console_user_interface::display_ranking()
     while(true)
     {
         clear_console();
+
         cout << "Generating ranking... Enter 2 parameters\n";
-        char sort_type, order_type;
-        cout << "Sort by: nickname--> 1 | wins--> 2 | draws--> 3 | loses--> 4 | points--> 5 : ";
+
+	    char sort_type, order_type;
+
+	    cout << "Sort by: nickname--> 1 | wins--> 2 | draws--> 3 | loses--> 4 | points--> 5 : ";
+
         sort_type = get_single_character();
-        cout << "Order: ascending--> 1 | descending--> 2 : ";
-        order_type = get_single_character();
+
+		cout << "Order: ascending--> 1 | descending--> 2 : ";
+
+		order_type = get_single_character();
 
         if(sort_type < '1' || sort_type > '5' || order_type < '1' || order_type > '2')
         {
@@ -888,32 +938,42 @@ void Console_user_interface::display_ranking()
 
             string choice = "";
             getline(cin, choice);
+
             continue;
         }
 
         auto ranking = db_manager.generate_ranking(static_cast<Sort_by>(sort_type - '0'), static_cast<Order>(order_type - '0'));
+
         if(ranking.empty())
         {
             cout << "Ups: no players found in the database\n";
             cout << "Press enter to go back to try again..." << "\n";
+
             string text;
             getline(cin,text);
+
             return;
         }
+
         cout << " _________________________________________________________________________\n";
         cout << "|       NICKNAME:       |  WINS:  |  DRAWS:  |    LOSES:    |   POINTS:   |\n";
         cout << " =========================================================================\n";
-        for(vector<Player>::size_type i = 0; i < ranking.size() && i < NUMBER_OF_PLAYERS_GENERATED_BY_DB; ++i)
+
+        for(vector<Player>::size_type i = 0; i < ranking.size() && i < NUMBER_OF_PLAYERS_GENERATED_BY_DB; i++)
         {
-            cout<< "|" << (i+1) << "."<< setw(20) << ranking[i].nickname << " | " << setw(7)<< ranking[i].wins << " | " 
+            cout << "|" << (i+1) << "."<< setw(20) << ranking[i].nickname << " | " << setw(7)<< ranking[i].wins << " | "
                 << setw(8) << ranking[i].draws << " | " << setw(12) << ranking[i].loses << " | " << setw(12) << ranking[i].points << "|\n";
         }
+
         cout << " =========================================================================\n";
         cout << "To quit enter q | To generate a ranking for other parameters, press any other button : ";
+
         string choice;
         getline(cin,choice);
-        if(choice[0] == 'q')
-            break;
-    }
 
+        if(choice[0] == 'q')
+		{
+            break;
+	    }
+	}
 }
