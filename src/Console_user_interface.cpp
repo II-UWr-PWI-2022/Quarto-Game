@@ -883,8 +883,10 @@ void Console_user_interface::account_settings()
 		{
 			string nickname, password;
 
+			cout << "Nickname must contain printable characters and cannot contain '<', '>', '@'\n";
 			cout << "Enter nickname : ";
 			getline(cin, nickname);
+			cout << "The password should consist of at least 8 characters, uppercase, lowercase and digit\n";
 			cout << "Enter password : ";
 			getline(cin, password);
 
@@ -911,7 +913,7 @@ void Console_user_interface::account_settings()
     }
 }
 
-#define NUMBER_OF_PLAYERS_GENERATED_BY_DB 20
+// #define NUMBER_OF_PLAYERS_GENERATED_BY_DB 20
 
 void Console_user_interface::display_ranking()
 {
@@ -959,7 +961,7 @@ void Console_user_interface::display_ranking()
         cout << "|       NICKNAME:       |  WINS:  |  DRAWS:  |    LOSES:    |   POINTS:   |\n";
         cout << " =========================================================================\n";
 
-        for(vector<Player>::size_type i = 0; i < ranking.size() && i < NUMBER_OF_PLAYERS_GENERATED_BY_DB; i++)
+        for(vector<Player>::size_type i = 0; i < ranking.size() /*&& i < NUMBER_OF_PLAYERS_GENERATED_BY_DB*/; i++)
         {
             cout << "|" << (i+1) << "."<< setw(20) << ranking[i].nickname << " | " << setw(7)<< ranking[i].wins << " | "
                 << setw(8) << ranking[i].draws << " | " << setw(12) << ranking[i].loses << " | " << setw(12) << ranking[i].points << "|\n";
