@@ -5,6 +5,9 @@ bot_2_pts=0
 bot_3_pts=0
 num_of_tests=5
 
+# clear the script log
+echo "" > scriptres.txt
+
 # bots 1 and 2, easy mode
 echo "bots 1 and 2, easy mode" >> scriptres.txt
 for (( i=1; i<=$num_of_tests; i++ ))
@@ -45,9 +48,7 @@ done
 echo "bots 1 and 3, easy mode" >> scriptres.txt
 for (( i=1; i<=$num_of_tests; i++ ))
 do
-	../build/main < easy13 > out.out &
-	ID=$!
-	kill $ID
+	../build/main < easy13 > out.out
 	if grep "Player A wins" out.out; then
 		(( bot_1_pts++ ))
 		echo "bot 1 won" >> scriptres.txt
@@ -62,11 +63,10 @@ do
 done
 
 # bots 1 and 3, hard mode
+echo "bots 1 and 3, hard mode" >> scriptres.txt
 for (( i=1; i<=$num_of_tests; i++ ))
 do
-	../build/main < hard13 > out.out &
-	ID=$!
-	kill $ID
+	../build/main < hard13 > out.out
 	if grep "Player A wins" out.out; then
 		(( bot_1_pts += 3 ))
 		echo "bot 1 won" >> scriptres.txt
@@ -83,9 +83,7 @@ done
 # bots 2 and 3, easy mode
 for (( i=1; i<=$num_of_tests; i++ ))
 do
-	../build/main < easy23 > out.out &
-	ID=$!
-	kill $ID
+	../build/main < easy23 > out.out
 	if grep "Player A wins" out.out; then
 		(( bot_2_pts++ ))
 	fi
@@ -97,9 +95,7 @@ done
 # bots 2 and 3, hard mode
 for (( i=1; i<=$num_of_tests; i++ ))
 do
-	../build/main < hard23 > out.out &
-	ID=$!
-	kill $ID
+	../build/main < hard23 > out.out
 	if grep "Player A wins" out.out; then
 		(( bot_2_pts += 3 ))
 	fi
