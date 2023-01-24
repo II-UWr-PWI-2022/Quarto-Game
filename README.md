@@ -1,6 +1,6 @@
 # Projekt grupowy na PWI - Quarto
 ## Co to za gra?
-Quarto to gra planszowa, w której celem jest ułożenie pionki tej samej cechy w linie o czterech polach lub kwadrat 2 x 2 pola. W grze kładziemy na zmianę szesnaście różnych pionków (na kwadratową planszę 4 x 4) o następującyh cechach:
+Quarto to gra planszowa, w której celem jest ułożenie pionków tej samej cechy w linie o czterech polach lub kwadrat 2 x 2 pola. W grze kładziemy na zmianę szesnaście różnych pionków (na kwadratową planszę 4 x 4) o następującyh cechach:
 
 -Kolor: ciemny lub jasny
 
