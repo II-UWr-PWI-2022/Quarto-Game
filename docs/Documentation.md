@@ -102,3 +102,38 @@ A bot based on min-max algorithm, searching the moves tree deeper than Bot_minma
 ```pair <int, int> get_chosen_board_field()``` - Returns a field where bot wants to place given piece.
 
 ```void analyze_position(Quarto_game* game, int piece)``` - Reads board and game difficulty, and launches minmax function to find the best move.
+
+## Quarto_game
+###class Quarto_game 
+Main game class
+#### private:
+```void put_piece_on_board(int row, int column, int piece_number)``` - Search for type of piece defined by its number in table of pieces in Quarto game object. Then this value is assigned to the field in the board specified by row and column number.
+
+```void change_player()``` - Sets the value of active player to the opposite.
+
+```bool is_game_finished_in_easy_version(int row, int column)``` - Checks, in easy mode, by using bit operations if after last move are there four pieces on appropriate fields, which have the same value of at least one characteristic. If yes, it sets the winning pattern and returns true, it not - it returns false.
+
+```bool is_game_finished_in_hard_version(int row, int column)``` - Puts piece on board, then checks if there are any winning pattern and game is finished, if yes it returns different value depending on the player making the last move, if not it checks how many pieces have been used and if there is draw, if not it changes the active user and returns 0.
+
+#### public:
+```Quarto_game(bool game_difficulty_level)``` - Constructor. It takes as an argument a bool variable. If the value of argument is true, the game is played in hard mode, if it is false - in easy mode.
+
+```int make_move(int row, int column, int piece_number)``` - Puts piece on board, then checks if there are any winning pattern and game is finished, if yes it returns different value depending on the player making the last move, if not it checks how many pieces have been used and if there is draw, if not it changes the active user and returns 0.
+
+```bool is_piece_used(int number_of_piece)``` - Checks if particular piece from table of pieces in Quarto game object has been used.
+
+```bool is_board_field_free(int row, int column)``` - Checks if particular field on board is free.
+
+```bool get_winning_pattern_field(int row, int column)``` - Checks if on particular field of board is located one of pieces forming a winning pattern.
+
+```int get_piece_type(int number_of_piece)``` - Returns the type of piece defined by its index number in table of pieces in Quarto game object.
+
+```bool get_player_active()``` - Returns true when player B is active and false when it is player A. Active player is the one making move.
+
+```int get_piece_type_from_board_field(int row, int column)``` - Returns the value of piece which is located on the board field specified by row and column number.
+
+```int find_piece_number(int type_of_piece)``` - Returns the number of index in table of pieces in Quarto game object for piece defined by its type.
+
+```bool get_game_difficulty_level()``` - Returns bool which contain information about game difficulty.
+
+```void set_piece_as_used(int piece_number)``` - Marks piece as used.
