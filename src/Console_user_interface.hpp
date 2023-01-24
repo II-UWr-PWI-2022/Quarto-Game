@@ -1,13 +1,13 @@
 #ifndef CONSOLE_USER_INTERFACE_H
 #define CONSOLE_USER_INTERFACE_H
 
-#include "Libraries_And_Macros.h"
-#include "Quarto_game.h"
-#include "Bot_random.h"
-#include "Bot_minmax.h"
-#include "Bot_superior.h"
-#include "Player.h"
-#include "DB_manager.h"
+#include "Libraries_and_macros.hpp"
+#include "Quarto_game.hpp"
+#include "Bot_random.hpp"
+#include "Bot_minmax.hpp"
+#include "Bot_superior.hpp"
+#include "Player.hpp"
+#include "DB_manager.hpp"
 #include <time.h>
 
 class Console_user_interface

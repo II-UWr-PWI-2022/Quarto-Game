@@ -1,4 +1,4 @@
-#include "Bot_template.h"
+#include "Bot_template.hpp"
 
 int Bot_Template::get_chosen_piece_type()
 {

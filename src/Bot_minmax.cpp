@@ -1,4 +1,4 @@
-#include "Bot_minmax.h"
+#include "Bot_minmax.hpp"
 
 /*
 	Returns random value from the range of numbers [L, R]

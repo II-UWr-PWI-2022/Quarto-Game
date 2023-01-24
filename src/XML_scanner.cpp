@@ -1,5 +1,5 @@
-#include "XML_scanner.h"
-#include "Player.h"
+#include "XML_scanner.hpp"
+#include "Player.hpp"
 
 #include <iostream>
 #include <string>

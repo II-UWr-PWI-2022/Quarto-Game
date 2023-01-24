@@ -1,5 +1,5 @@
-#include "DB_manager.h"
-#include "Player.h"
+#include "DB_manager.hpp"
+#include "Player.hpp"
 #include <algorithm>
 #include <iostream>
 #include <fstream>

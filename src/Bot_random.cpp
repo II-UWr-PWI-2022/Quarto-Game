@@ -1,4 +1,4 @@
-#include "Bot_random.h"
+#include "Bot_random.hpp"
 
 int Bot_Random::random_int(int L, int R)
 {

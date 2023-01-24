@@ -1,4 +1,4 @@
-#include "Bot_superior.h"
+#include "Bot_superior.hpp"
 
 /*
 	Returns random value from the range of numbers [L, R]

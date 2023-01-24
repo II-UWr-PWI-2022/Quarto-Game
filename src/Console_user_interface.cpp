@@ -1,4 +1,4 @@
-#include "Console_user_interface.h"
+#include "Console_user_interface.hpp"
 
 Console_user_interface::Console_user_interface() : db_manager("../db/users.xml"), user(db_manager)
 {

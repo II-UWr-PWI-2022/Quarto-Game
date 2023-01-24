@@ -1,8 +1,8 @@
 #ifndef QUARTO_GAME_H
 #define QUARTO_GAME_H
 
-#include "Libraries_And_Macros.h"
-#include "Piece.h"
+#include "Libraries_and_macros.hpp"
+#include "Piece.hpp"
 
 class Quarto_game
 {

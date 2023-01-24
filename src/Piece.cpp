@@ -1,4 +1,4 @@
-#include "Piece.h"
+#include "Piece.hpp"
 
 /*
 	Constructor. It takes as an argument an integer from 0 to 15

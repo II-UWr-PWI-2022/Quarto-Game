@@ -1,4 +1,4 @@
-#include "Quarto_game.h"
+#include "Quarto_game.hpp"
 
 /*
 	Constructor. It takes as an argument a bool variable.

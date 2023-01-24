@@ -1,8 +1,8 @@
 #ifndef BOT_MINMAX_H
 #define BOT_MINMAX_H
 
-#include "Libraries_And_Macros.h"
-#include "Quarto_game.h"
+#include "Libraries_and_macros.hpp"
+#include "Quarto_game.hpp"
 
 class Bot_Minmax
 {
