@@ -84,7 +84,7 @@ do
 	if grep "Player A wins" out.out; then
 		(( bot_2_pts += 3 ))
 	fi
-	if grep "Player A wins" out.out; then
+	if grep "Player B wins" out.out; then
 		(( bot_3_pts += 3 ))
 	fi
 done
