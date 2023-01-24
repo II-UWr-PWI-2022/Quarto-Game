@@ -14,7 +14,7 @@ Podczas swojego ruchu gracz musi wskazać pionka, który przeciwnik musi postawi
 
 ## Gra w wersji konsolowej
 W wersji konsolowej gry nie wszystko jest tak czytelne, dlatego poniżej znajduje się instrukcja jak z niej korzystać.
-W celu włączenia gry trzeba uruchomić plik s.sh komendą ```bash s.sh``` po czym wejść w folder build i uruchomić plik main komendą ```./main```. 
+W celu włączenia gry trzeba uruchomić plik s.sh komendą ```bash s.sh``` po czym wejść w folder build i uruchomić plik main komendą ```./main```.
 
 ### Menu
 W menu mamy 5 opcji do wyboru:
@@ -38,3 +38,8 @@ Jak już wybierzemy pasujący nam typ rozgrywki możemy rozpocząć grę, która
 -Wypełnienie H (hollow/pusty w środku) lub S (solid/wypełniony)
 
 np. DRTH Ciemny okrągły wysoki i pusty w środku pionek.
+
+
+# Turniej
+
+Dostępne są trzy boty, uszeregowane poziomem trudności. Testowanie zostało wykonane przez 20 gier w każdej możliwej konfiguracji (stopień trudności gry + wybór botów w obu kolejnościach, żeby zminimalizować wpływ pierwszego ruchu). Za wygraną w trybie łatwym dany bot otrzymywał 1 pkt, a w trybie trudnym - 3 pkt.
