@@ -6,10 +6,10 @@ Class that was made for fields which are on board. It contain:
 
 ```bool isOccupied``` - bolean variable that keeps information is something on this field.
 
-```int XpositionOfLeftUpCorner```, ```int YpositionOfLeftUpCorner```, ```int XpositionOfRightDownCorner```, ```int YpositionOfRightDownCorner``` - int variables 
+```int XpositionOfLeftUpCorner```, ```int YpositionOfLeftUpCorner```, ```int XpositionOfRightDownCorner```, ```int YpositionOfRightDownCorner``` - int variables
 that contain informationabout position of field in window.
 
-```string whatTypeOfPieceisOn``` - string variable that contain four-letter code of piece that is on this fields, if nothing is on its empty (""). 
+```string whatTypeOfPieceisOn``` - string variable that contain four-letter code of piece that is on this fields, if nothing is on its empty ("").
 
 ```Sprite sprt``` - Sprite type (SFML) variable that contain sprite of piece that is on this field.
 
@@ -18,7 +18,7 @@ Class that was made for fields which are next to board. It contain:
 
 ```bool isPieceStillOn``` - bolean type variable that keeps information is piece still on this field.
 
-```int XpositionOfLeftUpCorner```, ```int YpositionOfLeftUpCorner```, ```int XpositionOfRightDownCorner```, ```int YpositionOfRightDownCorner``` - int variables 
+```int XpositionOfLeftUpCorner```, ```int YpositionOfLeftUpCorner```, ```int XpositionOfRightDownCorner```, ```int YpositionOfRightDownCorner``` - int variables
 that contain informationabout position of field in window.
 
 ```string whatTypeOfPieceisOn``` - string variable that contain four-letter code of piece that is on this fields, if nothing is on its empty ("").
@@ -47,7 +47,7 @@ Class that was made for buttons. It contain:
 
 ```int Xposition```, ```int Yposition``` - int type variable that contain information about X and Y position of button in window.
 
-```bool isMouseOn``` - bolean type variable that contain information is cursor of mouse on button. 
+```bool isMouseOn``` - bolean type variable that contain information is cursor of mouse on button.
 
 ```Text text``` - Text type (SFML) variable that contain information about textbox of button.
 
@@ -117,7 +117,7 @@ A bot that makes random moves, with equal probability of choosing each possible 
 ```void analyze_position(Quarto_game* game, int piece)``` - Reads board and game difficulty and chooses random move to make.
 
 ## Quarto_game
-### class Quarto_game 
+### class Quarto_game
 Main game class
 #### private:
 ```void put_piece_on_board(int row, int column, int piece_number)``` - Search for type of piece defined by its number in table of pieces in Quarto game object. Then this value is assigned to the field in the board specified by row and column number.
@@ -150,3 +150,20 @@ Main game class
 ```bool get_game_difficulty_level()``` - Returns bool which contain information about game difficulty.
 
 ```void set_piece_as_used(int piece_number)``` - Marks piece as used.
+
+## * piece.cpp
+
+### Classes:
+
+#### Piece
+Game piece class. It contains:
+* Attributes:
+	* private:
+		* ```int type``` -
+		* ```bool is_already_used``` -
+* Methods:
+	* public:
+		* ```void initialization(int piece_type)``` - initializes a piece with a `piece_type` that symbolizes its attributes
+		* ```void set_piece_as_used()``` - sets the piece as used in game
+		* ```bool is_piece_used()``` -
+		* ```int get_piece_type()``` - returns a type representing its attributes
