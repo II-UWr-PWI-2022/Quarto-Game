@@ -886,10 +886,12 @@ void Console_user_interface::account_settings()
 		{
 			string nickname, password;
 
+			cout << "Nickname must contain printable characters and cannot contain '<', '>', '@'\n";
 			cout << "Enter nickname : ";
 
 			getline(cin, nickname);
 
+			cout << "The password should consist of at least 8 characters, uppercase, lowercase and digit\n";
 			cout << "Enter password : ";
 
 			getline(cin, password);
@@ -917,8 +919,6 @@ void Console_user_interface::account_settings()
 	}
 }
 
-#define NUMBER_OF_PLAYERS_GENERATED_BY_DB 20
-
 void Console_user_interface::display_ranking()
 {
 	while(true)
@@ -938,15 +938,15 @@ void Console_user_interface::display_ranking()
 		order_type = get_single_character();
 
 		if(sort_type < '1' || sort_type > '5' || order_type < '1' || order_type > '2')
-		{
-			cout << "\n" << "There is no such option in the menu." << "\n\n";
-			cout << "Press enter to go back to try again..." << "\n";
+        {
+            cout << "\n" << "There is no such option in the menu." << "\n\n";
+            cout << "Press enter to go back to try again..." << "\n";
 
-			string choice = "";
-			getline(cin, choice);
+            string choice = "";
+            getline(cin, choice);
 
-			continue;
-		}
+            continue;
+        }
 
 		auto ranking = db_manager.generate_ranking(static_cast <Sort_by> (sort_type - '0'), static_cast <Order> (order_type - '0'));
 
@@ -965,7 +965,7 @@ void Console_user_interface::display_ranking()
 		cout << "|       NICKNAME:       |  WINS:  |  DRAWS:  |    LOSES:    |   POINTS:   |\n";
 		cout << " =========================================================================\n";
 
-		for(vector<Player>::size_type i = 0; i < ranking.size() && i < NUMBER_OF_PLAYERS_GENERATED_BY_DB; i++)
+		for(vector<Player>::size_type i = 0; i < ranking.size(); i++)
 		{
 			cout << "|" << (i+1) << "."<< setw(20) << ranking[i].nickname << " | " << setw(7)<< ranking[i].wins << " | "
 				<< setw(8) << ranking[i].draws << " | " << setw(12) << ranking[i].loses << " | " << setw(12) << ranking[i].points << "|\n";
