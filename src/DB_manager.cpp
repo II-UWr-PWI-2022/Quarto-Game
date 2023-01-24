@@ -17,7 +17,7 @@ DB_manager::~DB_manager()
 	scanner.write_database(db_access_path, users);
 }
 
-pair<bool, Player> DB_manager::search_nickname(string nickname)
+pair <bool, Player> DB_manager::search_nickname(string nickname)
 {
 	auto it = users.find(nickname);
 	if(it == users.end())
@@ -26,9 +26,9 @@ pair<bool, Player> DB_manager::search_nickname(string nickname)
 	return {true, it->second};
 }
 
-vector<Player> DB_manager::generate_ranking(Sort_by key, Order order_type)
+vector <Player> DB_manager::generate_ranking(Sort_by key, Order order_type)
 {
-	vector<Player> tmp;
+	vector <Player> tmp;
 
 	for(auto it : users)
 	{

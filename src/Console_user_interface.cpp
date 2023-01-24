@@ -852,8 +852,11 @@ void Console_user_interface::account_settings()
 			string nickname, password;
 
 			cout << "Enter nickname : ";
+
 			getline(cin, nickname);
+
 			cout << "Enter password : ";
+
 			getline(cin, password);
 
 			if(user.log_in(nickname, password))
@@ -884,8 +887,11 @@ void Console_user_interface::account_settings()
 			string nickname, password;
 
 			cout << "Enter nickname : ";
+
 			getline(cin, nickname);
+
 			cout << "Enter password : ";
+
 			getline(cin, password);
 
 			if(user.create_accout(nickname, password))
@@ -942,7 +948,7 @@ void Console_user_interface::display_ranking()
 			continue;
 		}
 
-		auto ranking = db_manager.generate_ranking(static_cast<Sort_by>(sort_type - '0'), static_cast<Order>(order_type - '0'));
+		auto ranking = db_manager.generate_ranking(static_cast <Sort_by> (sort_type - '0'), static_cast <Order> (order_type - '0'));
 
 		if(ranking.empty())
 		{

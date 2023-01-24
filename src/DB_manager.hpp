@@ -28,6 +28,7 @@ class DB_manager
 {
 	friend class Player;
 	friend class XML_scanner;
+
 private:
 	// The path to the xml file with the database
 	std::string db_access_path;
