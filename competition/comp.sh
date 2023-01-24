@@ -92,7 +92,7 @@ do
 		(( bot_3_pts++ ))
 		echo "bot 3 won" >> scriptres.txt
 	elif grep "Draw" out.out; then
-		echo "draw" >> scriptres.txt	
+		echo "draw" >> scriptres.txt
 	else
 		echo "error" >> scriptres.txt
 	fi
@@ -110,7 +110,7 @@ do
 		(( bot_3_pts += 3 ))
 		echo "bot 3 won" >> scriptres.txt
 	elif grep "Draw" out.out; then
-		echo "draw" >> scriptres.txt	
+		echo "draw" >> scriptres.txt
 	else
 		echo "error" >> scriptres.txt
 	fi
@@ -128,7 +128,7 @@ do
 		(( bot_1_pts++ ))
 		echo "bot 1 won" >> scriptres.txt
 	elif grep "Draw" out.out; then
-		echo "draw" >> scriptres.txt	
+		echo "draw" >> scriptres.txt
 	else
 		echo "error" >> scriptres.txt
 	fi
@@ -146,7 +146,7 @@ do
 		(( bot_1_pts += 3 ))
 		echo "bot 1 won" >> scriptres.txt
 	elif grep "Draw" out.out; then
-		echo "draw" >> scriptres.txt	
+		echo "draw" >> scriptres.txt
 	else
 		echo "error" >> scriptres.txt
 	fi
@@ -164,7 +164,7 @@ do
 		(( bot_3_pts++ ))
 		echo "bot 3 won" >> scriptres.txt
 	elif grep "Draw" out.out; then
-		echo "draw" >> scriptres.txt	
+		echo "draw" >> scriptres.txt
 	else
 		echo "error" >> scriptres.txt
 	fi
@@ -182,7 +182,7 @@ do
 		(( bot_3_pts += 3 ))
 		echo "bot 3 won" >> scriptres.txt
 	elif grep "Draw" out.out; then
-		echo "draw" >> scriptres.txt	
+		echo "draw" >> scriptres.txt
 	else
 		echo "error" >> scriptres.txt
 	fi
@@ -200,7 +200,7 @@ do
 		(( bot_2_pts++ ))
 		echo "bot 2 won" >> scriptres.txt
 	elif grep "Draw" out.out; then
-		echo "draw" >> scriptres.txt	
+		echo "draw" >> scriptres.txt
 	else
 		echo "error" >> scriptres.txt
 	fi
@@ -218,7 +218,7 @@ do
 		(( bot_2_pts += 3 ))
 		echo "bot 2 won" >> scriptres.txt
 	elif grep "Draw" out.out; then
-		echo "draw" >> scriptres.txt	
+		echo "draw" >> scriptres.txt
 	else
 		echo "error" >> scriptres.txt
 	fi
