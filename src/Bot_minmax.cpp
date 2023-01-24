@@ -1,15 +1,15 @@
 #include "Bot_minmax.h"
 
 /*
-Returns random value from the range of numbers [a,b]
+	Returns random value from the range of numbers [a,b]
 */
 int random_int(int a, int b)
-{	
+{
 	return a + rand() % (b - a + 1);
 }
 
 /*
-Checks whether the given four fields share at least one common characteristics 
+	Checks whether the given four fields share at least one common characteristics
 */
 bool Bot_Minmax::is_pattern_winning(int p1, int p2, int p3, int p4)
 {
@@ -17,14 +17,15 @@ bool Bot_Minmax::is_pattern_winning(int p1, int p2, int p3, int p4)
 }
 
 /*
-Depending on game difficulty checks if there is a line or square 
-of fields that share at least one common characteristics 
+	Depending on game difficulty checks if there is a line or square
+	of fields that share at least one common characteristics
 */
 bool Bot_Minmax::is_board_winning()
-{	
+{
 	if(!GAME_DIFFICULTY)
 	{
-		//easy version of game, checks all the lines
+		// easy version of game, checks all the lines
+
 		for(int row = 0; row < MAX_N; row++)
 		{
 			if(is_pattern_winning(board[row][0], board[row][1], board[row][2], board[row][3])) return true;
@@ -38,14 +39,19 @@ bool Bot_Minmax::is_board_winning()
 		return (is_pattern_winning(board[0][0], board[1][1], board[2][2], board[3][3])
 			|| is_pattern_winning(board[0][3], board[1][2], board[2][1], board[3][0]));
 	}
-	else 
+
+	else
 	{
-		//hard version of game, checks all the squares
-		for(int row = 0; row < MAX_N-1; row++){
-			for(int column = 0; column < MAX_N-1; column++){
-				if(is_pattern_winning(board[row][column],board[row+1][column],board[row][column+1],board[row+1][column+1])) return true;
+		// hard version of game, checks all the squares
+
+		for(int row = 0; row < MAX_N - 1; row++)
+		{
+			for(int column = 0; column < MAX_N - 1; column++)
+			{
+				if(is_pattern_winning(board[row][column], board[row + 1][column], board[row][column + 1], board[row + 1][column + 1])) return true;
 			}
 		}
+
 		return false;
 	}
 }
@@ -161,9 +167,9 @@ int Bot_Minmax::evaluate(int given_piece)
 */
 void Bot_Minmax::set_choice(int row, int column, int opponent_piece)
 {
-    chosen_piece=opponent_piece;
-    chosen_board_field.first=row;
-    chosen_board_field.second=column;
+	chosen_piece = opponent_piece;
+	chosen_board_field.first = row;
+	chosen_board_field.second = column;
 }
 
 /*
@@ -195,6 +201,7 @@ int Bot_Minmax::minmax(int depth, int piece, int max_depth)
 		for(int column = 0; column < MAX_N; column++)
 		{
 			if(board[row][column] != EMPTY_FIELD) continue;
+
 			pieces[piece] = false;
 			board[row][column] = piece;
 
@@ -203,18 +210,21 @@ int Bot_Minmax::minmax(int depth, int piece, int max_depth)
 				if(depth & 1)
 				{
 					pieces[piece] = true;
-                    board[row][column] = EMPTY_FIELD;
+					board[row][column] = EMPTY_FIELD;
+
 					return MIN_BOARD_VALUE;
 				}
 
 				else
 				{
-					if (depth==0)
-                    {
-                        set_choice(row,column, EMPTY_FIELD);
-                    }
-                    pieces[piece] = true;
-                    board[row][column] = EMPTY_FIELD;
+					if(depth == 0)
+					{
+						set_choice(row,column, EMPTY_FIELD);
+					}
+
+					pieces[piece] = true;
+					board[row][column] = EMPTY_FIELD;
+
 					return MAX_BOARD_VALUE;
 				}
 			}
@@ -230,7 +240,9 @@ int Bot_Minmax::minmax(int depth, int piece, int max_depth)
 					if(max_move <= evaluated_move)
 					{
 						if(max_move == evaluated_move && chosen_board_field.first != -1 && random_int(0,1)) continue;
+
 						max_move = evaluated_move;
+
 						set_choice(row, column, opponent_piece);
 					}
 
@@ -262,13 +274,14 @@ int Bot_Minmax::minmax(int depth, int piece, int max_depth)
 */
 void Bot_Minmax::last_move()
 {
-	for (int row = 0; row < MAX_N; row++)
+	for(int row = 0; row < MAX_N; row++)
 	{
-		for (int column = 0; column < MAX_N; column++)
+		for(int column = 0; column < MAX_N; column++)
 		{
-			if (board[row][column] == EMPTY_FIELD)
+			if(board[row][column] == EMPTY_FIELD)
 			{
 				set_choice(row, column, EMPTY_FIELD);
+
 				return;
 			}
 		}
@@ -281,8 +294,9 @@ void Bot_Minmax::last_move()
 */
 int Bot_Minmax::get_chosen_piece_type()
 {
-    pieces[chosen_piece] = false;
-    return chosen_piece;
+	pieces[chosen_piece] = false;
+
+	return chosen_piece;
 }
 
 /*
@@ -300,16 +314,26 @@ void Bot_Minmax::analyze_position(Quarto_game* game, int piece)
 {
 	board = game->get_board();
 
-	// pieces = vector <bool> (MAX_NUMBER_OF_PIECES, true);
 	GAME_DIFFICULTY=game->get_game_difficulty_level();
 
 	int pieces_left = 0;
+
 	for(int i = 0; i < MAX_NUMBER_OF_PIECES; i++)
 	{
 		pieces[i] = !game->is_piece_used(i);
+
 		if(pieces[i]) pieces_left++;
 	}
+
 	chosen_board_field = {-1, -1};
-	if (pieces_left == 0) last_move();
-	else minmax(0, piece, min(2, pieces_left));
+
+	if(pieces_left == 0)
+	{
+		last_move();
+	}
+
+	else
+	{
+		minmax(0, piece, min(2, pieces_left));
+	}
 }
