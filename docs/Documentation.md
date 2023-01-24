@@ -55,7 +55,13 @@ Class that was made for buttons. It contain:
 ### Classes
 #### Bot_Minmax
 A bot based on min-max algorithm. It contains:
-```random_int``` - returns random integer
-```is_pattern_winning``` - checks if four pieces given as arguments have at least one common characteristic
-```is_board_winning``` - depending on game difficulty checks if there is a line or square of fields that share at least one common characteristics
-```evaluate``` calculates the value of current state of board and the given piece
+```int random_int(int L, int R)``` - returns random integer from range [L, R].
+```bool is_pattern_winning(int p1, int p2, int p3, int p4)``` - checks if four pieces given as arguments have at least one common characteristic.
+```bool is_board_winning()``` - depending on game difficulty checks if there is a line or square of fields that share at least one common characteristics.
+```int evaluate(int piece)``` - calculates the value of current state of board and the given piece.
+```void set_choice(int row, int column int opponent_piece)``` - sets move as best, updates the chosen move.
+```int minmax(int depth, int piece, int max_depth)``` - Analizes potential arrangement of pieces on board using recursive minmax algorithm and depending on results chooses the best move. Maximum depth of algorithm is sets to 2.
+```void last_move()``` - Finds the last empty field for the last piece.
+```int get_chosen_piece_type()``` - Returns a piece that bot wants to give to the opponent.
+```pair <int, int> get_chosen_board_field()``` - Returns a field where bot wants to place given piece.
+```void analyze_position(Quarto_game* game, int piece)``` - Reads board and game difficulty, and launches minmax function to find the best move.
