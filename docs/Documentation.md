@@ -50,3 +50,12 @@ Class that was made for buttons. It contain:
 ```bool isMouseOn``` - bolean type variable that contain information is cursor of mouse on button. 
 
 ```Text text``` - Text type (SFML) variable that contain information about textbox of button.
+
+## Bot_minmax.cpp
+### Classes
+#### Bot_Minmax
+A bot based on min-max algorithm. It contains:
+```random_int``` - returns random integer
+```is_pattern_winning``` - checks if four pieces given as arguments have at least one common characteristic
+```is_board_winning``` - depending on game difficulty checks if there is a line or square of fields that share at least one common characteristics
+```evaluate``` calculates the value of current state of board and the given piece
