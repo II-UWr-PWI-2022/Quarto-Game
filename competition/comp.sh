@@ -6,19 +6,26 @@ bot_3_pts=0
 num_of_tests=20
 
 # bots 1 and 2, easy mode
+echo "bots 1 and 2, easy mode" > scriptres.txt
 for (( i=1; i<=$num_of_tests; i++ ))
 do
-	../build/main < easy12 > out.out &
+	timeout 20 ../build/main < easy12 > out.out
 	ID=$!
 	kill $ID
 	if grep "Player A wins" out.out; then
 		(( bot_1_pts++ ))
-	fi
-	if grep "Player B wins" out.out; then
+		echo "bot 1 won" > scriptres.txt
+	elif grep "Player B wins" out.out; then
 		(( bot_2_pts++ ))
+		echo "bot 2 won" > scriptres.txt
+	elif grep "DRAW" out.out; then
+		echo "no one won" > scriptres.txt
+	else
+		echo "error" > scriptres.txt
 	fi
 done
 
+echo "bots 1 and 2, hard mode" > scriptres.txt
 # bots 1 and 2, hard mode
 for (( i=1; i<=$num_of_tests; i++ ))
 do
@@ -27,9 +34,14 @@ do
 	kill $ID
 	if grep "Player A wins" out.out; then
 		(( bot_1_pts += 3 ))
-	fi
-	if grep "Player B wins" out.out; then
+		echo "bot 1 won" > scriptres.txt
+	elif grep "Player B wins" out.out; then
 		(( bot_2_pts += 3 ))
+		echo "bot 2 won" > scriptres.txt
+	elif grep "DRAW" out.out; then
+		echo "no one won" > scriptres.txt
+	else
+		echo "error" > scriptres.txt
 	fi
 done
 
