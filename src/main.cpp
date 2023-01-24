@@ -3,8 +3,8 @@
 
 int main()
 {
-    Console_user_interface interface;
-    interface.display_main_menu();
+	Console_user_interface interface;
+	interface.display_main_menu();
 
-    return 0;
+	return 0;
 }

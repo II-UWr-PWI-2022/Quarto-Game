@@ -2,16 +2,16 @@
 
 Console_user_interface::Console_user_interface() : db_manager("../db/users.xml"), user(db_manager)
 {
-    game = NULL;
+	game = NULL;
 
-    bot_random_1 = NULL;
-    bot_random_2 = NULL;
+	bot_random_1 = NULL;
+	bot_random_2 = NULL;
 
-    bot_minmax_1 = NULL;
-    bot_minmax_2 = NULL;
+	bot_minmax_1 = NULL;
+	bot_minmax_2 = NULL;
 
-    bot_superior_1 = NULL;
-    bot_superior_2 = NULL;
+	bot_superior_1 = NULL;
+	bot_superior_2 = NULL;
 }
 
 /*
@@ -19,24 +19,24 @@ Console_user_interface::Console_user_interface() : db_manager("../db/users.xml")
 */
 char Console_user_interface::get_single_character()
 {
-    string input = "";
-    char character = {0};
+	string input = "";
+	char character = {0};
 
-    while(true)
-    {
-        getline(cin, input);
+	while(true)
+	{
+		getline(cin, input);
 
-        if(input.length() == 1)
-        {
-            character = input[0];
+		if(input.length() == 1)
+		{
+			character = input[0];
 
-		    break;
-        }
+			break;
+		}
 
-        cout << "This is not a single character. Type again:" << "\n";
-    }
+		cout << "This is not a single character. Type again:" << "\n";
+	}
 
-    return character;
+	return character;
 }
 
 /*
@@ -44,36 +44,36 @@ char Console_user_interface::get_single_character()
 */
 char Console_user_interface::select_from_main_menu()
 {
-    char choice;
+	char choice;
 
-    if(system("cls")) system("clear");
+	clear_console();
 
-    cout << " >>> QUARTO GAME <<<" << "\n";
-    cout << "--------------------------------" << "\n";
+	cout << " >>> QUARTO GAME <<<" << "\n";
+	cout << "--------------------------------" << "\n";
 
-    if(user.is_logged())
+	if(user.is_logged())
 	{
-        cout << "Logged >> " << user.nickname << " << points: "<< user.points << " <--\n";
+		cout << "Logged >> " << user.nickname << " << points: "<< user.points << " <--\n";
 	}
 
 	else
-    {
-        cout << "Current number of points: " << user.points << "\n";
-        cout << "Remember you must be logged in to save your score\n";
-    }
+	{
+		cout << "Current number of points: " << user.points << "\n";
+		cout << "Remember you must be logged in to save your score\n";
+	}
 
-    cout << "--------------------------------" << "\n";
-    cout << "0. Account setting\n";
-    cout << "1. Display ranking\n";
-    cout << "2. Play EASY version" << "\n";
-    cout << "3. Play HARD version" << "\n";
-    cout << "4. Exit" << "\n";
-    cout << "--------------------------------" << "\n";
-    cout << "Your choice: ";
+	cout << "--------------------------------" << "\n";
+	cout << "0. Account setting\n";
+	cout << "1. Display ranking\n";
+	cout << "2. Play EASY version" << "\n";
+	cout << "3. Play HARD version" << "\n";
+	cout << "4. Exit" << "\n";
+	cout << "--------------------------------" << "\n";
+	cout << "Your choice: ";
 
-    choice = get_single_character();
+	choice = get_single_character();
 
-    return choice;
+	return choice;
 }
 
 /*
@@ -81,24 +81,24 @@ char Console_user_interface::select_from_main_menu()
 */
 char Console_user_interface::select_from_player_menu(char player)
 {
-    char choice;
+	char choice;
 
-    if(system("cls")) system("clear");
+	clear_console();
 
-    cout << " >>> QUARTO GAME <<<" << "\n";
-    cout << "---------------------------" << "\n";
-    cout << "Choose who will play as a player " << player << ":" << "\n";
-    cout << "1. Human" << "\n";
-    cout << "2. Bot 1" << "\n";
-    cout << "3. Bot 2" << "\n";
-    cout << "4. Bot 3" << "\n";
-    cout << "5. Exit" << "\n";
-    cout << "---------------------------" << "\n";
-    cout << "Your choice: ";
+	cout << " >>> QUARTO GAME <<<" << "\n";
+	cout << "---------------------------" << "\n";
+	cout << "Choose who will play as a player " << player << ":" << "\n";
+	cout << "1. Human" << "\n";
+	cout << "2. Bot 1" << "\n";
+	cout << "3. Bot 2" << "\n";
+	cout << "4. Bot 3" << "\n";
+	cout << "5. Exit" << "\n";
+	cout << "---------------------------" << "\n";
+	cout << "Your choice: ";
 
-    choice = get_single_character();
+	choice = get_single_character();
 
-    return choice;
+	return choice;
 }
 
 /*
@@ -110,73 +110,73 @@ char Console_user_interface::select_from_player_menu(char player)
 */
 void Console_user_interface::start_game(bool game_difficulty_level)
 {
-    game = new Quarto_game(game_difficulty_level);
+	game = new Quarto_game(game_difficulty_level);
 
-    bot_random_1 = new Bot_Random();
-    bot_random_2 = new Bot_Random();
+	bot_random_1 = new Bot_Random();
+	bot_random_2 = new Bot_Random();
 	bot_minmax_1 = new Bot_Minmax();
 	bot_minmax_2 = new Bot_Minmax();
 	bot_superior_1 = new Bot_Superior();
 	bot_superior_2 = new Bot_Superior();
 
-    srand(time(NULL));
+	srand(time(NULL));
 
-    clear_marks();
+	clear_marks();
 
-    int result;
+	int result;
 
-    do
-    {
-        result = make_move();
-    }
-    while(result == 0);
+	do
+	{
+		result = make_move();
+	}
+	while(result == 0);
 
-    update_marks();
-    display_the_board();
+	update_marks();
+	display_the_board();
 
-    cout << "   -----------------------------------------" << "\n";
+	cout << "   -----------------------------------------" << "\n";
 
-    if(result == 1)
-    {
-        cout << "             Player A wins!              " << "\n";
-    }
+	if(result == 1)
+	{
+		cout << "             Player A wins!              " << "\n";
+	}
 
-    else if(result == 2)
-    {
-        cout << "             Player B wins!              " << "\n";
-    }
+	else if(result == 2)
+	{
+		cout << "             Player B wins!              " << "\n";
+	}
 
-    else if(result == 3)
-    {
-        cout << "                  Draw!                  " << "\n";
-    }
+	else if(result == 3)
+	{
+		cout << "                  Draw!                  " << "\n";
+	}
 
-    cout << "   -----------------------------------------" << "\n" << "\n";
+	cout << "   -----------------------------------------" << "\n" << "\n";
 
-    assign_points(result);
+	assign_points(result);
 
-    delete game;
-    delete bot_random_1;
-    delete bot_random_2;
-    delete bot_minmax_1;
-    delete bot_minmax_2;
-    delete bot_superior_1;
-    delete bot_superior_2;
+	delete game;
+	delete bot_random_1;
+	delete bot_random_2;
+	delete bot_minmax_1;
+	delete bot_minmax_2;
+	delete bot_superior_1;
+	delete bot_superior_2;
 
-    game = NULL;
-    bot_random_1 = NULL;
-    bot_random_2 = NULL;
-    bot_minmax_1 = NULL;
-    bot_minmax_2 = NULL;
-    bot_superior_1 = NULL;
-    bot_superior_2 = NULL;
+	game = NULL;
+	bot_random_1 = NULL;
+	bot_random_2 = NULL;
+	bot_minmax_1 = NULL;
+	bot_minmax_2 = NULL;
+	bot_superior_1 = NULL;
+	bot_superior_2 = NULL;
 
-    cout << "Press enter to go back to main menu..." << "\n";
+	cout << "Press enter to go back to main menu..." << "\n";
 
-    string choice = "";
-    getline(cin, choice);
+	string choice = "";
+	getline(cin, choice);
 
-    display_main_menu();
+	display_main_menu();
 }
 
 /*
@@ -185,13 +185,13 @@ void Console_user_interface::start_game(bool game_difficulty_level)
 */
 void Console_user_interface::clear_marks()
 {
-    for(int i = 0; i < MAX_N; i++)
-    {
-        for(int j = 0; j < MAX_N; j++)
-        {
-            marks[i][j] = "    ";
-        }
-    }
+	for(int i = 0; i < MAX_N; i++)
+	{
+		for(int j = 0; j < MAX_N; j++)
+		{
+			marks[i][j] = "    ";
+		}
+	}
 }
 
 /*
@@ -200,13 +200,13 @@ void Console_user_interface::clear_marks()
 */
 void Console_user_interface::update_marks()
 {
-    for(int i = 0; i < MAX_N; i++)
-    {
-        for(int j = 0; j < MAX_N; j++)
-        {
-            if(game->get_winning_pattern_field(i,j)) marks[i][j] = "----";
-        }
-    }
+	for(int i = 0; i < MAX_N; i++)
+	{
+		for(int j = 0; j < MAX_N; j++)
+		{
+			if(game->get_winning_pattern_field(i,j)) marks[i][j] = "----";
+		}
+	}
 }
 
 /*
@@ -214,49 +214,49 @@ void Console_user_interface::update_marks()
 */
 string Console_user_interface::create_piece_symbol(int type)
 {
-    string symbol = "";
+	string symbol = "";
 
-    if((type >> 0) & 1)
-    {
-        symbol += 'D';
-    }
+	if((type >> 0) & 1)
+	{
+		symbol += 'D';
+	}
 
-    else
-    {
-        symbol += 'L';
-    }
+	else
+	{
+		symbol += 'L';
+	}
 
-    if((type >> 1) & 1)
-    {
-        symbol += 'R';
-    }
+	if((type >> 1) & 1)
+	{
+		symbol += 'R';
+	}
 
-    else
-    {
-        symbol += 'S';
-    }
+	else
+	{
+		symbol += 'S';
+	}
 
-    if((type >> 2) & 1)
-    {
-        symbol += 'T';
-    }
+	if((type >> 2) & 1)
+	{
+		symbol += 'T';
+	}
 
-    else
-    {
-        symbol += 'S';
-    }
+	else
+	{
+		symbol += 'S';
+	}
 
-    if((type >> 3) & 1)
-    {
-        symbol += 'S';
-    }
+	if((type >> 3) & 1)
+	{
+		symbol += 'S';
+	}
 
-    else
-    {
-        symbol += 'H';
-    }
+	else
+	{
+		symbol += 'H';
+	}
 
-    return symbol;
+	return symbol;
 }
 
 /*
@@ -265,24 +265,24 @@ string Console_user_interface::create_piece_symbol(int type)
 */
 void Console_user_interface::update_board()
 {
-    char piece_type;
+	char piece_type;
 
-    for(int i = 0; i < MAX_N; i++)
-    {
-        for(int j = 0; j < MAX_N; j++)
-        {
-            piece_type = game->get_piece_type_from_board_field(i,j);
+	for(int i = 0; i < MAX_N; i++)
+	{
+		for(int j = 0; j < MAX_N; j++)
+		{
+			piece_type = game->get_piece_type_from_board_field(i,j);
 
-            if(piece_type == 16)
+			if(piece_type == 16)
 			{
 				board[i][j] = "    ";
 			}
 
-            else
+			else
 			{
 				board[i][j] = create_piece_symbol(piece_type);
-        	}
-    	}
+			}
+		}
 	}
 }
 
@@ -291,29 +291,29 @@ void Console_user_interface::update_board()
 */
 void Console_user_interface::display_the_board()
 {
-    update_board();
+	update_board();
 
-    if(system("cls")) system("clear");
+	clear_console();
 
-    cout << "              >>> QUARTO GAME <<<           " << "\n\n";
-    cout << internal << "   |    1    |    2    |    3    |    4    |" << "\n";
-    cout << "--------------------------------------------" << "\n";
-    cout << internal << "   |  "<<marks[0][0]<<"   |  "<<marks[0][1]<<"   |  "<<marks[0][2]<<"   |  "<<marks[0][3]<<"   |" << "\n";
-    cout << internal << " A |  "<<board[0][0]<<"   |  "<<board[0][1]<<"   |  "<<board[0][2]<<"   |  "<<board[0][3]<<"   |" << "\n";
-    cout << internal << "   |  "<<marks[0][0]<<"   |  "<<marks[0][1]<<"   |  "<<marks[0][2]<<"   |  "<<marks[0][3]<<"   |" << "\n";
-    cout << "--------------------------------------------" << "\n";
-    cout << internal << "   |  "<<marks[1][0]<<"   |  "<<marks[1][1]<<"   |  "<<marks[1][2]<<"   |  "<<marks[1][3]<<"   |" << "\n";
-    cout << internal << " B |  "<<board[1][0]<<"   |  "<<board[1][1]<<"   |  "<<board[1][2]<<"   |  "<<board[1][3]<<"   |" << "\n";
-    cout << internal << "   |  "<<marks[1][0]<<"   |  "<<marks[1][1]<<"   |  "<<marks[1][2]<<"   |  "<<marks[1][3]<<"   |" << "\n";
-    cout << "--------------------------------------------" << "\n";
-    cout << internal << "   |  "<<marks[2][0]<<"   |  "<<marks[2][1]<<"   |  "<<marks[2][2]<<"   |  "<<marks[2][3]<<"   |" << "\n";
-    cout << internal << " C |  "<<board[2][0]<<"   |  "<<board[2][1]<<"   |  "<<board[2][2]<<"   |  "<<board[2][3]<<"   |" << "\n";
-    cout << internal << "   |  "<<marks[2][0]<<"   |  "<<marks[2][1]<<"   |  "<<marks[2][2]<<"   |  "<<marks[2][3]<<"   |" << "\n";
-    cout << "--------------------------------------------" << "\n";
-    cout << internal << "   |  "<<marks[3][0]<<"   |  "<<marks[3][1]<<"   |  "<<marks[3][2]<<"   |  "<<marks[3][3]<<"   |" << "\n";
-    cout << internal << " D |  "<<board[3][0]<<"   |  "<<board[3][1]<<"   |  "<<board[3][2]<<"   |  "<<board[3][3]<<"   |" << "\n";
-    cout << internal << "   |  "<<marks[3][0]<<"   |  "<<marks[3][1]<<"   |  "<<marks[3][2]<<"   |  "<<marks[3][3]<<"   |" << "\n";
-    cout << "--------------------------------------------" << "\n";
+	cout << "              >>> QUARTO GAME <<<           " << "\n\n";
+	cout << internal << "   |    1    |    2    |    3    |    4    |" << "\n";
+	cout << "--------------------------------------------" << "\n";
+	cout << internal << "   |  "<<marks[0][0]<<"   |  "<<marks[0][1]<<"   |  "<<marks[0][2]<<"   |  "<<marks[0][3]<<"   |" << "\n";
+	cout << internal << " A |  "<<board[0][0]<<"   |  "<<board[0][1]<<"   |  "<<board[0][2]<<"   |  "<<board[0][3]<<"   |" << "\n";
+	cout << internal << "   |  "<<marks[0][0]<<"   |  "<<marks[0][1]<<"   |  "<<marks[0][2]<<"   |  "<<marks[0][3]<<"   |" << "\n";
+	cout << "--------------------------------------------" << "\n";
+	cout << internal << "   |  "<<marks[1][0]<<"   |  "<<marks[1][1]<<"   |  "<<marks[1][2]<<"   |  "<<marks[1][3]<<"   |" << "\n";
+	cout << internal << " B |  "<<board[1][0]<<"   |  "<<board[1][1]<<"   |  "<<board[1][2]<<"   |  "<<board[1][3]<<"   |" << "\n";
+	cout << internal << "   |  "<<marks[1][0]<<"   |  "<<marks[1][1]<<"   |  "<<marks[1][2]<<"   |  "<<marks[1][3]<<"   |" << "\n";
+	cout << "--------------------------------------------" << "\n";
+	cout << internal << "   |  "<<marks[2][0]<<"   |  "<<marks[2][1]<<"   |  "<<marks[2][2]<<"   |  "<<marks[2][3]<<"   |" << "\n";
+	cout << internal << " C |  "<<board[2][0]<<"   |  "<<board[2][1]<<"   |  "<<board[2][2]<<"   |  "<<board[2][3]<<"   |" << "\n";
+	cout << internal << "   |  "<<marks[2][0]<<"   |  "<<marks[2][1]<<"   |  "<<marks[2][2]<<"   |  "<<marks[2][3]<<"   |" << "\n";
+	cout << "--------------------------------------------" << "\n";
+	cout << internal << "   |  "<<marks[3][0]<<"   |  "<<marks[3][1]<<"   |  "<<marks[3][2]<<"   |  "<<marks[3][3]<<"   |" << "\n";
+	cout << internal << " D |  "<<board[3][0]<<"   |  "<<board[3][1]<<"   |  "<<board[3][2]<<"   |  "<<board[3][3]<<"   |" << "\n";
+	cout << internal << "   |  "<<marks[3][0]<<"   |  "<<marks[3][1]<<"   |  "<<marks[3][2]<<"   |  "<<marks[3][3]<<"   |" << "\n";
+	cout << "--------------------------------------------" << "\n";
 }
 
 /*
@@ -322,9 +322,9 @@ void Console_user_interface::display_the_board()
 */
 string Console_user_interface::create_symbol_of_free_piece(int number_of_piece)
 {
-    string symbol;
+	string symbol;
 
-    if((game->is_piece_used(number_of_piece)))
+	if((game->is_piece_used(number_of_piece)))
 	{
 		symbol = "----";
 	}
@@ -343,10 +343,10 @@ string Console_user_interface::create_symbol_of_free_piece(int number_of_piece)
 */
 void Console_user_interface::update_free_pieces()
 {
-    for(int i = 0; i < MAX_NUMBER_OF_PIECES; i++)
-    {
-        free_pieces[i] = create_symbol_of_free_piece(i);
-    }
+	for(int i = 0; i < MAX_NUMBER_OF_PIECES; i++)
+	{
+		free_pieces[i] = create_symbol_of_free_piece(i);
+	}
 }
 
 /*
@@ -355,15 +355,15 @@ void Console_user_interface::update_free_pieces()
 */
 void Console_user_interface::display_free_pieces()
 {
-    update_free_pieces();
+	update_free_pieces();
 
-    cout << "\n";
-    cout << "                  FREE PIECES               " << "\n";
-    cout << "   -----------------------------------------" << "\n";
-    cout << internal << "      "<<free_pieces[0]<<"      "<<free_pieces[1]<<"      "<<free_pieces[2]<<"      "<<free_pieces[3]<<"    " << "\n";
-    cout << internal << "      "<<free_pieces[4]<<"      "<<free_pieces[5]<<"      "<<free_pieces[6]<<"      "<<free_pieces[7]<<"    " << "\n";
-    cout << internal << "      "<<free_pieces[8]<<"      "<<free_pieces[9]<<"      "<<free_pieces[10]<<"      "<<free_pieces[11]<<"    " << "\n";
-    cout << internal << "      "<<free_pieces[12]<<"      "<<free_pieces[13]<<"      "<<free_pieces[14]<<"      "<<free_pieces[15]<<"    " << "\n";
+	cout << "\n";
+	cout << "                  FREE PIECES               " << "\n";
+	cout << "   -----------------------------------------" << "\n";
+	cout << internal << "      "<<free_pieces[0]<<"      "<<free_pieces[1]<<"      "<<free_pieces[2]<<"      "<<free_pieces[3]<<"    " << "\n";
+	cout << internal << "      "<<free_pieces[4]<<"      "<<free_pieces[5]<<"      "<<free_pieces[6]<<"      "<<free_pieces[7]<<"    " << "\n";
+	cout << internal << "      "<<free_pieces[8]<<"      "<<free_pieces[9]<<"      "<<free_pieces[10]<<"      "<<free_pieces[11]<<"    " << "\n";
+	cout << internal << "      "<<free_pieces[12]<<"      "<<free_pieces[13]<<"      "<<free_pieces[14]<<"      "<<free_pieces[15]<<"    " << "\n";
 }
 
 /*
@@ -371,22 +371,22 @@ void Console_user_interface::display_free_pieces()
 */
 string Console_user_interface::get_piece_symbol_from_user()
 {
-    string input = "";
+	string input = "";
 
-    while(true)
-    {
-        getline(cin, input);
+	while(true)
+	{
+		getline(cin, input);
 
-        if(input.length() == MAX_N && (input[0] == 'D' || input[0] == 'L') && (input[1] == 'R' || input[1] == 'S')
-            && (input[2] == 'T' || input[2] == 'S') && (input[3] == 'S' || input[3] == 'H'))
-        {
-            break;
-        }
+		if(input.length() == MAX_N && (input[0] == 'D' || input[0] == 'L') && (input[1] == 'R' || input[1] == 'S')
+			&& (input[2] == 'T' || input[2] == 'S') && (input[3] == 'S' || input[3] == 'H'))
+		{
+			break;
+		}
 
-        cout << "There is no such a symbol. Use the four-letter symbol according to the above table of free pieces. Type again:" << "\n";
-    }
+		cout << "There is no such a symbol. Use the four-letter symbol according to the above table of free pieces. Type again:" << "\n";
+	}
 
-    return input;
+	return input;
 }
 
 /*
@@ -395,14 +395,14 @@ string Console_user_interface::get_piece_symbol_from_user()
 */
 int Console_user_interface::change_piece_symbol_to_type(string symbol)
 {
-    int type = 0;
+	int type = 0;
 
-    if(symbol[0] == 'D') type |= (1 << 0);
-    if(symbol[1] == 'R') type |= (1 << 1);
-    if(symbol[2] == 'T') type |= (1 << 2);
-    if(symbol[3] == 'S') type |= (1 << 3);
+	if(symbol[0] == 'D') type |= (1 << 0);
+	if(symbol[1] == 'R') type |= (1 << 1);
+	if(symbol[2] == 'T') type |= (1 << 2);
+	if(symbol[3] == 'S') type |= (1 << 3);
 
-    return type;
+	return type;
 }
 
 /*
@@ -411,13 +411,13 @@ int Console_user_interface::change_piece_symbol_to_type(string symbol)
 */
 int Console_user_interface::find_piece_number(string symbol)
 {
-    int type = change_piece_symbol_to_type(symbol);
+	int type = change_piece_symbol_to_type(symbol);
 
-    int number = game->find_piece_number(type);
+	int number = game->find_piece_number(type);
 
-    if(game->is_piece_used(number)) number = MAX_NUMBER_OF_PIECES;
+	if(game->is_piece_used(number)) number = MAX_NUMBER_OF_PIECES;
 
-    return number;
+	return number;
 }
 
 /*
@@ -427,34 +427,34 @@ int Console_user_interface::find_piece_number(string symbol)
 */
 int Console_user_interface::make_move()
 {
-    display_the_board();
-    display_free_pieces();
+	display_the_board();
+	display_free_pieces();
 
-    // is_player_2 (0 is player A, 1 is player B)
-    bool is_player_2 = game->get_player_active();
+	// is_player_2 (0 is player A, 1 is player B)
+	bool is_player_2 = game->get_player_active();
 
-    string player_1;
-    string player_2;
+	string player_1;
+	string player_2;
 
-    if(is_player_2)
-    {
-        player_1 = "B";
-        player_2 = "A";
-    }
-    else
-    {
-        player_1 = "A";
-        player_2 = "B";
-    }
+	if(is_player_2)
+	{
+		player_1 = "B";
+		player_2 = "A";
+	}
+	else
+	{
+		player_1 = "A";
+		player_2 = "B";
+	}
 
-    string symbol;
-    int piece_number;
-    char row;
-    char column;
+	string symbol;
+	int piece_number;
+	char row;
+	char column;
 
-    // asking inactive player to chose a piece for active player
-    cout << "\n" << "(Player " << player_2 << "):" << "\n";
-    cout << "Chose the piece for Player " << player_1 << ":" << "\n";
+	// asking inactive player to chose a piece for active player
+	cout << "\n" << "(Player " << player_2 << "):" << "\n";
+	cout << "Chose the piece for Player " << player_1 << ":" << "\n";
 
 	bool is_human = false;
 
@@ -500,11 +500,8 @@ int Console_user_interface::make_move()
 
 	else
 	{
-<<<<<<< HEAD
 		wait(500);
 
-=======
->>>>>>> bots_competition
 		if(!is_player_2)
 		{
 			switch(index_player_B)
@@ -520,7 +517,7 @@ int Console_user_interface::make_move()
 			case BOT_3:
 				piece_number = bot_superior_2->get_chosen_piece_type();
 
-                break;
+				break;
 			default:
 				break;
 			}
@@ -541,7 +538,7 @@ int Console_user_interface::make_move()
 			case BOT_3:
 				piece_number = bot_superior_1->get_chosen_piece_type();
 
-                break;
+				break;
 			default:
 				break;
 			}
@@ -553,9 +550,9 @@ int Console_user_interface::make_move()
 
 	game -> set_piece_as_used(piece_number);
 
-    // asking active player to chose a field on board for his piece
-    cout << "\n" << "(Player " << player_1 << "):" << "\n";
-    cout << "Chose the field for piece " << symbol << ":" << "\n";
+	// asking active player to chose a field on board for his piece
+	cout << "\n" << "(Player " << player_1 << "):" << "\n";
+	cout << "Chose the field for piece " << symbol << ":" << "\n";
 
 	is_human = false;
 
@@ -627,11 +624,8 @@ int Console_user_interface::make_move()
 
 	else
 	{
-<<<<<<< HEAD
 		wait(1000);
 
-=======
->>>>>>> bots_competition
 		pair <int, int> field;
 
 		if(is_player_2)
@@ -687,10 +681,10 @@ int Console_user_interface::make_move()
 		column = field.second + '1';
 	}
 
-    // actual move in Quarto game object
-    int result = (game->make_move(row-'A',column-'1',piece_number));
+	// actual move in Quarto game object
+	int result = (game->make_move(row-'A',column-'1',piece_number));
 
-    return result;
+	return result;
 }
 
 /*
@@ -699,14 +693,14 @@ int Console_user_interface::make_move()
 */
 void Console_user_interface::display_main_menu()
 {
-    char choice;
+	char choice;
 
-    while(true)
-    {
-        choice = select_from_main_menu();
+	while(true)
+	{
+		choice = select_from_main_menu();
 
-        switch (choice)
-        {
+		switch (choice)
+		{
 		case '0':
 			account_settings();
 
@@ -743,8 +737,8 @@ void Console_user_interface::display_main_menu()
 			getline(cin, choice);
 
 			break;
-        }
-    }
+		}
+	}
 }
 
 /*
@@ -752,17 +746,17 @@ void Console_user_interface::display_main_menu()
 */
 int Console_user_interface::display_player_menu(char player)
 {
-    char choice;
+	char choice;
 
-    while(true)
-    {
-        choice = select_from_player_menu(player);
+	while(true)
+	{
+		choice = select_from_player_menu(player);
 
 		if('1' <= choice && choice <= '5')
 		{
 			if(choice == '5')
 			{
-                this->~Console_user_interface();
+				this->~Console_user_interface();
 
 				exit(0);
 			}
@@ -770,23 +764,23 @@ int Console_user_interface::display_player_menu(char player)
 			return choice - '1';
 		}
 
-	   	else
+		else
 		{
-            cout << "\n" << "There is no such option in the menu." << "\n\n";
-            cout << "Press enter to go back to try again..." << "\n";
+			cout << "\n" << "There is no such option in the menu." << "\n\n";
+			cout << "Press enter to go back to try again..." << "\n";
 
-            string choice = "";
-            getline(cin, choice);
-        }
-    }
+			string choice = "";
+			getline(cin, choice);
+		}
+	}
 }
 
 void Console_user_interface::assign_points(int game_status)
 {
-    if(index_player_A == 0 && index_player_B != 0)
-    {
-        switch(game_status)
-        {
+	if(index_player_A == 0 && index_player_B != 0)
+	{
+		switch(game_status)
+		{
 		case 1:
 			user.play_match(static_cast<Opponent>(index_player_B), Game_status::win);
 
@@ -801,13 +795,13 @@ void Console_user_interface::assign_points(int game_status)
 			break;
 		default:
 			break;
-        }
-    }
+		}
+	}
 
-    else if(index_player_B == 0 && index_player_A != 0)
-    {
-        switch(game_status)
-        {
+	else if(index_player_B == 0 && index_player_A != 0)
+	{
+		switch(game_status)
+		{
 		case 1:
 			user.play_match(static_cast<Opponent>(index_player_B), Game_status::lose);
 
@@ -822,33 +816,33 @@ void Console_user_interface::assign_points(int game_status)
 			break;
 		default:
 			break;
-        }
-    }
+		}
+	}
 }
 
 void Console_user_interface::account_settings()
 {
-    char choice;
+	char choice;
 
-    while(true)
-    {
-        clear_console();
+	while(true)
+	{
+		clear_console();
 
-        cout << " >>> QUARTO GAME <<<" << "\n";
-        cout << "--------------------------------" << "\n";
-        cout << "Account options: " << "\n";
-        cout << "1. Print statistics" << "\n";
-        cout << "2. Log in" << "\n";
-        cout << "3. Log out" << "\n";
-        cout << "4. Create new account" << "\n";
-        cout << "5. Return" << "\n";
-        cout << "--------------------------------" << "\n";
-        cout << "Your choice: ";
+		cout << " >>> QUARTO GAME <<<" << "\n";
+		cout << "--------------------------------" << "\n";
+		cout << "Account options: " << "\n";
+		cout << "1. Print statistics" << "\n";
+		cout << "2. Log in" << "\n";
+		cout << "3. Log out" << "\n";
+		cout << "4. Create new account" << "\n";
+		cout << "5. Return" << "\n";
+		cout << "--------------------------------" << "\n";
+		cout << "Your choice: ";
 
-        choice = get_single_character();
+		choice = get_single_character();
 
-        switch(choice)
-        {
+		switch(choice)
+		{
 		case '1':
 			user.print_statistics();
 
@@ -908,78 +902,78 @@ void Console_user_interface::account_settings()
 			cout << "Command not recognized, please try again\n";
 
 			break;
-        }
+		}
 
-        cout << "Press enter to continue..." << "\n";
+		cout << "Press enter to continue..." << "\n";
 
-        string text;
-        getline(cin,text);
-    }
+		string text;
+		getline(cin,text);
+	}
 }
 
 #define NUMBER_OF_PLAYERS_GENERATED_BY_DB 20
 
 void Console_user_interface::display_ranking()
 {
-    while(true)
-    {
-        clear_console();
+	while(true)
+	{
+		clear_console();
 
-        cout << "Generating ranking... Enter 2 parameters\n";
+		cout << "Generating ranking... Enter 2 parameters\n";
 
-	    char sort_type, order_type;
+		char sort_type, order_type;
 
-	    cout << "Sort by: nickname--> 1 | wins--> 2 | draws--> 3 | loses--> 4 | points--> 5 : ";
+		cout << "Sort by: nickname--> 1 | wins--> 2 | draws--> 3 | loses--> 4 | points--> 5 : ";
 
-        sort_type = get_single_character();
+		sort_type = get_single_character();
 
 		cout << "Order: ascending--> 1 | descending--> 2 : ";
 
 		order_type = get_single_character();
 
-        if(sort_type < '1' || sort_type > '5' || order_type < '1' || order_type > '2')
-        {
-            cout << "\n" << "There is no such option in the menu." << "\n\n";
-            cout << "Press enter to go back to try again..." << "\n";
-
-            string choice = "";
-            getline(cin, choice);
-
-            continue;
-        }
-
-        auto ranking = db_manager.generate_ranking(static_cast<Sort_by>(sort_type - '0'), static_cast<Order>(order_type - '0'));
-
-        if(ranking.empty())
-        {
-            cout << "Ups: no players found in the database\n";
-            cout << "Press enter to go back to try again..." << "\n";
-
-            string text;
-            getline(cin,text);
-
-            return;
-        }
-
-        cout << " _________________________________________________________________________\n";
-        cout << "|       NICKNAME:       |  WINS:  |  DRAWS:  |    LOSES:    |   POINTS:   |\n";
-        cout << " =========================================================================\n";
-
-        for(vector<Player>::size_type i = 0; i < ranking.size() && i < NUMBER_OF_PLAYERS_GENERATED_BY_DB; i++)
-        {
-            cout << "|" << (i+1) << "."<< setw(20) << ranking[i].nickname << " | " << setw(7)<< ranking[i].wins << " | "
-                << setw(8) << ranking[i].draws << " | " << setw(12) << ranking[i].loses << " | " << setw(12) << ranking[i].points << "|\n";
-        }
-
-        cout << " =========================================================================\n";
-        cout << "To quit enter q | To generate a ranking for other parameters, press any other button : ";
-
-        string choice;
-        getline(cin,choice);
-
-        if(choice[0] == 'q')
+		if(sort_type < '1' || sort_type > '5' || order_type < '1' || order_type > '2')
 		{
-            break;
-	    }
+			cout << "\n" << "There is no such option in the menu." << "\n\n";
+			cout << "Press enter to go back to try again..." << "\n";
+
+			string choice = "";
+			getline(cin, choice);
+
+			continue;
+		}
+
+		auto ranking = db_manager.generate_ranking(static_cast<Sort_by>(sort_type - '0'), static_cast<Order>(order_type - '0'));
+
+		if(ranking.empty())
+		{
+			cout << "Ups: no players found in the database\n";
+			cout << "Press enter to go back to try again..." << "\n";
+
+			string text;
+			getline(cin,text);
+
+			return;
+		}
+
+		cout << " _________________________________________________________________________\n";
+		cout << "|       NICKNAME:       |  WINS:  |  DRAWS:  |    LOSES:    |   POINTS:   |\n";
+		cout << " =========================================================================\n";
+
+		for(vector<Player>::size_type i = 0; i < ranking.size() && i < NUMBER_OF_PLAYERS_GENERATED_BY_DB; i++)
+		{
+			cout << "|" << (i+1) << "."<< setw(20) << ranking[i].nickname << " | " << setw(7)<< ranking[i].wins << " | "
+				<< setw(8) << ranking[i].draws << " | " << setw(12) << ranking[i].loses << " | " << setw(12) << ranking[i].points << "|\n";
+		}
+
+		cout << " =========================================================================\n";
+		cout << "To quit enter q | To generate a ranking for other parameters, press any other button : ";
+
+		string choice;
+		getline(cin,choice);
+
+		if(choice[0] == 'q')
+		{
+			break;
+		}
 	}
 }

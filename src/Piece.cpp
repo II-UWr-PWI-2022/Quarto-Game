@@ -31,8 +31,8 @@
 
 void Piece::initialization(int piece_type)
 {
-    type = piece_type;
-    is_already_used = false;
+	type = piece_type;
+	is_already_used = false;
 }
 
 /*
@@ -40,7 +40,7 @@ void Piece::initialization(int piece_type)
 */
 void Piece::set_piece_as_used()
 {
-    is_already_used = true;
+	is_already_used = true;
 }
 
 /*
@@ -48,7 +48,7 @@ void Piece::set_piece_as_used()
 */
 bool Piece::is_piece_used()
 {
-    if(is_already_used)
+	if(is_already_used)
 	{
 		return true;
 	}
@@ -64,5 +64,5 @@ bool Piece::is_piece_used()
 */
 int Piece::get_piece_type()
 {
-    return type;
+	return type;
 }
