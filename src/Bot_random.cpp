@@ -1,20 +1,32 @@
 #include "Bot_random.hpp"
 
+/*
+	Returns random value from the range of numbers [L, R]
+*/
 int Bot_Random::random_int(int L, int R)
 {
 	return L + rand() % (R - L + 1);
 }
 
+/*
+	Returns a piece that bot wants to give to the opponent
+*/
 int Bot_Random::get_chosen_piece_type()
 {
 	return chosen_piece;
 }
 
+/*
+	Returns a field where bot wants to place given piece
+*/
 pair <int, int> Bot_Random::get_chosen_board_field()
 {
 	return chosen_board_field;
 }
 
+/*
+	Reads board and game difficulty, and launches minmax function to find the best move
+*/
 void Bot_Random::analyze_position(Quarto_game* game, int piece)
 {
 	vector <vector <int>> board = game->get_board();
