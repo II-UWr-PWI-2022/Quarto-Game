@@ -36,7 +36,7 @@ Przy wyborze pola należy podać osobno literę odpowiadającą wierszowi i cyfr
 
 ## Wymagania
 
-W celu przyjemnej kompilacji plików należy mieć dostęp do powłoki `bash`. Do kompilacji plików należy mieć zainstalowy kompilator `g++` (programy zostały przetestowane na wersji `9.4.0` i nowszych). Żeby używać możliwości kompilacji przy użyciu makefile'a, należy mieć zainstalowany program `make`.
+W celu przyjemnej kompilacji plików należy mieć dostęp do powłoki `bash`. Do kompilacji plików należy mieć zainstalowy kompilator `g++` (programy zostały przetestowane na wersji `8.1.0` i nowszych). Żeby używać możliwości kompilacji przy użyciu makefile'a, należy mieć zainstalowany program `make`.
 
 ## Kompilacja i uruchomienie (wersja konsolowa)
 
