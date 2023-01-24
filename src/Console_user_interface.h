@@ -45,8 +45,7 @@ class Console_user_interface
     Bot_Superior *bot_superior_2;
 
     DB_manager db_manager;
-    Player human_player_1;
-    Player human_player_2;
+    Player user;
 
     char get_single_character();
     char select_from_main_menu();   // dodanie rekordu 3
@@ -65,6 +64,10 @@ class Console_user_interface
     int find_piece_number(string symbol);
     int make_move();
     int display_player_menu(char player);
+
+    void display_ranking();
+    void account_settings();
+    void assign_points(int game_status);
 
 public:
     Console_user_interface();

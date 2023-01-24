@@ -8,12 +8,12 @@
 #include <utility>
 
 enum class Order{
-    ascending = 0,
+    ascending = 1,
     descending
 };
 
 enum class Sort_by{
-    nickname = 0,
+    nickname = 1,
     wins,
     draws,
     loses,

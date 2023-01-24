@@ -1,10 +1,7 @@
 #include "Console_user_interface.h"
 
-Console_user_interface::Console_user_interface() : db_manager("../db/users.xml")
+Console_user_interface::Console_user_interface() : db_manager("../db/users.xml"), user(db_manager)
 {
-    human_player_1.connect_with_database(db_manager);
-    human_player_2.connect_with_database(db_manager);
-
     game = NULL;
     bot_random_1 = NULL;
     bot_random_2 = NULL;
@@ -49,11 +46,22 @@ char Console_user_interface::select_from_main_menu()
     clear_console();
 
     cout << " >>> QUARTO GAME <<<" << "\n";
-    cout << "---------------------------" << "\n";
-    cout << "1. Play EASY version" << "\n";
-    cout << "2. Play HARD version" << "\n";
-    cout << "3. Exit" << "\n";
-    cout << "---------------------------" << "\n";
+    cout << "--------------------------------" << "\n";
+    if(user.is_logged())
+        cout << "Logged >> " << user.nickname << " << points: "<< user.points << " <--\n";
+    else 
+    {
+        cout << "Current number of points: " << user.points << "\n";
+        cout << "Remember you must be logged in to save your score\n";
+    }
+
+    cout << "--------------------------------" << "\n";
+    cout << "0. Account setting\n";
+    cout << "1. Display ranking\n";
+    cout << "2. Play EASY version" << "\n";
+    cout << "3. Play HARD version" << "\n";
+    cout << "4. Exit" << "\n";
+    cout << "--------------------------------" << "\n";
     cout << "Your choice: ";
 
     choice = get_single_character();
@@ -134,6 +142,8 @@ void Console_user_interface::start_game(bool game_difficulty_level)
     }
 
     cout << "   -----------------------------------------" << "\n" << "\n";
+
+    assign_points(result);
 
     delete game;
     delete bot_random_1;
@@ -678,32 +688,35 @@ void Console_user_interface::display_main_menu()
 
         switch (choice)
         {
-        case '1':
-			index_player_A = display_player_menu('A');
-			index_player_B = display_player_menu('B');
+            case '0':
+                account_settings();
+                break;
+            case '1':
+                display_ranking();
+                break;
+            case '2':
+			    index_player_A = display_player_menu('A');
+			    index_player_B = display_player_menu('B');
 
-            start_game(0);
+                start_game(0);
+                break;
+            case '3':
+			    index_player_A = display_player_menu('A');
+			    index_player_B = display_player_menu('B');
 
-            break;
-        case '2':
-			index_player_A = display_player_menu('A');
-			index_player_B = display_player_menu('B');
+                start_game(1);
+                break;
+            case '4':
+                this->~Console_user_interface();
+                exit(0);
+                break;
+            default:
+                cout << "\n" << "There is no such option in the menu." << "\n\n";
+                cout << "Press enter to go back to try again..." << "\n";
 
-            start_game(1);
-
-            break;
-        case '3':
-            exit(0);
-
-            break;
-        default:
-            cout << "\n" << "There is no such option in the menu." << "\n\n";
-            cout << "Press enter to go back to try again..." << "\n";
-
-            string choice = "";
-            getline(cin, choice);
-
-            break;
+                string choice = "";
+                getline(cin, choice);
+                break;
         }
     }
 }
@@ -724,6 +737,7 @@ int Console_user_interface::display_player_menu(char player)
 		{
 			if(choice == '5')
 			{
+                this->~Console_user_interface();
 				exit(0);
 			}
 
@@ -739,4 +753,167 @@ int Console_user_interface::display_player_menu(char player)
             getline(cin, choice);
         }
     }
+}
+
+
+void Console_user_interface::assign_points(int game_status)
+{
+    if(index_player_A == 0 && index_player_B != 0)
+    {   
+        switch(game_status)
+        {
+            case 1:
+                user.play_match(static_cast<Opponent>(index_player_B), Game_status::win);
+                break;
+            case 2:
+                user.play_match(static_cast<Opponent>(index_player_B), Game_status::lose);
+                break;
+            case 3:
+                user.play_match(static_cast<Opponent>(index_player_B), Game_status::draw);
+                break;
+        }
+    }
+    else if(index_player_B == 0 && index_player_A != 0)
+    {
+        switch(game_status)
+        {
+            case 1:
+                user.play_match(static_cast<Opponent>(index_player_B), Game_status::lose);
+                break;
+            case 2:
+                user.play_match(static_cast<Opponent>(index_player_B), Game_status::win);
+                break;
+            case 3:
+                user.play_match(static_cast<Opponent>(index_player_B), Game_status::draw);
+                break;
+        }
+    }
+}
+
+
+void Console_user_interface::account_settings()
+{
+    char choice;
+    while(true)
+    {
+        clear_console();
+
+        cout << " >>> QUARTO GAME <<<" << "\n";
+        cout << "--------------------------------" << "\n";
+        cout << "Account options: " << "\n";
+        cout << "1. Print statistics" << "\n";
+        cout << "2. Log in" << "\n";
+        cout << "3. Log out" << "\n";
+        cout << "4. Create new account" << "\n";
+        cout << "5. Return" << "\n";
+        cout << "--------------------------------" << "\n";
+        cout << "Your choice: ";
+
+        choice = get_single_character();
+
+        switch(choice)
+        {
+            case '1':
+                user.print_statistics();
+                break;
+            case '2':
+            {
+                string nickname, password;
+                cout << "Enter nickname : ";
+                getline(cin, nickname);
+                cout << "Enter password : ";
+                getline(cin, password);
+                if( user.log_in(nickname, password))
+                    cout << "Player logged in successfully\n";
+                // else
+                //     cout << "Player login failen";
+                break;
+            }
+            case '3':
+            {
+                if(user.log_out())
+                    cout << "Successful player logout\n";
+                else
+                    cout << "Player logout failed\n";
+                break;
+            }
+
+            case '4':
+            {
+                string nickname, password;
+                cout << "Enter nickname : ";
+                getline(cin, nickname);
+                cout << "Enter password : ";
+                getline(cin, password);
+                if( user.create_accout(nickname, password))
+                    cout << "Player account created successfully\n";
+
+                break;
+            }
+
+            case '5':
+                return;
+
+            default:
+                cout << "Command not recognized, please try again\n";
+                break;
+        }
+
+        cout << "Press enter to continue..." << "\n";
+        string text;
+        getline(cin,text);
+
+    }
+}
+
+
+#define NUMBER_OF_PLAYERS_GENERATED_BY_DB 20
+
+void Console_user_interface::display_ranking()
+{
+    while(true)
+    {
+        clear_console();
+        cout << "Generating ranking... Enter 2 parameters\n";
+        char sort_type, order_type;
+        cout << "Sort by: nickname--> 1 | wins--> 2 | draws--> 3 | loses--> 4 | points--> 5 : ";
+        sort_type = get_single_character();
+        cout << "Order: ascending--> 1 | descending--> 2 : ";
+        order_type = get_single_character();
+
+        if(sort_type < '1' || sort_type > '5' || order_type < '1' || order_type > '2')
+        {
+            cout << "\n" << "There is no such option in the menu." << "\n\n";
+            cout << "Press enter to go back to try again..." << "\n";
+
+            string choice = "";
+            getline(cin, choice);
+            continue;
+        }
+
+        auto ranking = db_manager.generate_ranking(static_cast<Sort_by>(sort_type - '0'), static_cast<Order>(order_type - '0'));
+        if(ranking.empty())
+        {
+            cout << "Ups: no players found in the database\n";
+            cout << "Press enter to go back to try again..." << "\n";
+            string text;
+            getline(cin,text);
+            return;
+        }
+        cout << " _________________________________________________________________________\n";
+        cout << "|       NICKNAME:       |  WINS:  |  DRAWS:  |    LOSES:    |   POINTS:   |\n";
+        cout << " =========================================================================\n";
+        for(vector<Player>::size_type i = 0; i < ranking.size() && i < NUMBER_OF_PLAYERS_GENERATED_BY_DB; ++i)
+        {
+            cout<< "|" << (i+1) << "."<< setw(20) << ranking[i].nickname << " | " << setw(7)<< ranking[i].wins << " | " 
+                << setw(8) << ranking[i].draws << " | " << setw(12) << ranking[i].loses << " | " << setw(12) << ranking[i].points << "|\n";
+        }
+        cout << " =========================================================================\n";
+        cout << "To quit enter q | To generate a ranking for other parameters, press any other button : ";
+        string choice;
+        getline(cin,choice);
+        if(choice[0] == 'q')
+            break;
+    }
+
 }

@@ -35,7 +35,7 @@ public:
     int loses;
     int points;
 //***********************************************
-    Player() = default;
+    Player();
     explicit Player(DB_manager &db_manager);
     
     // The function accepts nick and password as arguments, if logging in successfully returns true, otherwise false
@@ -53,8 +53,6 @@ public:
     // Prints all data of the current player
     void print_statistics();
 
-    void connect_with_database(DB_manager &DB);
-
 private:
     // Checks whether the given password is in the correct form:    length (8 - 60) 
     // It should consist of at least one uppercase letter, lowercase letter, number and any other characters    
@@ -69,8 +67,5 @@ private:
 
     DB_manager *DB;
 };
-
-int max_bet_value(const Player &player1,const Player &player2);
-bool check_bet_value(const Player &player1, const Player &player2, int bet_value);
 
 #endif

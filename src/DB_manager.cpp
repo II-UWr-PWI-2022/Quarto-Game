@@ -51,7 +51,7 @@ vector<Player> DB_manager::generate_ranking(Sort_by key, Order order_type)
     }
     else
     {
-   if(key == Sort_by::nickname)
+        if(key == Sort_by::nickname)
             sort(tmp.begin(), tmp.end(), [](const Player &p1, const Player &p2){ return p1.nickname > p2.nickname;});
         else if(key == Sort_by::points)
             sort(tmp.begin(), tmp.end(), [](const Player &p1, const Player &p2){ return p1.points > p2.points;});

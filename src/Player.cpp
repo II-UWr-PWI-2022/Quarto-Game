@@ -17,11 +17,15 @@ Player::Player(DB_manager &db_manager) :
     points(0),
     DB(&db_manager){};
 
-
-void Player::connect_with_database(DB_manager &db_manager)
-{
-    DB = &db_manager;
-}
+Player::Player() :
+    password(""),
+    connection_status(false),
+    nickname(""),
+    wins(0),
+    draws(0),
+    loses(0),
+    points(0),
+    DB(nullptr){};
 
 bool Player::is_logged()
 {
@@ -38,9 +42,9 @@ void Player::save_account()
 void Player::print_statistics()
 {
     if(is_logged())
-        cout << nickname << " " << password << " " << wins << " " << draws << " " << loses << " " << points << "\n";
+        cout << "Nickname: " << nickname << " Wins: " << wins << " Draws: " << draws << "  Loses: " << loses << " Points: " << points << "\n";
     else
-        cout << nickname << " " << wins << " " << draws << " " << loses << " " << points << "\n";
+        cout << "Ups. Player is not logged in\n";
 }
 
 
@@ -134,58 +138,54 @@ void Player::play_match(Opponent rival_type, Game_status status, int bet_value)
         return;
     }
 
-    if(is_logged())
+    if(rival_type == Opponent::other_player)
     {
-        if(rival_type == Opponent::other_player)
+        if(status == Game_status::win)
         {
-            if(status == Game_status::win)
-            {
-                ++wins;
-                points += bet_value;
-            }
-            else if(status == Game_status::lose)
-            {
-                ++loses;
-                points -= bet_value;
-            }
+            ++wins;
+            points += bet_value;
+        }
+        else if(status == Game_status::lose)
+        {
+            ++loses;
+            points -= bet_value;
+        }
+    }
+    else
+    {
+        int multi=0;
+        if(rival_type == Opponent::bot_level_easy)
+            multi = 1;
+        else if(rival_type == Opponent::bot_level_medium)
+            multi = 2;
+        else
+            multi = 3;
+
+
+        if(status == Game_status::win)
+        {
+            ++wins;
+            points += 5*multi;
+        }
+        else if(status == Game_status::draw)
+        {
+            ++draws;
+            points += 2*multi;
         }
         else
         {
-            int multi=0;
-            if(rival_type == Opponent::bot_level_easy)
-                multi = 1;
-            else if(rival_type == Opponent::bot_level_medium)
-                multi = 2;
-            else
-                multi = 3;
+            ++loses;
+            points -= multi;
+        }   
+    }
 
 
-            if(status == Game_status::win)
-            {
-                ++wins;
-                points += 5*multi;
-            }
-            else if(status == Game_status::draw)
-            {
-                ++draws;
-                points += 2*multi;
-            }
-            else
-            {
-                ++loses;
-                points -= multi;
-            }   
-        }
-
+    if(is_logged())
+    {
         if(points < 0) points = 0;
-
         save_account();
     }
-    else
-        cerr << "Player is not logged in\n";
 }
-
-
 
 
 #define NICKNAME_MIN_LENGTH 3
@@ -233,16 +233,5 @@ bool Player::validate_password(string _password)
 
     return (lower && upper && digit);
 
-}
-
-
-int max_bet_value(const Player &player1,const Player &player2)
-{
-    return min(player1.points, player2.points);
-}
-
-bool check_bet_value(const Player &player1, const Player &player2, int bet_value)
-{
-    return (player1.points <= bet_value && player2.points <= bet_value);
 }
 
