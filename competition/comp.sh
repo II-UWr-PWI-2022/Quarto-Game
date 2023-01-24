@@ -86,9 +86,14 @@ do
 	../build/main < easy23 > out.out
 	if grep "Player A wins" out.out; then
 		(( bot_2_pts++ ))
-	fi
-	if grep "Player B wins" out.out; then
+		echo "bot 2 won" >> scriptres.txt
+	elif grep "Player B wins" out.out; then
 		(( bot_3_pts++ ))
+		echo "bot 3 won" >> scriptres.txt
+	elif grep "Draw" out.out; then
+		echo "draw" >> scriptres.txt	
+	else
+		echo "error" >> scriptres.txt
 	fi
 done
 
@@ -98,9 +103,14 @@ do
 	../build/main < hard23 > out.out
 	if grep "Player A wins" out.out; then
 		(( bot_2_pts += 3 ))
-	fi
-	if grep "Player B wins" out.out; then
+		echo "bot 2 won" >> scriptres.txt
+	elif grep "Player B wins" out.out; then
 		(( bot_3_pts += 3 ))
+		echo "bot 3 won" >> scriptres.txt
+	elif grep "Draw" out.out; then
+		echo "draw" >> scriptres.txt	
+	else
+		echo "error" >> scriptres.txt
 	fi
 done
 
