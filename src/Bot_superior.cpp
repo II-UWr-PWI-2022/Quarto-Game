@@ -1,11 +1,11 @@
 #include "Bot_superior.h"
 
 /*
-	Returns random value from the range of numbers [a,b]
+	Returns random value from the range of numbers [L, R]
 */
-int random_int(int a, int b)
+int Bot_Superior::random_int(int L, int R)
 {
-	return a + rand() % (b - a + 1);
+	return L + rand() % (R - L + 1);
 }
 
 /*
@@ -318,7 +318,7 @@ void Bot_Superior::analyze_position(Quarto_game* game, int piece)
 {
 	board = game->get_board();
 
-	GAME_DIFFICULTY=game->get_game_difficulty_level();
+	GAME_DIFFICULTY = game->get_game_difficulty_level();
 
 	int pieces_left = 0;
 

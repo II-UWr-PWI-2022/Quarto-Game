@@ -1,8 +1,8 @@
 #include "Bot_random.h"
 
-int random_int(int a, int b)
+int Bot_Random::random_int(int L, int R)
 {
-	return a + rand() % (b - a + 1);
+	return L + rand() % (R - L + 1);
 }
 
 int Bot_Random::get_chosen_piece_type()

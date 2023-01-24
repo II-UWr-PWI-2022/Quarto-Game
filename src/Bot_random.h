@@ -10,6 +10,8 @@ private:
 	pair <int, int> chosen_board_field = {0, 0};
 	int chosen_piece = 0;
 
+	int random_int(int L, int R);
+
 public:
 	int get_chosen_piece_type();
 	pair <int, int> get_chosen_board_field();

@@ -21,7 +21,8 @@ private:
 	bool is_pattern_winning(int p1, int p2, int p3, int p4);
 	bool is_board_winning();
 	int evaluate(int piece);
-	int minmax(int depth,int piece,int max_depth);
+	int minmax(int depth, int piece, int max_depth);
+	int random_int(int L, int R);
 	void last_move();
 	void set_choice(int row, int column, int opponent_piece);
 
