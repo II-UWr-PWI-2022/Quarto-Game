@@ -75,3 +75,30 @@ A bot based on min-max algorithm. It contains:
 ```pair <int, int> get_chosen_board_field()``` - Returns a field where bot wants to place given piece.
 
 ```void analyze_position(Quarto_game* game, int piece)``` - Reads board and game difficulty, and launches minmax function to find the best move.
+
+## Bot_superior.cpp
+### Classes
+#### Bot_Superior
+A bot based on min-max algorithm, searching the moves tree deeper than Bot_minmax, and evauating bords with different function. It contains:
+
+```int random_int(int L, int R)``` - returns random integer from range [L, R].
+
+```bool is_pattern_winning(int p1, int p2, int p3, int p4)``` - checks if four pieces given as arguments have at least one common characteristic.
+
+```bool is_board_winning()``` - depending on game difficulty checks if there is a line or square of fields that share at least one common characteristics.
+
+```bool is_triple(int given_piece, vector<int> pattern)``` - Checks if putting given piece on one of the empty fields from vector "pattern" forms a triple with at least one common characteristic.
+
+```int evaluate(int piece)``` - Counts value of the board with a piece that will be put on it, based on how many ways of putting that piece form a tripple - the less such moves the better.
+
+```void set_choice(int row, int column int opponent_piece)``` - sets move as best, updates the chosen move.
+
+```int minmax(int depth, int piece, int max_depth)``` - Analizes potential arrangement of pieces on board using recursive minmax algorithm and depending on results chooses the best move Maximum depth of algorithm depends on how many pieces are left
+
+```void last_move()``` - Finds the last empty field for the last piece.
+
+```int get_chosen_piece_type()``` - Returns a piece that bot wants to give to the opponent.
+
+```pair <int, int> get_chosen_board_field()``` - Returns a field where bot wants to place given piece.
+
+```void analyze_position(Quarto_game* game, int piece)``` - Reads board and game difficulty, and launches minmax function to find the best move.
